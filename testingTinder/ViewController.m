@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "BackgroundView.h"
 
 @interface ViewController ()
 
@@ -16,7 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    BackgroundView *draggableBackground = [[BackgroundView alloc]initWithFrame:self.view.frame];
+    [self.view addSubview:draggableBackground];
 }
 
 

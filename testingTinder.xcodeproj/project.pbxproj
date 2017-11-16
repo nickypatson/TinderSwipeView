@@ -13,6 +13,8 @@
 		E1E1703E1FBD517500C555C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1E1703D1FBD517500C555C1 /* Assets.xcassets */; };
 		E1E170411FBD517500C555C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1E1703F1FBD517500C555C1 /* LaunchScreen.storyboard */; };
 		E1E170441FBD517500C555C1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E170431FBD517500C555C1 /* main.m */; };
+		E1E1704C1FBD524700C555C1 /* BackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E1704B1FBD524700C555C1 /* BackgroundView.m */; };
+		E1E170521FBD551200C555C1 /* TinderViewCard.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E170511FBD551200C555C1 /* TinderViewCard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,10 @@
 		E1E170401FBD517500C555C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E1E170421FBD517500C555C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1E170431FBD517500C555C1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E1E1704A1FBD524700C555C1 /* BackgroundView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackgroundView.h; sourceTree = "<group>"; };
+		E1E1704B1FBD524700C555C1 /* BackgroundView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackgroundView.m; sourceTree = "<group>"; };
+		E1E170501FBD551200C555C1 /* TinderViewCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TinderViewCard.h; sourceTree = "<group>"; };
+		E1E170511FBD551200C555C1 /* TinderViewCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TinderViewCard.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,10 @@
 				E1E170371FBD517500C555C1 /* ViewController.h */,
 				E1E170381FBD517500C555C1 /* ViewController.m */,
 				E1E1703A1FBD517500C555C1 /* Main.storyboard */,
+				E1E1704A1FBD524700C555C1 /* BackgroundView.h */,
+				E1E1704B1FBD524700C555C1 /* BackgroundView.m */,
+				E1E170501FBD551200C555C1 /* TinderViewCard.h */,
+				E1E170511FBD551200C555C1 /* TinderViewCard.m */,
 				E1E1703D1FBD517500C555C1 /* Assets.xcassets */,
 				E1E1703F1FBD517500C555C1 /* LaunchScreen.storyboard */,
 				E1E170421FBD517500C555C1 /* Info.plist */,
@@ -143,7 +153,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1E170391FBD517500C555C1 /* ViewController.m in Sources */,
+				E1E170521FBD551200C555C1 /* TinderViewCard.m in Sources */,
 				E1E170441FBD517500C555C1 /* main.m in Sources */,
+				E1E1704C1FBD524700C555C1 /* BackgroundView.m in Sources */,
 				E1E170361FBD517500C555C1 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
