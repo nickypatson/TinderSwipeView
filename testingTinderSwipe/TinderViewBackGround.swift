@@ -48,6 +48,7 @@ class TinderViewBackGround: UIView {
                 }
             }
             
+            
             for (i,_) in currentLoadedCardsArray.enumerated() {
                 if i > 0 {
                     insertSubview(currentLoadedCardsArray[i], belowSubview: currentLoadedCardsArray[i - 1])
