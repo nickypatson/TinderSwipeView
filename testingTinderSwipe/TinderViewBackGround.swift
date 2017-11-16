@@ -41,10 +41,10 @@ class TinderViewBackGround: UIView,TinderViewDelegate {
             let num_currentLoadedCardsArrayCap: Int = (valueArray.count > MAX_BUFFER_SIZE) ? MAX_BUFFER_SIZE : valueArray.count
             
             for (i,_) in valueArray.enumerated() {
-                let newCard: TinderCard? = createDraggableViewWithData(at: i)
-                allCardsArray.append(newCard!)
+                let newCard = createDraggableViewWithData(at: i)
+                allCardsArray.append(newCard)
                 if i < num_currentLoadedCardsArrayCap {
-                    currentLoadedCardsArray.append(newCard!)
+                    currentLoadedCardsArray.append(newCard)
                 }
             }
             
