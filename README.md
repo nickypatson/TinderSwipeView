@@ -1,4 +1,4 @@
-Navaigation bar loader 
+Swipe view inspired by Tinder
 
 ## Screenshot
 

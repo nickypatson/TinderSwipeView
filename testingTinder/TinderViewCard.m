@@ -5,12 +5,12 @@
 //  Created by Nicky on 11/16/17.
 //  Copyright © 2017 Nicky. All rights reserved.
 //
-#define ACTION_MARGIN 120 //%%% distance from center where the action applies. Higher = swipe further in order for the action to be called
-#define SCALE_STRENGTH 4 //%%% how quickly the card shrinks. Higher = slower shrinking
-#define SCALE_MAX .93 //%%% upper bar for how much the card shrinks. Higher = shrinks less
-#define ROTATION_MAX 1 //%%% the maximum rotation allowed in radians.  Higher = card can keep rotating longer
-#define ROTATION_STRENGTH 320 //%%% strength of rotation. Higher = weaker rotation
-#define ROTATION_ANGLE M_PI/8 //%%% Higher = stronger rotation angle
+#define ACTION_MARGIN 120
+#define SCALE_STRENGTH 4
+#define SCALE_MAX .93
+#define ROTATION_MAX 1
+#define ROTATION_STRENGTH 320
+#define ROTATION_ANGLE M_PI/8 
 
 #import "TinderViewCard.h"
 
@@ -110,7 +110,7 @@
     [_delegate updateCardView:self withDistance:distance];
     
 }
-//%%% called when the card is let go
+
 - (void)afterSwipeAction{
     
     if (xFromCenter > ACTION_MARGIN) {
@@ -127,7 +127,7 @@
     }
 }
 
-//%%% called when a swipe exceeds the ACTION_MARGIN to the right
+
 -(void)rightAction{
     
     CGPoint finishPoint = CGPointMake(500, 2*yFromCenter + originalPoint.y);
@@ -142,7 +142,6 @@
     NSLog(@"YES");
 }
 
-//%%% called when a swip exceeds the ACTION_MARGIN to the left
 -(void)leftAction{
     
     CGPoint finishPoint = CGPointMake(-500, 2*yFromCenter + originalPoint.y);
