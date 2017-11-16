@@ -15,7 +15,7 @@ let ROTATION_STRENGTH : CGFloat = 320
 
 import UIKit
 
-protocol TinderViewDelegate: NSObjectProtocol {
+protocol TinderCardDelegate: NSObjectProtocol {
     func cardSwipedLeft(_ card: UIView)
     func cardSwipedRight(_ card: UIView)
     func updateCardView(_ card: UIView, withDistance distance: CGFloat)
@@ -28,7 +28,7 @@ class TinderCard: UIView {
     var originalPoint = CGPoint.zero
     var imageView = UIImageView()
     
-    weak var delegate: TinderViewDelegate?
+    weak var delegate: TinderCardDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -48,11 +48,10 @@ class TinderCard: UIView {
         textLabel.textAlignment = .center
         textLabel.numberOfLines = 0
         let attributedString = NSMutableAttributedString(string: "First Contact\n", attributes: [.foregroundColor: UIColor.orange, .font: UIFont.boldSystemFont(ofSize: 20.0)])
-        
-        
         attributedString.append(NSAttributedString(string: "Company\n", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17.0)]))
         attributedString.append(NSAttributedString(string: "Title\nCity\nCountry", attributes: [.foregroundColor: UIColor.black, .font: UIFont.systemFont(ofSize: 15.0)]))
         textLabel.attributedText = attributedString
+        
         addSubview(imageView)
         addSubview(textLabel)
         

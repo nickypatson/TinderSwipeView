@@ -12,7 +12,7 @@ let  TOPYAXIS = 75;
 
 import UIKit
 
-class TinderViewBackGround: UIView,TinderViewDelegate {
+class TinderViewBackGround: UIView {
     var currentIndex = 0
     var currentLoadedCardsArray = [TinderCard]()
     var allCardsArray = [TinderCard]()
@@ -38,7 +38,7 @@ class TinderViewBackGround: UIView,TinderViewDelegate {
     
     func loadCards() {
         if valueArray.count > 0 {
-            let num_currentLoadedCardsArrayCap: Int = (valueArray.count > MAX_BUFFER_SIZE) ? MAX_BUFFER_SIZE : valueArray.count
+            let num_currentLoadedCardsArrayCap = (valueArray.count > MAX_BUFFER_SIZE) ? MAX_BUFFER_SIZE : valueArray.count
             
             for (i,_) in valueArray.enumerated() {
                 let newCard = createDraggableViewWithData(at: i)
@@ -62,11 +62,40 @@ class TinderViewBackGround: UIView,TinderViewDelegate {
     }
     
     func createDraggableViewWithData(at index: Int) -> TinderCard {
+        
         let card = TinderCard(frame: CGRect(x: 10, y: CGFloat(TOPYAXIS), width: frame.size.width - 20, height: frame.size.height - CGFloat(TOPYAXIS) - 200))
         card.delegate = self
         return card
     }
     
+    func removeObjectAndAddNewValues() {
+        
+        currentLoadedCardsArray.remove(at: 0)
+        if currentIndex < allCardsArray.count {
+            let card = allCardsArray[currentIndex]
+            var frame = card.frame
+            frame.origin.y = CGFloat(TOPYAXIS + (MAX_BUFFER_SIZE * SEPERATOR_DISTANCE))
+            card.frame = frame
+            currentLoadedCardsArray.append(card)
+            currentIndex += 1
+            insertSubview(currentLoadedCardsArray[MAX_BUFFER_SIZE - 1], belowSubview: currentLoadedCardsArray[MAX_BUFFER_SIZE - 2])
+            animateCardAfterSwiping()
+        }
+    }
+    
+    func animateCardAfterSwiping() {
+        
+        for (i,card) in currentLoadedCardsArray.enumerated() {
+            UIView.animate(withDuration: 0.5, animations: {
+                var frame = card.frame
+                frame.origin.y = CGFloat(TOPYAXIS + (i * SEPERATOR_DISTANCE))
+                card.frame = frame
+            })
+        }
+    }
+}
+
+extension TinderViewBackGround : TinderCardDelegate{
     
     //%%% action called when the card goes to the left.
     func cardSwipedLeft(_ card: UIView) {
@@ -82,33 +111,4 @@ class TinderViewBackGround: UIView,TinderViewDelegate {
         let ratio: Float = Float(min(fabs(distance / (frame.size.width / 2)), 1))
         print("\(ratio)")
     }
-    
-    func removeObjectAndAddNewValues() {
-        currentLoadedCardsArray.remove(at: 0)
-        if currentIndex < allCardsArray.count {
-            
-            let card = allCardsArray[currentIndex]
-            var frame = card.frame
-            frame.origin.y = CGFloat(TOPYAXIS + (MAX_BUFFER_SIZE * SEPERATOR_DISTANCE))
-            card.frame = frame
-            currentLoadedCardsArray.append(card)
-            currentIndex += 1
-            insertSubview(currentLoadedCardsArray[MAX_BUFFER_SIZE - 1], belowSubview: currentLoadedCardsArray[MAX_BUFFER_SIZE - 2])
-            animateCardAfterSwiping()
-        }
-    }
-    
-    func animateCardAfterSwiping() {
-        for (i,_) in currentLoadedCardsArray.enumerated() {
-            let card = currentLoadedCardsArray[i]
-            UIView.animate(withDuration: 0.5, animations: {() -> Void in
-                var frame = card.frame
-                frame.origin.y = CGFloat(TOPYAXIS + (i * SEPERATOR_DISTANCE))
-                card.frame = frame
-            })
-        }
-    }
-    
-    
-    
 }
