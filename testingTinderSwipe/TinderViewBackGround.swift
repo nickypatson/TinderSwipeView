@@ -21,7 +21,6 @@ class TinderViewBackGround: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         super.layoutSubviews()
         setUpView()
     }
@@ -29,6 +28,7 @@ class TinderViewBackGround: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     func setUpView() {
         backgroundColor = UIColor(red: 0.92, green: 0.93, blue: 0.95, alpha: 1)
         valueArray = ["first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last"]

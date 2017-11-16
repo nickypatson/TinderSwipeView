@@ -60,7 +60,8 @@ class TinderCard: UIView {
         layer.shadowOpacity = 0.4
         layer.shadowOffset = CGSize(width: 0.5, height: 3)
         layer.shadowColor = UIColor.gray.cgColor
-        backgroundColor = UIColor.white
+        backgroundColor = .white
+        
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
         addGestureRecognizer(panGestureRecognizer)
     }
@@ -90,22 +91,15 @@ class TinderCard: UIView {
         case .ended:
             afterSwipeAction()
             break;
-        case .possible:
-            break
-        case .cancelled:
-            break
-        case .failed:
-            break
             
+        case .possible:break
+        case .cancelled:break
+        case .failed:break
         }
     }
     func updateOverlay(_ distance: CGFloat) {
-        if distance > 0 {
-            imageView.image = UIImage(named: "yesButton")
-        }
-        else {
-            imageView.image = UIImage(named: "noButton")
-        }
+        
+        imageView.image = distance > 0 ? UIImage(named: "yesButton") : UIImage(named: "noButton")
         imageView.alpha = min(fabs(distance) / 100, 0.5)
         delegate?.updateCardView(self, withDistance: distance)
     }
@@ -119,7 +113,7 @@ class TinderCard: UIView {
         }
         else {
             //%%% resets the card
-            UIView.animate(withDuration: 0.3, animations: {() -> Void in
+            UIView.animate(withDuration: 0.3, animations: {
                 self.center = self.originalPoint
                 self.transform = CGAffineTransform(rotationAngle: 0)
                 self.imageView.alpha = 0
@@ -130,24 +124,26 @@ class TinderCard: UIView {
     
     func rightAction() {
         let finishPoint = CGPoint(x: 500, y: 2 * yFromCenter + originalPoint.y)
-        UIView.animate(withDuration: 0.3, animations: {() -> Void in
+        
+        UIView.animate(withDuration: 0.3, animations: {
             self.center = finishPoint
-        }, completion: {(_ complete: Bool) -> Void in
+        }, completion: {(_) in
             self.removeFromSuperview()
         })
         delegate?.cardSwipedRight(self)
-        print("YES")
+        print("WATCHOUT RIGHT")
     }
     
     func leftAction() {
         let finishPoint = CGPoint(x: -500, y: 2 * yFromCenter + originalPoint.y)
-        UIView.animate(withDuration: 0.3, animations: {() -> Void in
+        
+        UIView.animate(withDuration: 0.3, animations: {
             self.center = finishPoint
-        }, completion: {(_ complete: Bool) -> Void in
+        }, completion: {(_) in
             self.removeFromSuperview()
         })
         delegate?.cardSwipedLeft(self)
-        print("NO")
+        print("WATCHOUT LEFT")
     }
 }
 
