@@ -7,35 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E1E170361FBD517500C555C1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E170351FBD517500C555C1 /* AppDelegate.m */; };
-		E1E170391FBD517500C555C1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E170381FBD517500C555C1 /* ViewController.m */; };
-		E1E1703C1FBD517500C555C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1E1703A1FBD517500C555C1 /* Main.storyboard */; };
-		E1E1703E1FBD517500C555C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1E1703D1FBD517500C555C1 /* Assets.xcassets */; };
-		E1E170411FBD517500C555C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1E1703F1FBD517500C555C1 /* LaunchScreen.storyboard */; };
-		E1E170441FBD517500C555C1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E170431FBD517500C555C1 /* main.m */; };
-		E1E1704C1FBD524700C555C1 /* BackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E1704B1FBD524700C555C1 /* BackgroundView.m */; };
-		E1E170521FBD551200C555C1 /* TinderViewCard.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E170511FBD551200C555C1 /* TinderViewCard.m */; };
+		E1B3FCA01FBDA0FD0038ADF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B3FC9F1FBDA0FD0038ADF9 /* AppDelegate.swift */; };
+		E1B3FCA21FBDA0FD0038ADF9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B3FCA11FBDA0FD0038ADF9 /* ViewController.swift */; };
+		E1B3FCA51FBDA0FD0038ADF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1B3FCA31FBDA0FD0038ADF9 /* Main.storyboard */; };
+		E1B3FCA71FBDA0FD0038ADF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1B3FCA61FBDA0FD0038ADF9 /* Assets.xcassets */; };
+		E1B3FCAA1FBDA0FD0038ADF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1B3FCA81FBDA0FD0038ADF9 /* LaunchScreen.storyboard */; };
+		E1B3FCB21FBDA12C0038ADF9 /* TinderViewBackGround.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B3FCB11FBDA12C0038ADF9 /* TinderViewBackGround.swift */; };
+		E1B3FCB41FBDA13D0038ADF9 /* TinderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B3FCB31FBDA13D0038ADF9 /* TinderCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E1E170311FBD517500C555C1 /* testingTinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testingTinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1E170341FBD517500C555C1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		E1E170351FBD517500C555C1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E1E170371FBD517500C555C1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E1E170381FBD517500C555C1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		E1E1703B1FBD517500C555C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E1E1703D1FBD517500C555C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E1E170401FBD517500C555C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		E1E170421FBD517500C555C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1E170431FBD517500C555C1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E1E1704A1FBD524700C555C1 /* BackgroundView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackgroundView.h; sourceTree = "<group>"; };
-		E1E1704B1FBD524700C555C1 /* BackgroundView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackgroundView.m; sourceTree = "<group>"; };
-		E1E170501FBD551200C555C1 /* TinderViewCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TinderViewCard.h; sourceTree = "<group>"; };
-		E1E170511FBD551200C555C1 /* TinderViewCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TinderViewCard.m; sourceTree = "<group>"; };
+		E1B3FC9C1FBDA0FD0038ADF9 /* testingTinderSwipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testingTinderSwipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1B3FC9F1FBDA0FD0038ADF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E1B3FCA11FBDA0FD0038ADF9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E1B3FCA41FBDA0FD0038ADF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E1B3FCA61FBDA0FD0038ADF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E1B3FCA91FBDA0FD0038ADF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E1B3FCAB1FBDA0FD0038ADF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1B3FCB11FBDA12C0038ADF9 /* TinderViewBackGround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderViewBackGround.swift; sourceTree = "<group>"; };
+		E1B3FCB31FBDA13D0038ADF9 /* TinderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		E1E1702E1FBD517500C555C1 /* Frameworks */ = {
+		E1B3FC991FBDA0FD0038ADF9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -45,78 +39,74 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E1E170281FBD517500C555C1 = {
+		E1B3FC931FBDA0FD0038ADF9 = {
 			isa = PBXGroup;
 			children = (
-				E1E170331FBD517500C555C1 /* testingTinder */,
-				E1E170321FBD517500C555C1 /* Products */,
+				E1B3FC9E1FBDA0FD0038ADF9 /* testingTinderSwipe */,
+				E1B3FC9D1FBDA0FD0038ADF9 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		E1E170321FBD517500C555C1 /* Products */ = {
+		E1B3FC9D1FBDA0FD0038ADF9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E1E170311FBD517500C555C1 /* testingTinder.app */,
+				E1B3FC9C1FBDA0FD0038ADF9 /* testingTinderSwipe.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E1E170331FBD517500C555C1 /* testingTinder */ = {
+		E1B3FC9E1FBDA0FD0038ADF9 /* testingTinderSwipe */ = {
 			isa = PBXGroup;
 			children = (
-				E1E170341FBD517500C555C1 /* AppDelegate.h */,
-				E1E170351FBD517500C555C1 /* AppDelegate.m */,
-				E1E170371FBD517500C555C1 /* ViewController.h */,
-				E1E170381FBD517500C555C1 /* ViewController.m */,
-				E1E1703A1FBD517500C555C1 /* Main.storyboard */,
-				E1E1704A1FBD524700C555C1 /* BackgroundView.h */,
-				E1E1704B1FBD524700C555C1 /* BackgroundView.m */,
-				E1E170501FBD551200C555C1 /* TinderViewCard.h */,
-				E1E170511FBD551200C555C1 /* TinderViewCard.m */,
-				E1E1703D1FBD517500C555C1 /* Assets.xcassets */,
-				E1E1703F1FBD517500C555C1 /* LaunchScreen.storyboard */,
-				E1E170421FBD517500C555C1 /* Info.plist */,
-				E1E170431FBD517500C555C1 /* main.m */,
+				E1B3FC9F1FBDA0FD0038ADF9 /* AppDelegate.swift */,
+				E1B3FCA11FBDA0FD0038ADF9 /* ViewController.swift */,
+				E1B3FCB11FBDA12C0038ADF9 /* TinderViewBackGround.swift */,
+				E1B3FCB31FBDA13D0038ADF9 /* TinderCard.swift */,
+				E1B3FCA31FBDA0FD0038ADF9 /* Main.storyboard */,
+				E1B3FCA61FBDA0FD0038ADF9 /* Assets.xcassets */,
+				E1B3FCA81FBDA0FD0038ADF9 /* LaunchScreen.storyboard */,
+				E1B3FCAB1FBDA0FD0038ADF9 /* Info.plist */,
 			);
-			path = testingTinder;
+			path = testingTinderSwipe;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E1E170301FBD517500C555C1 /* testingTinder */ = {
+		E1B3FC9B1FBDA0FD0038ADF9 /* testingTinderSwipe */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E1E170471FBD517500C555C1 /* Build configuration list for PBXNativeTarget "testingTinder" */;
+			buildConfigurationList = E1B3FCAE1FBDA0FD0038ADF9 /* Build configuration list for PBXNativeTarget "testingTinderSwipe" */;
 			buildPhases = (
-				E1E1702D1FBD517500C555C1 /* Sources */,
-				E1E1702E1FBD517500C555C1 /* Frameworks */,
-				E1E1702F1FBD517500C555C1 /* Resources */,
+				E1B3FC981FBDA0FD0038ADF9 /* Sources */,
+				E1B3FC991FBDA0FD0038ADF9 /* Frameworks */,
+				E1B3FC9A1FBDA0FD0038ADF9 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = testingTinder;
-			productName = testingTinder;
-			productReference = E1E170311FBD517500C555C1 /* testingTinder.app */;
+			name = testingTinderSwipe;
+			productName = testingTinderSwipe;
+			productReference = E1B3FC9C1FBDA0FD0038ADF9 /* testingTinderSwipe.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		E1E170291FBD517500C555C1 /* Project object */ = {
+		E1B3FC941FBDA0FD0038ADF9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = Nicky;
 				TargetAttributes = {
-					E1E170301FBD517500C555C1 = {
+					E1B3FC9B1FBDA0FD0038ADF9 = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = E1E1702C1FBD517500C555C1 /* Build configuration list for PBXProject "testingTinder" */;
+			buildConfigurationList = E1B3FC971FBDA0FD0038ADF9 /* Build configuration list for PBXProject "testingTinderSwipe" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -124,57 +114,56 @@
 				en,
 				Base,
 			);
-			mainGroup = E1E170281FBD517500C555C1;
-			productRefGroup = E1E170321FBD517500C555C1 /* Products */;
+			mainGroup = E1B3FC931FBDA0FD0038ADF9;
+			productRefGroup = E1B3FC9D1FBDA0FD0038ADF9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E1E170301FBD517500C555C1 /* testingTinder */,
+				E1B3FC9B1FBDA0FD0038ADF9 /* testingTinderSwipe */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		E1E1702F1FBD517500C555C1 /* Resources */ = {
+		E1B3FC9A1FBDA0FD0038ADF9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1E170411FBD517500C555C1 /* LaunchScreen.storyboard in Resources */,
-				E1E1703E1FBD517500C555C1 /* Assets.xcassets in Resources */,
-				E1E1703C1FBD517500C555C1 /* Main.storyboard in Resources */,
+				E1B3FCAA1FBDA0FD0038ADF9 /* LaunchScreen.storyboard in Resources */,
+				E1B3FCA71FBDA0FD0038ADF9 /* Assets.xcassets in Resources */,
+				E1B3FCA51FBDA0FD0038ADF9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		E1E1702D1FBD517500C555C1 /* Sources */ = {
+		E1B3FC981FBDA0FD0038ADF9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1E170391FBD517500C555C1 /* ViewController.m in Sources */,
-				E1E170521FBD551200C555C1 /* TinderViewCard.m in Sources */,
-				E1E170441FBD517500C555C1 /* main.m in Sources */,
-				E1E1704C1FBD524700C555C1 /* BackgroundView.m in Sources */,
-				E1E170361FBD517500C555C1 /* AppDelegate.m in Sources */,
+				E1B3FCB21FBDA12C0038ADF9 /* TinderViewBackGround.swift in Sources */,
+				E1B3FCA21FBDA0FD0038ADF9 /* ViewController.swift in Sources */,
+				E1B3FCA01FBDA0FD0038ADF9 /* AppDelegate.swift in Sources */,
+				E1B3FCB41FBDA13D0038ADF9 /* TinderCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E1E1703A1FBD517500C555C1 /* Main.storyboard */ = {
+		E1B3FCA31FBDA0FD0038ADF9 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E1E1703B1FBD517500C555C1 /* Base */,
+				E1B3FCA41FBDA0FD0038ADF9 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		E1E1703F1FBD517500C555C1 /* LaunchScreen.storyboard */ = {
+		E1B3FCA81FBDA0FD0038ADF9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E1E170401FBD517500C555C1 /* Base */,
+				E1B3FCA91FBDA0FD0038ADF9 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -182,7 +171,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		E1E170451FBD517500C555C1 /* Debug */ = {
+		E1B3FCAC1FBDA0FD0038ADF9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -234,10 +223,12 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		E1E170461FBD517500C555C1 /* Release */ = {
+		E1B3FCAD1FBDA0FD0038ADF9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -282,34 +273,37 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		E1E170481FBD517500C555C1 /* Debug */ = {
+		E1B3FCAF1FBDA0FD0038ADF9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3N3C88D973;
-				INFOPLIST_FILE = testingTinder/Info.plist;
+				INFOPLIST_FILE = testingTinderSwipe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nickypatson.testingTinder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickypatson.testingTinderSwipe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		E1E170491FBD517500C555C1 /* Release */ = {
+		E1B3FCB01FBDA0FD0038ADF9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3N3C88D973;
-				INFOPLIST_FILE = testingTinder/Info.plist;
+				INFOPLIST_FILE = testingTinderSwipe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nickypatson.testingTinder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickypatson.testingTinderSwipe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -317,25 +311,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E1E1702C1FBD517500C555C1 /* Build configuration list for PBXProject "testingTinder" */ = {
+		E1B3FC971FBDA0FD0038ADF9 /* Build configuration list for PBXProject "testingTinderSwipe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E1E170451FBD517500C555C1 /* Debug */,
-				E1E170461FBD517500C555C1 /* Release */,
+				E1B3FCAC1FBDA0FD0038ADF9 /* Debug */,
+				E1B3FCAD1FBDA0FD0038ADF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E1E170471FBD517500C555C1 /* Build configuration list for PBXNativeTarget "testingTinder" */ = {
+		E1B3FCAE1FBDA0FD0038ADF9 /* Build configuration list for PBXNativeTarget "testingTinderSwipe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E1E170481FBD517500C555C1 /* Debug */,
-				E1E170491FBD517500C555C1 /* Release */,
+				E1B3FCAF1FBDA0FD0038ADF9 /* Debug */,
+				E1B3FCB01FBDA0FD0038ADF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = E1E170291FBD517500C555C1 /* Project object */;
+	rootObject = E1B3FC941FBDA0FD0038ADF9 /* Project object */;
 }

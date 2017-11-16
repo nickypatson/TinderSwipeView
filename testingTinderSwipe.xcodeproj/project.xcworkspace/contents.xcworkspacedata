@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:testingTinder.xcodeproj">
+      location = "self:testingTinderSwipe.xcodeproj">
    </FileRef>
 </Workspace>
