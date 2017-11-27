@@ -145,5 +145,34 @@ class TinderCard: UIView {
         delegate?.cardSwipedLeft(self)
         print("WATCHOUT LEFT")
     }
+    
+    // right click action
+func rightClickAction() {
+    imageView.image = UIImage(named: "yesButton")
+    let finishPoint = CGPoint(x: center.x + frame.size.width * 1.5, y: center.y)
+    imageView.alpha = 0.5
+    UIView.animate(withDuration: 1.0, animations: {() -> Void in
+        self.center = finishPoint
+        self.transform = CGAffineTransform(rotationAngle: 1)
+        self.imageView.alpha = 1.0
+    }, completion: {(_ complete: Bool) -> Void in
+        self.removeFromSuperview()
+    })
+    delegate?.cardSwipedRight(self)
+}
+    // left click action
+func leftClickAction() {
+    imageView.image = UIImage(named: "noButton")
+    let finishPoint = CGPoint(x: center.x - frame.size.width * 1.5, y: center.y)
+    imageView.alpha = 0.5
+    UIView.animate(withDuration: 1.0, animations: {() -> Void in
+        self.center = finishPoint
+        self.transform = CGAffineTransform(rotationAngle: -1)
+        self.imageView.alpha = 1.0
+    }, completion: {(_ complete: Bool) -> Void in
+        self.removeFromSuperview()
+    })
+    delegate?.cardSwipedLeft(self)
+}
 }
 

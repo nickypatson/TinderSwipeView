@@ -17,6 +17,8 @@ class TinderViewBackGround: UIView {
     var currentLoadedCardsArray = [TinderCard]()
     var allCardsArray = [TinderCard]()
     var valueArray = Array<String>()
+    var buttonLeft = UIButton()
+    var buttonRight = UIButton()
     
     
     override init(frame: CGRect) {
@@ -31,9 +33,32 @@ class TinderViewBackGround: UIView {
     
     func setUpView() {
         backgroundColor = UIColor(red: 0.92, green: 0.93, blue: 0.95, alpha: 1)
-        valueArray = ["first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last"]
+        valueArray = ["first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last"]
         currentIndex = 0
+        
+        buttonLeft = UIButton(frame: CGRect(x: 10, y: self.frame.size.height - 100, width: 50, height: 50));
+        buttonLeft.setImage(UIImage(named:"noButton"), for: .normal)
+        self.addSubview(buttonLeft)
+        
+        buttonRight = UIButton(frame: CGRect(x: self.frame.size.width - 60, y: self.frame.size.height - 100, width: 50, height: 50));
+        buttonRight.setImage(UIImage(named:"yesButton"), for: .normal)
+         self.addSubview(buttonRight)
+        
+        buttonLeft.addTarget(self, action: #selector(buttonAction(_:)), for: .touchUpInside)
+        buttonRight.addTarget(self, action: #selector(buttonAction(_:)), for: .touchUpInside)
+    
         loadCards()
+    }
+    
+    @objc func buttonAction(_ sender :UIButton){
+        
+        let tinderCard = currentLoadedCardsArray.first
+        
+        if sender == buttonLeft {
+            tinderCard?.leftClickAction()
+        }else{
+            tinderCard?.rightClickAction()
+        }
     }
     
     func loadCards() {
