@@ -73,7 +73,6 @@ class TinderViewBackGround: UIView {
                 }
             }
             
-            
             for (i,_) in currentLoadedCardsArray.enumerated() {
                 if i > 0 {
                     insertSubview(currentLoadedCardsArray[i], belowSubview: currentLoadedCardsArray[i - 1])
@@ -84,7 +83,15 @@ class TinderViewBackGround: UIView {
                 currentIndex += 1
             }
             animateCardAfterSwiping()
+            
+            self.perform(#selector(createDummyCard), with: nil, afterDelay: 1.0)
+            
         }
+    }
+    
+    @objc func createDummyCard() {
+        let dummyCard = currentLoadedCardsArray.first;
+        dummyCard?.shakeCard()
     }
     
     func createDraggableViewWithData(at index: Int) -> TinderCard {

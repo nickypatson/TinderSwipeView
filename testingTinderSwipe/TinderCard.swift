@@ -147,32 +147,65 @@ class TinderCard: UIView {
     }
     
     // right click action
-func rightClickAction() {
-    imageView.image = UIImage(named: "yesButton")
-    let finishPoint = CGPoint(x: center.x + frame.size.width * 1.5, y: center.y)
-    imageView.alpha = 0.5
-    UIView.animate(withDuration: 1.0, animations: {() -> Void in
-        self.center = finishPoint
-        self.transform = CGAffineTransform(rotationAngle: 1)
-        self.imageView.alpha = 1.0
-    }, completion: {(_ complete: Bool) -> Void in
-        self.removeFromSuperview()
-    })
-    delegate?.cardSwipedRight(self)
-}
+    func rightClickAction() {
+        imageView.image = UIImage(named: "yesButton")
+        let finishPoint = CGPoint(x: center.x + frame.size.width * 1.5, y: center.y)
+        imageView.alpha = 0.5
+        UIView.animate(withDuration: 1.0, animations: {() -> Void in
+            self.center = finishPoint
+            self.transform = CGAffineTransform(rotationAngle: 1)
+            self.imageView.alpha = 1.0
+        }, completion: {(_ complete: Bool) -> Void in
+            self.removeFromSuperview()
+        })
+        delegate?.cardSwipedRight(self)
+    }
     // left click action
-func leftClickAction() {
-    imageView.image = UIImage(named: "noButton")
-    let finishPoint = CGPoint(x: center.x - frame.size.width * 1.5, y: center.y)
-    imageView.alpha = 0.5
-    UIView.animate(withDuration: 1.0, animations: {() -> Void in
-        self.center = finishPoint
-        self.transform = CGAffineTransform(rotationAngle: -1)
-        self.imageView.alpha = 1.0
-    }, completion: {(_ complete: Bool) -> Void in
-        self.removeFromSuperview()
-    })
-    delegate?.cardSwipedLeft(self)
-}
+    func leftClickAction() {
+        imageView.image = UIImage(named: "noButton")
+        let finishPoint = CGPoint(x: center.x - frame.size.width * 1.5, y: center.y)
+        imageView.alpha = 0.5
+        UIView.animate(withDuration: 1.0, animations: {() -> Void in
+            self.center = finishPoint
+            self.transform = CGAffineTransform(rotationAngle: -1)
+            self.imageView.alpha = 1.0
+        }, completion: {(_ complete: Bool) -> Void in
+            self.removeFromSuperview()
+        })
+        delegate?.cardSwipedLeft(self)
+    }
+    
+    func shakeCard()
+    {
+        let originalP: CGPoint = center
+        imageView.image = UIImage(named: "noButton")
+        UIView.animate(withDuration: 0.6, animations: {() -> Void in
+            self.center = CGPoint(x: self.center.x - (self.frame.size.width / 2), y: self.center.y)
+            self.transform = CGAffineTransform(rotationAngle: -0.2)
+            self.imageView.alpha = 1.0
+        }, completion: {(_ complete: Bool) -> Void in
+            
+            UIView.animate(withDuration: 0.6, animations: {() -> Void in
+                self.imageView.alpha = 0
+                self.center = originalP
+                self.transform = CGAffineTransform(rotationAngle: 0)
+            }, completion: {(_ complete: Bool) -> Void in
+                self.imageView.image = UIImage(named: "yesButton")
+                UIView.animate(withDuration: 0.6, animations: {() -> Void in
+                    self.imageView.alpha = 1
+                    self.center = CGPoint(x: self.center.x + (self.frame.size.width / 2), y: self.center.y)
+                    self.transform = CGAffineTransform(rotationAngle: 0.2)
+                }, completion: {(_ complete: Bool) -> Void in
+                    UIView.animate(withDuration: 0.6, animations: {() -> Void in
+                        self.imageView.alpha = 0
+                        self.center = originalP
+                        self.transform = CGAffineTransform(rotationAngle: 0)
+                    }) { _ in }
+                })
+            })
+            
+        })
+        
+    }
 }
 
