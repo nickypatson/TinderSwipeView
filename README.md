@@ -1,4 +1,11 @@
+
+# TinderSwipeView
+
 Swipe view inspired by Tinder
+
+## Description
+
+Graident layer slider using UIView
 
 ## Screenshot
 
@@ -20,4 +27,17 @@ return card
 * XCode 9
 * iOS 8.0 (Min SDK)
 ```
+
+## Author
+
+Nicky Patson
+
+[HomePage](http://about.me/nickypatson)
+
+<mail.nickypatson@gmail.com>
+
+
+## License
+
+GradientSlider is available under the MIT license. See the LICENSE file for more info.
 
