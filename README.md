@@ -3,10 +3,6 @@
 
 Swipe view inspired by Tinder
 
-## Description
-
-Graident layer slider using UIView
-
 ## Screenshot
 
 ![Alt text](/playback.gif?raw=true "Optional Title")

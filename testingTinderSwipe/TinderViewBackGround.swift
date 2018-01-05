@@ -65,8 +65,8 @@ class TinderViewBackGround: UIView {
         if valueArray.count > 0 {
             let num_currentLoadedCardsArrayCap = (valueArray.count > MAX_BUFFER_SIZE) ? MAX_BUFFER_SIZE : valueArray.count
             
-            for (i,_) in valueArray.enumerated() {
-                let newCard = createDraggableViewWithData(at: i)
+            for (i,value) in valueArray.enumerated() {
+                let newCard = createDraggableViewWithData(at: i,value: value)
                 allCardsArray.append(newCard)
                 if i < num_currentLoadedCardsArrayCap {
                     currentLoadedCardsArray.append(newCard)
@@ -94,9 +94,9 @@ class TinderViewBackGround: UIView {
         dummyCard?.shakeCard()
     }
     
-    func createDraggableViewWithData(at index: Int) -> TinderCard {
+    func createDraggableViewWithData(at index: Int , value :String) -> TinderCard {
         
-        let card = TinderCard(frame: CGRect(x: 10, y: CGFloat(TOPYAXIS), width: frame.size.width - 20, height: frame.size.height - CGFloat(TOPYAXIS) - 200))
+        let card = TinderCard(frame: CGRect(x: 10, y: CGFloat(TOPYAXIS), width: frame.size.width - 20, height: frame.size.height - CGFloat(TOPYAXIS) - 200) ,value : value)
         card.delegate = self
         return card
     }

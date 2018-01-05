@@ -30,16 +30,16 @@ class TinderCard: UIView {
     
     weak var delegate: TinderCardDelegate?
     
-    override init(frame: CGRect) {
+    public init(frame: CGRect, value: String) {
         super.init(frame: frame)
-        setupView()
+        setupView(at: value)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupView() {
+    func setupView(at value:String) {
         
         imageView = UIImageView(frame: CGRect(x: (frame.size.width / 2) - 37.5, y: frame.size.height - 75 - 50, width: 75, height: 75))
         imageView.image = UIImage(named: "yesButton")
@@ -47,7 +47,7 @@ class TinderCard: UIView {
         let textLabel = UILabel(frame: CGRect(x: 20, y: 50, width: frame.size.width - 40, height: frame.size.width - 100))
         textLabel.textAlignment = .center
         textLabel.numberOfLines = 0
-        let attributedString = NSMutableAttributedString(string: "First Contact\n", attributes: [.foregroundColor: UIColor.orange, .font: UIFont.boldSystemFont(ofSize: 20.0)])
+        let attributedString = NSMutableAttributedString(string: "\(value)\n", attributes: [.foregroundColor: UIColor.orange, .font: UIFont.boldSystemFont(ofSize: 20.0)])
         attributedString.append(NSAttributedString(string: "Company\n", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17.0)]))
         attributedString.append(NSAttributedString(string: "Title\nCity\nCountry", attributes: [.foregroundColor: UIColor.black, .font: UIFont.systemFont(ofSize: 15.0)]))
         textLabel.attributedText = attributedString
