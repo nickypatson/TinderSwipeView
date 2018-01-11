@@ -12,7 +12,6 @@
 		E1B3FCA51FBDA0FD0038ADF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1B3FCA31FBDA0FD0038ADF9 /* Main.storyboard */; };
 		E1B3FCA71FBDA0FD0038ADF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1B3FCA61FBDA0FD0038ADF9 /* Assets.xcassets */; };
 		E1B3FCAA1FBDA0FD0038ADF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1B3FCA81FBDA0FD0038ADF9 /* LaunchScreen.storyboard */; };
-		E1B3FCB21FBDA12C0038ADF9 /* TinderViewBackGround.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B3FCB11FBDA12C0038ADF9 /* TinderViewBackGround.swift */; };
 		E1B3FCB41FBDA13D0038ADF9 /* TinderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B3FCB31FBDA13D0038ADF9 /* TinderCard.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +23,6 @@
 		E1B3FCA61FBDA0FD0038ADF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E1B3FCA91FBDA0FD0038ADF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E1B3FCAB1FBDA0FD0038ADF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1B3FCB11FBDA12C0038ADF9 /* TinderViewBackGround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderViewBackGround.swift; sourceTree = "<group>"; };
 		E1B3FCB31FBDA13D0038ADF9 /* TinderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,7 +58,6 @@
 			children = (
 				E1B3FC9F1FBDA0FD0038ADF9 /* AppDelegate.swift */,
 				E1B3FCA11FBDA0FD0038ADF9 /* ViewController.swift */,
-				E1B3FCB11FBDA12C0038ADF9 /* TinderViewBackGround.swift */,
 				E1B3FCB31FBDA13D0038ADF9 /* TinderCard.swift */,
 				E1B3FCA31FBDA0FD0038ADF9 /* Main.storyboard */,
 				E1B3FCA61FBDA0FD0038ADF9 /* Assets.xcassets */,
@@ -142,7 +139,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1B3FCB21FBDA12C0038ADF9 /* TinderViewBackGround.swift in Sources */,
 				E1B3FCA21FBDA0FD0038ADF9 /* ViewController.swift in Sources */,
 				E1B3FCA01FBDA0FD0038ADF9 /* AppDelegate.swift in Sources */,
 				E1B3FCB41FBDA13D0038ADF9 /* TinderCard.swift in Sources */,

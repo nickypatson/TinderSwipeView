@@ -26,7 +26,7 @@ class TinderCard: UIView {
     var xFromCenter: CGFloat = 0.0
     var yFromCenter: CGFloat = 0.0
     var originalPoint = CGPoint.zero
-    var imageView = UIImageView()
+    var imageViewStatus = UIImageView()
     
     weak var delegate: TinderCardDelegate?
     
@@ -41,26 +41,23 @@ class TinderCard: UIView {
     
     func setupView(at value:String) {
         
-        imageView = UIImageView(frame: CGRect(x: (frame.size.width / 2) - 37.5, y: frame.size.height - 75 - 50, width: 75, height: 75))
-        imageView.image = UIImage(named: "yesButton")
-        imageView.alpha = 0
-        let textLabel = UILabel(frame: CGRect(x: 20, y: 50, width: frame.size.width - 40, height: frame.size.width - 100))
-        textLabel.textAlignment = .center
-        textLabel.numberOfLines = 0
-        let attributedString = NSMutableAttributedString(string: "\(value)\n", attributes: [.foregroundColor: UIColor.orange, .font: UIFont.boldSystemFont(ofSize: 20.0)])
-        attributedString.append(NSAttributedString(string: "Company\n", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17.0)]))
-        attributedString.append(NSAttributedString(string: "Title\nCity\nCountry", attributes: [.foregroundColor: UIColor.black, .font: UIFont.systemFont(ofSize: 15.0)]))
-        textLabel.attributedText = attributedString
+        let randomNumber = Int(1 + arc4random() % (5 - 1))
+        let profileImageView = UIImageView(frame:bounds)
+        profileImageView.image = UIImage(named:String(randomNumber))
+        profileImageView.contentMode = .scaleToFill
+        profileImageView.clipsToBounds = true;
+        addSubview(profileImageView)
         
-        addSubview(imageView)
-        addSubview(textLabel)
+        imageViewStatus = UIImageView(frame: CGRect(x: (frame.size.width / 2) - 37.5, y: 25, width: 75, height: 75))
+        imageViewStatus.image = UIImage(named: "btn_like_pressed")
+        imageViewStatus.alpha = 0
+        addSubview(imageViewStatus)
         
         layer.cornerRadius = 10
         layer.shadowRadius = 3
         layer.shadowOpacity = 0.4
         layer.shadowOffset = CGSize(width: 0.5, height: 3)
-        layer.shadowColor = UIColor.gray.cgColor
-        backgroundColor = .white
+        layer.shadowColor = UIColor.darkGray.cgColor
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
         addGestureRecognizer(panGestureRecognizer)
@@ -71,12 +68,11 @@ class TinderCard: UIView {
         xFromCenter = gestureRecognizer.translation(in: self).x
         yFromCenter = gestureRecognizer.translation(in: self).y
         switch gestureRecognizer.state {
-        //%%% just started swiping
+        // Keep swiping
         case .began:
             originalPoint = self.center;
             break;
-            
-        //%%% in the middle of a swipe
+        //in the middle of a swipe
         case .changed:
             let rotationStrength = min(xFromCenter / ROTATION_STRENGTH, ROTATION_MAX)
             let rotationAngel = .pi/8 * rotationStrength
@@ -87,7 +83,8 @@ class TinderCard: UIView {
             self.transform = scaleTransform
             updateOverlay(xFromCenter)
             break;
-            
+           
+        // swipe ended
         case .ended:
             afterSwipeAction()
             break;
@@ -99,8 +96,8 @@ class TinderCard: UIView {
     }
     func updateOverlay(_ distance: CGFloat) {
         
-        imageView.image = distance > 0 ? UIImage(named: "yesButton") : UIImage(named: "noButton")
-        imageView.alpha = min(fabs(distance) / 100, 0.5)
+        imageViewStatus.image = distance > 0 ? UIImage(named: "btn_like_pressed") : UIImage(named: "btn_skip_pressed")
+        imageViewStatus.alpha = min(fabs(distance) / 100, 0.5)
         delegate?.updateCardView(self, withDistance: distance)
     }
     
@@ -112,11 +109,11 @@ class TinderCard: UIView {
             leftAction()
         }
         else {
-            //%%% resets the card
+            //reseting image
             UIView.animate(withDuration: 0.3, animations: {
                 self.center = self.originalPoint
                 self.transform = CGAffineTransform(rotationAngle: 0)
-                self.imageView.alpha = 0
+                self.imageViewStatus.alpha = 0
             })
         }
         
@@ -148,13 +145,13 @@ class TinderCard: UIView {
     
     // right click action
     func rightClickAction() {
-        imageView.image = UIImage(named: "yesButton")
+        imageViewStatus.image = UIImage(named: "btn_like_pressed")
         let finishPoint = CGPoint(x: center.x + frame.size.width * 1.5, y: center.y)
-        imageView.alpha = 0.5
+        imageViewStatus.alpha = 0.5
         UIView.animate(withDuration: 1.0, animations: {() -> Void in
             self.center = finishPoint
             self.transform = CGAffineTransform(rotationAngle: 1)
-            self.imageView.alpha = 1.0
+            self.imageViewStatus.alpha = 1.0
         }, completion: {(_ complete: Bool) -> Void in
             self.removeFromSuperview()
         })
@@ -162,13 +159,13 @@ class TinderCard: UIView {
     }
     // left click action
     func leftClickAction() {
-        imageView.image = UIImage(named: "noButton")
+        imageViewStatus.image = UIImage(named: "btn_skip_pressed")
         let finishPoint = CGPoint(x: center.x - frame.size.width * 1.5, y: center.y)
-        imageView.alpha = 0.5
+        imageViewStatus.alpha = 0.5
         UIView.animate(withDuration: 1.0, animations: {() -> Void in
             self.center = finishPoint
             self.transform = CGAffineTransform(rotationAngle: -1)
-            self.imageView.alpha = 1.0
+            self.imageViewStatus.alpha = 1.0
         }, completion: {(_ complete: Bool) -> Void in
             self.removeFromSuperview()
         })
@@ -178,26 +175,26 @@ class TinderCard: UIView {
     func shakeCard()
     {
         let originalP: CGPoint = center
-        imageView.image = UIImage(named: "noButton")
+        imageViewStatus.image = UIImage(named: "btn_skip_pressed")
         UIView.animate(withDuration: 0.6, animations: {() -> Void in
             self.center = CGPoint(x: self.center.x - (self.frame.size.width / 2), y: self.center.y)
             self.transform = CGAffineTransform(rotationAngle: -0.2)
-            self.imageView.alpha = 1.0
+            self.imageViewStatus.alpha = 1.0
         }, completion: {(_ complete: Bool) -> Void in
             
             UIView.animate(withDuration: 0.6, animations: {() -> Void in
-                self.imageView.alpha = 0
+                self.imageViewStatus.alpha = 0
                 self.center = originalP
                 self.transform = CGAffineTransform(rotationAngle: 0)
             }, completion: {(_ complete: Bool) -> Void in
-                self.imageView.image = UIImage(named: "yesButton")
+                self.imageViewStatus.image = UIImage(named: "btn_like_pressed")
                 UIView.animate(withDuration: 0.6, animations: {() -> Void in
-                    self.imageView.alpha = 1
+                    self.imageViewStatus.alpha = 1
                     self.center = CGPoint(x: self.center.x + (self.frame.size.width / 2), y: self.center.y)
                     self.transform = CGAffineTransform(rotationAngle: 0.2)
                 }, completion: {(_ complete: Bool) -> Void in
                     UIView.animate(withDuration: 0.6, animations: {() -> Void in
-                        self.imageView.alpha = 0
+                        self.imageViewStatus.alpha = 0
                         self.center = originalP
                         self.transform = CGAffineTransform(rotationAngle: 0)
                     }) { _ in }
