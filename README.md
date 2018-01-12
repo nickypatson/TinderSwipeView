@@ -8,9 +8,9 @@ Swipe view inspired by Tinder
 ![Alt text](/playback.gif?raw=true "Optional Title")
 
 ```swift
-func createDraggableViewWithData(at index: Int) -> TinderCard {
+func createDraggableViewWithData(at index: Int , value :String) -> TinderCard {
 
-let card = TinderCard(frame: CGRect(x: 10, y: CGFloat(TOPYAXIS), width: frame.size.width - 20, height: frame.size.height - CGFloat(TOPYAXIS) - 200))
+let card = TinderCard(frame: CGRect(x: 10, y: 0, width: viewTinderBackGround.frame.size.width - 20 , height: viewTinderBackGround.frame.size.height - 40) ,value : value)
 card.delegate = self
 return card
 }
