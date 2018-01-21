@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "icons8-undo-100 (2).png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "cards_3@2x.png",
       "scale" : "2x"
     },
     {

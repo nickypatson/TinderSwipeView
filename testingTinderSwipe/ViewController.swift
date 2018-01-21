@@ -15,13 +15,14 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var viewTinderBackGround: UIView!
-
-   
+    @IBOutlet weak var buttonUndo: UIButton!
+    
     
     var currentIndex = 0
+    var isMakeUndo = false
     var currentLoadedCardsArray = [TinderCard]()
     var allCardsArray = [TinderCard]()
-    var valueArray = ["first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last"]
+    var valueArray = ["first", "second", "third"]
     
     
     
@@ -74,6 +75,8 @@ class ViewController: UIViewController {
     
     func removeObjectAndAddNewValues() {
         
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(enableUndoButton), userInfo: nil, repeats: false)
+        
         currentLoadedCardsArray.remove(at: 0)
         if currentIndex < allCardsArray.count {
             let card = allCardsArray[currentIndex]
@@ -83,8 +86,8 @@ class ViewController: UIViewController {
             currentLoadedCardsArray.append(card)
             currentIndex += 1
             viewTinderBackGround.insertSubview(currentLoadedCardsArray[MAX_BUFFER_SIZE - 1], belowSubview: currentLoadedCardsArray[MAX_BUFFER_SIZE - 2])
-            animateCardAfterSwiping()
         }
+        animateCardAfterSwiping()
     }
     
     func animateCardAfterSwiping() {
@@ -98,13 +101,42 @@ class ViewController: UIViewController {
         }
     }
     
+    
     @IBAction func disLikeButtonAction(_ sender: Any) {
-        let card  = currentLoadedCardsArray.first
+        let card = currentLoadedCardsArray.first
         card?.leftClickAction()
     }
+    
     @IBAction func LikeButtonAction(_ sender: Any) {
-        let card  = currentLoadedCardsArray.first
+        let card = currentLoadedCardsArray.first
         card?.rightClickAction()
+    }
+    
+    @IBAction func undoButtonAction(_ sender: Any) {
+        
+        if !isMakeUndo {
+            isMakeUndo = true
+            buttonUndo.isHidden = true
+            
+            let card = allCardsArray[(currentIndex - 1) - currentLoadedCardsArray.count]
+            currentLoadedCardsArray.insert(card, at: 0)
+            viewTinderBackGround.addSubview(card)
+            card.makeUndoAction()
+            if currentIndex < MAX_BUFFER_SIZE{
+                currentLoadedCardsArray.last?.removeFromSuperview()
+                currentLoadedCardsArray.removeLast()
+                currentIndex = MAX_BUFFER_SIZE + 1
+            }else if currentIndex == MAX_BUFFER_SIZE{
+                currentIndex = MAX_BUFFER_SIZE + 1
+            }
+            animateCardAfterSwiping()
+            currentIndex -= 1
+        }
+    }
+    
+    @objc func enableUndoButton(){
+        buttonUndo.isHidden = false
+        isMakeUndo = false
     }
     
 }
