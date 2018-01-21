@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -26,6 +25,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backGround" translatesAutoresizingMaskIntoConstraints="NO" id="bZG-mh-NoB">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWB-Xd-Ene">
                                 <rect key="frame" x="0.0" y="20" width="375" height="74"/>
                                 <subviews>
@@ -48,55 +50,73 @@
                                 <rect key="frame" x="0.0" y="109" width="375" height="448"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvH-LK-xus">
-                                <rect key="frame" x="36" y="572" width="75" height="75"/>
+                            <view clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ngc-vB-tmf">
+                                <rect key="frame" x="0.0" y="567" width="375" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9B-sc-Flt">
+                                        <rect key="frame" x="280" y="12.5" width="75" height="75"/>
+                                        <state key="normal" image="yesButton"/>
+                                        <connections>
+                                            <action selector="LikeButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fRq-Hm-Geh"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dd4-1R-nPc">
+                                        <rect key="frame" x="150" y="12.5" width="75" height="75"/>
+                                        <state key="normal" image="undoButton"/>
+                                        <connections>
+                                            <action selector="undoButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yKR-1X-10r"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvH-LK-xus">
+                                        <rect key="frame" x="20" y="12.5" width="75" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="75" id="Ra7-2Q-h0D"/>
+                                            <constraint firstAttribute="height" constant="75" id="clG-Mm-lVo"/>
+                                        </constraints>
+                                        <state key="normal" image="noButton"/>
+                                        <connections>
+                                            <action selector="disLikeButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RB1-9R-QuH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.30588235289999999" blue="0.43529411759999997" alpha="0.85788952460000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="l4r-WW-y9B"/>
-                                    <constraint firstAttribute="width" constant="75" id="rEU-Fj-Ysj"/>
+                                    <constraint firstItem="dd4-1R-nPc" firstAttribute="width" secondItem="uvH-LK-xus" secondAttribute="width" id="0pb-C3-pOr"/>
+                                    <constraint firstAttribute="height" constant="100" id="17s-z1-Yai"/>
+                                    <constraint firstItem="f9B-sc-Flt" firstAttribute="height" secondItem="dd4-1R-nPc" secondAttribute="height" id="5fY-g1-DsP"/>
+                                    <constraint firstAttribute="trailing" secondItem="f9B-sc-Flt" secondAttribute="trailing" constant="20" id="F1j-yb-OJG"/>
+                                    <constraint firstItem="dd4-1R-nPc" firstAttribute="height" secondItem="uvH-LK-xus" secondAttribute="height" id="M6R-cz-AYk"/>
+                                    <constraint firstItem="dd4-1R-nPc" firstAttribute="centerX" secondItem="Ngc-vB-tmf" secondAttribute="centerX" id="Xyo-Jk-gXR"/>
+                                    <constraint firstItem="dd4-1R-nPc" firstAttribute="top" secondItem="uvH-LK-xus" secondAttribute="top" id="cbd-ca-rkd"/>
+                                    <constraint firstItem="uvH-LK-xus" firstAttribute="leading" secondItem="Ngc-vB-tmf" secondAttribute="leading" constant="20" id="hd8-4V-L4L"/>
+                                    <constraint firstItem="uvH-LK-xus" firstAttribute="centerY" secondItem="Ngc-vB-tmf" secondAttribute="centerY" id="r6U-IE-zlF"/>
+                                    <constraint firstItem="f9B-sc-Flt" firstAttribute="top" secondItem="dd4-1R-nPc" secondAttribute="top" id="uQA-JS-60y"/>
+                                    <constraint firstItem="f9B-sc-Flt" firstAttribute="width" secondItem="dd4-1R-nPc" secondAttribute="width" id="upQ-wm-YHy"/>
                                 </constraints>
-                                <state key="normal" image="noButton"/>
-                                <connections>
-                                    <action selector="disLikeButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RB1-9R-QuH"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9B-sc-Flt">
-                                <rect key="frame" x="264" y="572" width="75" height="75"/>
-                                <state key="normal" image="yesButton"/>
-                                <connections>
-                                    <action selector="LikeButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fRq-Hm-Geh"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dd4-1R-nPc">
-                                <rect key="frame" x="149.5" y="572" width="75" height="75"/>
-                                <state key="normal" image="undoButton"/>
-                                <connections>
-                                    <action selector="undoButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yKR-1X-10r"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.30588235294117649" blue="0.43529411764705883" alpha="0.85788952464788737" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="f9B-sc-Flt" firstAttribute="width" secondItem="uvH-LK-xus" secondAttribute="width" id="2Tk-0e-2bW"/>
+                            <constraint firstAttribute="trailing" secondItem="Ngc-vB-tmf" secondAttribute="trailing" id="3iS-gt-ljH"/>
+                            <constraint firstAttribute="bottom" secondItem="Ngc-vB-tmf" secondAttribute="bottom" id="4C9-Tp-Uua"/>
                             <constraint firstAttribute="trailing" secondItem="MWB-Xd-Ene" secondAttribute="trailing" id="5oI-kI-eMZ"/>
-                            <constraint firstItem="uvH-LK-xus" firstAttribute="top" secondItem="et5-xb-yAa" secondAttribute="bottom" constant="15" id="HoZ-WW-wH5"/>
+                            <constraint firstItem="Lc7-rs-A4Z" firstAttribute="top" secondItem="bZG-mh-NoB" secondAttribute="bottom" id="IKb-eO-A6z"/>
                             <constraint firstItem="MWB-Xd-Ene" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="NC0-So-Cux"/>
+                            <constraint firstItem="Lc7-rs-A4Z" firstAttribute="top" secondItem="et5-xb-yAa" secondAttribute="bottom" constant="110" id="NJL-JK-J2c"/>
                             <constraint firstItem="et5-xb-yAa" firstAttribute="top" secondItem="MWB-Xd-Ene" secondAttribute="bottom" constant="15" id="Wsd-mf-NAe"/>
-                            <constraint firstItem="f9B-sc-Flt" firstAttribute="top" secondItem="uvH-LK-xus" secondAttribute="top" id="YDk-GD-T3g"/>
-                            <constraint firstItem="dd4-1R-nPc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZbL-yn-iVG"/>
                             <constraint firstItem="MWB-Xd-Ene" firstAttribute="top" secondItem="HLY-yg-2e4" secondAttribute="bottom" id="Zjr-Td-bxd"/>
-                            <constraint firstItem="dd4-1R-nPc" firstAttribute="height" secondItem="uvH-LK-xus" secondAttribute="height" id="cNv-Bu-eZa"/>
-                            <constraint firstItem="f9B-sc-Flt" firstAttribute="height" secondItem="uvH-LK-xus" secondAttribute="height" id="do2-OH-sM4"/>
-                            <constraint firstItem="Lc7-rs-A4Z" firstAttribute="top" secondItem="uvH-LK-xus" secondAttribute="bottom" constant="20" id="ggf-9e-04B"/>
+                            <constraint firstItem="Ngc-vB-tmf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hEM-sH-W4d"/>
                             <constraint firstAttribute="trailing" secondItem="et5-xb-yAa" secondAttribute="trailing" id="lFP-6i-uqd"/>
                             <constraint firstItem="et5-xb-yAa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ldY-n1-lvS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="f9B-sc-Flt" secondAttribute="trailing" constant="20" id="myx-CX-2Pv"/>
-                            <constraint firstItem="uvH-LK-xus" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="xCB-tj-vmD"/>
-                            <constraint firstItem="dd4-1R-nPc" firstAttribute="top" secondItem="uvH-LK-xus" secondAttribute="top" id="yZw-Le-shd"/>
-                            <constraint firstItem="dd4-1R-nPc" firstAttribute="width" secondItem="uvH-LK-xus" secondAttribute="width" id="ypP-jN-Tml"/>
+                            <constraint firstItem="bZG-mh-NoB" firstAttribute="top" secondItem="HLY-yg-2e4" secondAttribute="bottom" id="mBc-FV-p6v"/>
+                            <constraint firstItem="bZG-mh-NoB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rdq-pp-mvH"/>
+                            <constraint firstAttribute="trailing" secondItem="bZG-mh-NoB" secondAttribute="trailing" id="sme-XH-QcB"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="buttonUndo" destination="dd4-1R-nPc" id="dN2-s9-mBg"/>
+                        <outlet property="viewActionHeightConstrain" destination="17s-z1-Yai" id="PBe-uO-pbB"/>
+                        <outlet property="viewActions" destination="Ngc-vB-tmf" id="mzh-yr-jQo"/>
                         <outlet property="viewTinderBackGround" destination="et5-xb-yAa" id="zyr-xb-R3o"/>
                     </connections>
                 </viewController>
@@ -106,6 +126,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="backGround" width="1920" height="1200"/>
         <image name="noButton" width="34" height="34"/>
         <image name="undoButton" width="100" height="100"/>
         <image name="yesButton" width="38" height="34"/>
