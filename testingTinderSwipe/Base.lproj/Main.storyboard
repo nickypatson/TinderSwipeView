@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -66,13 +67,6 @@
                                     <action selector="LikeButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fRq-Hm-Geh"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dd4-1R-nPc">
-                                <rect key="frame" x="149.5" y="572" width="75" height="75"/>
-                                <state key="normal" image="undoButton"/>
-                                <connections>
-                                    <action selector="undoButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yKR-1X-10r"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.30588235294117649" blue="0.43529411764705883" alpha="0.85788952464788737" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -82,21 +76,16 @@
                             <constraint firstItem="MWB-Xd-Ene" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="NC0-So-Cux"/>
                             <constraint firstItem="et5-xb-yAa" firstAttribute="top" secondItem="MWB-Xd-Ene" secondAttribute="bottom" constant="15" id="Wsd-mf-NAe"/>
                             <constraint firstItem="f9B-sc-Flt" firstAttribute="top" secondItem="uvH-LK-xus" secondAttribute="top" id="YDk-GD-T3g"/>
-                            <constraint firstItem="dd4-1R-nPc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZbL-yn-iVG"/>
                             <constraint firstItem="MWB-Xd-Ene" firstAttribute="top" secondItem="HLY-yg-2e4" secondAttribute="bottom" id="Zjr-Td-bxd"/>
-                            <constraint firstItem="dd4-1R-nPc" firstAttribute="height" secondItem="uvH-LK-xus" secondAttribute="height" id="cNv-Bu-eZa"/>
                             <constraint firstItem="f9B-sc-Flt" firstAttribute="height" secondItem="uvH-LK-xus" secondAttribute="height" id="do2-OH-sM4"/>
                             <constraint firstItem="Lc7-rs-A4Z" firstAttribute="top" secondItem="uvH-LK-xus" secondAttribute="bottom" constant="20" id="ggf-9e-04B"/>
                             <constraint firstAttribute="trailing" secondItem="et5-xb-yAa" secondAttribute="trailing" id="lFP-6i-uqd"/>
                             <constraint firstItem="et5-xb-yAa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ldY-n1-lvS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="f9B-sc-Flt" secondAttribute="trailing" constant="20" id="myx-CX-2Pv"/>
                             <constraint firstItem="uvH-LK-xus" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="xCB-tj-vmD"/>
-                            <constraint firstItem="dd4-1R-nPc" firstAttribute="top" secondItem="uvH-LK-xus" secondAttribute="top" id="yZw-Le-shd"/>
-                            <constraint firstItem="dd4-1R-nPc" firstAttribute="width" secondItem="uvH-LK-xus" secondAttribute="width" id="ypP-jN-Tml"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="buttonUndo" destination="dd4-1R-nPc" id="dN2-s9-mBg"/>
                         <outlet property="viewTinderBackGround" destination="et5-xb-yAa" id="zyr-xb-R3o"/>
                     </connections>
                 </viewController>
@@ -107,7 +96,6 @@
     </scenes>
     <resources>
         <image name="noButton" width="34" height="34"/>
-        <image name="undoButton" width="100" height="100"/>
         <image name="yesButton" width="38" height="34"/>
     </resources>
 </document>

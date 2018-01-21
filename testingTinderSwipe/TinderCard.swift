@@ -27,7 +27,6 @@ class TinderCard: UIView {
     var yFromCenter: CGFloat = 0.0
     var originalPoint = CGPoint.zero
     var imageViewStatus = UIImageView()
-    var isLiked = false
     
     weak var delegate: TinderCardDelegate?
     
@@ -60,8 +59,6 @@ class TinderCard: UIView {
         layer.shadowOffset = CGSize(width: 0.5, height: 3)
         layer.shadowColor = UIColor.darkGray.cgColor
         
-        originalPoint = center
-        
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
         addGestureRecognizer(panGestureRecognizer)
     }
@@ -86,7 +83,7 @@ class TinderCard: UIView {
             self.transform = scaleTransform
             updateOverlay(xFromCenter)
             break;
-            
+           
         // swipe ended
         case .ended:
             afterSwipeAction()
@@ -123,27 +120,25 @@ class TinderCard: UIView {
     }
     
     func rightAction() {
-        let finishPoint = CGPoint(x: frame.size.width*2, y: 2 * yFromCenter + originalPoint.y)
+        let finishPoint = CGPoint(x: 500, y: 2 * yFromCenter + originalPoint.y)
         
         UIView.animate(withDuration: 0.3, animations: {
             self.center = finishPoint
         }, completion: {(_) in
             self.removeFromSuperview()
         })
-        isLiked = true
         delegate?.cardSwipedRight(self)
         print("WATCHOUT RIGHT")
     }
     
     func leftAction() {
-        let finishPoint = CGPoint(x: -frame.size.width, y: 2 * yFromCenter + originalPoint.y)
+        let finishPoint = CGPoint(x: -500, y: 2 * yFromCenter + originalPoint.y)
         
         UIView.animate(withDuration: 0.3, animations: {
             self.center = finishPoint
         }, completion: {(_) in
             self.removeFromSuperview()
         })
-        isLiked = false
         delegate?.cardSwipedLeft(self)
         print("WATCHOUT LEFT")
     }
@@ -160,7 +155,6 @@ class TinderCard: UIView {
         }, completion: {(_ complete: Bool) -> Void in
             self.removeFromSuperview()
         })
-        isLiked = true
         delegate?.cardSwipedRight(self)
     }
     // left click action
@@ -175,33 +169,22 @@ class TinderCard: UIView {
         }, completion: {(_ complete: Bool) -> Void in
             self.removeFromSuperview()
         })
-        isLiked = false
         delegate?.cardSwipedLeft(self)
-    }
-    
-    func makeUndoAction() {
-        
-        imageViewStatus.image = UIImage(named: isLiked ? "btn_like_pressed" : "btn_skip_pressed")
-        imageViewStatus.alpha = 1.0
-        UIView.animate(withDuration: 0.5, animations: {() -> Void in
-            self.center = self.originalPoint
-            self.transform = CGAffineTransform(rotationAngle: 0)
-            self.imageViewStatus.alpha = 0
-        }, completion: {(_ complete: Bool) -> Void in
-        })
     }
     
     func shakeCard()
     {
+        let originalP: CGPoint = center
         imageViewStatus.image = UIImage(named: "btn_skip_pressed")
         UIView.animate(withDuration: 0.6, animations: {() -> Void in
             self.center = CGPoint(x: self.center.x - (self.frame.size.width / 2), y: self.center.y)
             self.transform = CGAffineTransform(rotationAngle: -0.2)
             self.imageViewStatus.alpha = 1.0
         }, completion: {(_ complete: Bool) -> Void in
+            
             UIView.animate(withDuration: 0.6, animations: {() -> Void in
                 self.imageViewStatus.alpha = 0
-                self.center = self.originalPoint
+                self.center = originalP
                 self.transform = CGAffineTransform(rotationAngle: 0)
             }, completion: {(_ complete: Bool) -> Void in
                 self.imageViewStatus.image = UIImage(named: "btn_like_pressed")
@@ -212,7 +195,7 @@ class TinderCard: UIView {
                 }, completion: {(_ complete: Bool) -> Void in
                     UIView.animate(withDuration: 0.6, animations: {() -> Void in
                         self.imageViewStatus.alpha = 0
-                        self.center = self.originalPoint
+                        self.center = originalP
                         self.transform = CGAffineTransform(rotationAngle: 0)
                     }) { _ in }
                 })
