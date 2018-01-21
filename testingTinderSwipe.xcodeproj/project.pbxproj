@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E10A09362014A76700A92931 /* Screen Shot.png in Resources */ = {isa = PBXBuildFile; fileRef = E10A09352014A76700A92931 /* Screen Shot.png */; };
 		E1B2075B2014956500E0A3A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1B2075A2014956400E0A3A2 /* Assets.xcassets */; };
 		E1B3FCA01FBDA0FD0038ADF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B3FC9F1FBDA0FD0038ADF9 /* AppDelegate.swift */; };
 		E1B3FCA21FBDA0FD0038ADF9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B3FCA11FBDA0FD0038ADF9 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E10A09352014A76700A92931 /* Screen Shot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot.png"; sourceTree = "<group>"; };
 		E1B2075A2014956400E0A3A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E1B3FC9C1FBDA0FD0038ADF9 /* testingTinderSwipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testingTinderSwipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1B3FC9F1FBDA0FD0038ADF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		E1B3FC9E1FBDA0FD0038ADF9 /* testingTinderSwipe */ = {
 			isa = PBXGroup;
 			children = (
+				E10A09352014A76700A92931 /* Screen Shot.png */,
 				E1B3FC9F1FBDA0FD0038ADF9 /* AppDelegate.swift */,
 				E1B3FCA11FBDA0FD0038ADF9 /* ViewController.swift */,
 				E1B3FCB31FBDA13D0038ADF9 /* TinderCard.swift */,
@@ -126,6 +129,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E10A09362014A76700A92931 /* Screen Shot.png in Resources */,
 				E1B3FCAA1FBDA0FD0038ADF9 /* LaunchScreen.storyboard in Resources */,
 				E1B2075B2014956500E0A3A2 /* Assets.xcassets in Resources */,
 				E1B3FCA51FBDA0FD0038ADF9 /* Main.storyboard in Resources */,
