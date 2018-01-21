@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     var isMakeUndo = false
     var currentLoadedCardsArray = [TinderCard]()
     var allCardsArray = [TinderCard]()
-    var valueArray = ["first", "second", "third"]
+    var valueArray = ["first", "second", "third","fourth","first", "second", "third","fourth","first", "second", "third","fourth"]
     
     
     
@@ -77,6 +77,7 @@ class ViewController: UIViewController {
         
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(enableUndoButton), userInfo: nil, repeats: false)
         
+        
         currentLoadedCardsArray.remove(at: 0)
         if currentIndex < allCardsArray.count {
             let card = allCardsArray[currentIndex]
@@ -87,6 +88,7 @@ class ViewController: UIViewController {
             currentIndex += 1
             viewTinderBackGround.insertSubview(currentLoadedCardsArray[MAX_BUFFER_SIZE - 1], belowSubview: currentLoadedCardsArray[MAX_BUFFER_SIZE - 2])
         }
+        print(currentIndex)
         animateCardAfterSwiping()
     }
     
@@ -105,11 +107,17 @@ class ViewController: UIViewController {
     @IBAction func disLikeButtonAction(_ sender: Any) {
         let card = currentLoadedCardsArray.first
         card?.leftClickAction()
+        DispatchQueue.main.async {
+           self.buttonUndo.isHidden = true
+        }
     }
     
     @IBAction func LikeButtonAction(_ sender: Any) {
         let card = currentLoadedCardsArray.first
         card?.rightClickAction()
+        DispatchQueue.main.async {
+            self.buttonUndo.isHidden = true
+        }
     }
     
     @IBAction func undoButtonAction(_ sender: Any) {
@@ -117,20 +125,20 @@ class ViewController: UIViewController {
         if !isMakeUndo {
             isMakeUndo = true
             buttonUndo.isHidden = true
+            currentIndex -= 1
             
-            let card = allCardsArray[(currentIndex - 1) - currentLoadedCardsArray.count]
-            currentLoadedCardsArray.insert(card, at: 0)
-            viewTinderBackGround.addSubview(card)
-            card.makeUndoAction()
-            if currentIndex < MAX_BUFFER_SIZE{
+            let undoCard = allCardsArray[currentIndex-currentLoadedCardsArray.count]
+            currentLoadedCardsArray.insert(undoCard, at: 0)
+            viewTinderBackGround.addSubview(undoCard)
+            undoCard.makeUndoAction()
+            if (currentLoadedCardsArray.count > MAX_BUFFER_SIZE){
                 currentLoadedCardsArray.last?.removeFromSuperview()
                 currentLoadedCardsArray.removeLast()
-                currentIndex = MAX_BUFFER_SIZE + 1
-            }else if currentIndex == MAX_BUFFER_SIZE{
-                currentIndex = MAX_BUFFER_SIZE + 1
+            }else{
+               currentIndex = allCardsArray.count
             }
             animateCardAfterSwiping()
-            currentIndex -= 1
+            print(currentIndex)
         }
     }
     
@@ -143,17 +151,17 @@ class ViewController: UIViewController {
 
 extension ViewController : TinderCardDelegate{
     
-    //%%% action called when the card goes to the left.
+    // action called when the card goes to the left.
     func cardSwipedLeft(_ card: UIView) {
         removeObjectAndAddNewValues()
     }
-    //%%% action called when the card goes to the right.
+    // action called when the card goes to the right.
     func cardSwipedRight(_ card: UIView) {
         removeObjectAndAddNewValues()
     }
     
     func updateCardView(_ card: UIView, withDistance distance: CGFloat) {
-        //NSLog(@"%f",distance);
+        //Log(@"%f",distance);
     }
 }
 
