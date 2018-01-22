@@ -27,6 +27,7 @@ class TinderCard: UIView {
     var yFromCenter: CGFloat = 0.0
     var originalPoint = CGPoint.zero
     var imageViewStatus = UIImageView()
+    var overLayImage = UIImageView()
     
     weak var delegate: TinderCardDelegate?
     
@@ -53,6 +54,11 @@ class TinderCard: UIView {
         imageViewStatus.alpha = 0
         addSubview(imageViewStatus)
         
+        overLayImage = UIImageView(frame:bounds)
+        overLayImage.alpha = 0
+        addSubview(overLayImage)
+        
+    
         layer.cornerRadius = 10
         layer.shadowRadius = 3
         layer.shadowOpacity = 0.4
@@ -97,7 +103,9 @@ class TinderCard: UIView {
     func updateOverlay(_ distance: CGFloat) {
         
         imageViewStatus.image = distance > 0 ? UIImage(named: "btn_like_pressed") : UIImage(named: "btn_skip_pressed")
+        overLayImage.image = distance > 0 ? UIImage(named: "overlay_like") : UIImage(named: "overlay_skip")
         imageViewStatus.alpha = min(fabs(distance) / 100, 0.5)
+        overLayImage.alpha = min(fabs(distance) / 100, 0.5)
         delegate?.updateCardView(self, withDistance: distance)
     }
     
@@ -114,6 +122,7 @@ class TinderCard: UIView {
                 self.center = self.originalPoint
                 self.transform = CGAffineTransform(rotationAngle: 0)
                 self.imageViewStatus.alpha = 0
+                self.overLayImage.alpha = 0
             })
         }
         
@@ -146,12 +155,14 @@ class TinderCard: UIView {
     // right click action
     func rightClickAction() {
         imageViewStatus.image = UIImage(named: "btn_like_pressed")
-        let finishPoint = CGPoint(x: center.x + frame.size.width * 1.5, y: center.y)
+        let finishPoint = CGPoint(x: center.x + frame.size.width * 2, y: center.y)
         imageViewStatus.alpha = 0.5
-        UIView.animate(withDuration: 1.0, animations: {() -> Void in
+        overLayImage.alpha = 0.5
+        UIView.animate(withDuration: 2, animations: {() -> Void in
             self.center = finishPoint
             self.transform = CGAffineTransform(rotationAngle: 1)
             self.imageViewStatus.alpha = 1.0
+            self.overLayImage.alpha = 1.0
         }, completion: {(_ complete: Bool) -> Void in
             self.removeFromSuperview()
         })
@@ -160,12 +171,14 @@ class TinderCard: UIView {
     // left click action
     func leftClickAction() {
         imageViewStatus.image = UIImage(named: "btn_skip_pressed")
-        let finishPoint = CGPoint(x: center.x - frame.size.width * 1.5, y: center.y)
+        let finishPoint = CGPoint(x: center.x - frame.size.width * 2, y: center.y)
         imageViewStatus.alpha = 0.5
-        UIView.animate(withDuration: 1.0, animations: {() -> Void in
+        overLayImage.alpha = 0.5
+        UIView.animate(withDuration: 2, animations: {() -> Void in
             self.center = finishPoint
             self.transform = CGAffineTransform(rotationAngle: -1)
             self.imageViewStatus.alpha = 1.0
+            self.overLayImage.alpha = 1.0
         }, completion: {(_ complete: Bool) -> Void in
             self.removeFromSuperview()
         })
@@ -181,7 +194,6 @@ class TinderCard: UIView {
             self.transform = CGAffineTransform(rotationAngle: -0.2)
             self.imageViewStatus.alpha = 1.0
         }, completion: {(_ complete: Bool) -> Void in
-            
             UIView.animate(withDuration: 0.6, animations: {() -> Void in
                 self.imageViewStatus.alpha = 0
                 self.center = originalP

@@ -16,13 +16,10 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var viewTinderBackGround: UIView!
 
-   
-    
     var currentIndex = 0
     var currentLoadedCardsArray = [TinderCard]()
     var allCardsArray = [TinderCard]()
     var valueArray = ["first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last","first", "second", "third", "fourth", "last", "first", "second", "third", "fourth", "last"]
-    
     
     
     override func viewDidLoad() {
