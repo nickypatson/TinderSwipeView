@@ -6,7 +6,7 @@
 //  Copyright © 2017 Nicky. All rights reserved.
 //
 
-
+let NAMES = ["Adam Gontier","Matt Walst","Brad Walst","Neil Sanderson","Barry Stock","Nicky Patson"]
 let ACTION_MARGIN : CGFloat = 120
 let SCALE_STRENGTH : CGFloat = 4
 let SCALE_MAX : CGFloat = 0.93
@@ -16,9 +16,9 @@ let ROTATION_STRENGTH : CGFloat = 320
 import UIKit
 
 protocol TinderCardDelegate: NSObjectProtocol {
-    func cardSwipedLeft(_ card: UIView)
-    func cardSwipedRight(_ card: UIView)
-    func updateCardView(_ card: UIView, withDistance distance: CGFloat)
+    func cardSwipedLeft(_ card: TinderCard)
+    func cardSwipedRight(_ card: TinderCard)
+    func updateCardView(_ card: TinderCard, withDistance distance: CGFloat)
 }
 
 class TinderCard: UIView {
@@ -28,6 +28,7 @@ class TinderCard: UIView {
     var originalPoint = CGPoint.zero
     var imageViewStatus = UIImageView()
     var overLayImage = UIImageView()
+    var isLiked = false
     
     weak var delegate: TinderCardDelegate?
     
@@ -42,31 +43,44 @@ class TinderCard: UIView {
     
     func setupView(at value:String) {
         
-        let randomNumber = Int(1 + arc4random() % (5 - 1))
-        let profileImageView = UIImageView(frame:bounds)
-        profileImageView.image = UIImage(named:String(randomNumber))
-        profileImageView.contentMode = .scaleToFill
-        profileImageView.clipsToBounds = true;
+        layer.cornerRadius = 10
+        layer.shadowRadius = 3
+        layer.shadowOpacity = 0.4
+        layer.shadowOffset = CGSize(width: 0.5, height: 3)
+        layer.shadowColor = UIColor.darkGray.cgColor
+        clipsToBounds = true
+        originalPoint = center
+        
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
+        addGestureRecognizer(panGestureRecognizer)
+        
+        let backGroundImageView = UIImageView(frame:bounds)
+        backGroundImageView.image = UIImage(named:String(Int(1 + arc4random() % (8 - 1))))
+        backGroundImageView.contentMode = .scaleAspectFill
+        backGroundImageView.clipsToBounds = true;
+        addSubview(backGroundImageView)
+        
+        let profileImageView = UIImageView(frame:CGRect(x: 20, y: frame.size.height - 80, width: 60, height: 60))
+        profileImageView.image = UIImage(named:"profileimage1")
+        profileImageView.contentMode = .scaleAspectFill
+        profileImageView.layer.cornerRadius = 25
+        profileImageView.clipsToBounds = true
         addSubview(profileImageView)
         
+        let labelText = UILabel(frame:CGRect(x: 90, y: frame.size.height - 80, width: frame.size.width - 100, height: 60))
+        let attributedText = NSMutableAttributedString(string: NAMES[Int(arc4random_uniform(UInt32(NAMES.count)))], attributes: [.foregroundColor: UIColor.white,.font:UIFont.boldSystemFont(ofSize: 25)])
+        attributedText.append(NSAttributedString(string: "\n\(value) mins", attributes: [.foregroundColor: UIColor.white,.font:UIFont.systemFont(ofSize: 18)]))
+        labelText.attributedText = attributedText
+        labelText.numberOfLines = 2
+        addSubview(labelText)
+        
         imageViewStatus = UIImageView(frame: CGRect(x: (frame.size.width / 2) - 37.5, y: 25, width: 75, height: 75))
-        imageViewStatus.image = UIImage(named: "btn_like_pressed")
         imageViewStatus.alpha = 0
         addSubview(imageViewStatus)
         
         overLayImage = UIImageView(frame:bounds)
         overLayImage.alpha = 0
         addSubview(overLayImage)
-        
-    
-        layer.cornerRadius = 10
-        layer.shadowRadius = 3
-        layer.shadowOpacity = 0.4
-        layer.shadowOffset = CGSize(width: 0.5, height: 3)
-        layer.shadowColor = UIColor.darkGray.cgColor
-        
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
-        addGestureRecognizer(panGestureRecognizer)
     }
     
     @objc func beingDragged(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -78,6 +92,7 @@ class TinderCard: UIView {
         case .began:
             originalPoint = self.center;
             break;
+            
         //in the middle of a swipe
         case .changed:
             let rotationStrength = min(xFromCenter / ROTATION_STRENGTH, ROTATION_MAX)
@@ -89,7 +104,7 @@ class TinderCard: UIView {
             self.transform = scaleTransform
             updateOverlay(xFromCenter)
             break;
-           
+            
         // swipe ended
         case .ended:
             afterSwipeAction()
@@ -110,6 +125,7 @@ class TinderCard: UIView {
     }
     
     func afterSwipeAction() {
+        
         if xFromCenter > CGFloat(ACTION_MARGIN) {
             rightAction()
         }
@@ -125,40 +141,42 @@ class TinderCard: UIView {
                 self.overLayImage.alpha = 0
             })
         }
-        
     }
     
     func rightAction() {
-        let finishPoint = CGPoint(x: 500, y: 2 * yFromCenter + originalPoint.y)
         
+        let finishPoint = CGPoint(x: frame.size.width*2, y: 2 * yFromCenter + originalPoint.y)
         UIView.animate(withDuration: 0.3, animations: {
             self.center = finishPoint
         }, completion: {(_) in
             self.removeFromSuperview()
         })
+        isLiked = true
         delegate?.cardSwipedRight(self)
         print("WATCHOUT RIGHT")
     }
     
     func leftAction() {
-        let finishPoint = CGPoint(x: -500, y: 2 * yFromCenter + originalPoint.y)
         
+        let finishPoint = CGPoint(x: -frame.size.width*2, y: 2 * yFromCenter + originalPoint.y)
         UIView.animate(withDuration: 0.3, animations: {
             self.center = finishPoint
         }, completion: {(_) in
             self.removeFromSuperview()
         })
+        isLiked = false
         delegate?.cardSwipedLeft(self)
         print("WATCHOUT LEFT")
     }
     
     // right click action
     func rightClickAction() {
+        
         imageViewStatus.image = UIImage(named: "btn_like_pressed")
         let finishPoint = CGPoint(x: center.x + frame.size.width * 2, y: center.y)
         imageViewStatus.alpha = 0.5
         overLayImage.alpha = 0.5
-        UIView.animate(withDuration: 2, animations: {() -> Void in
+        UIView.animate(withDuration: 1.0, animations: {() -> Void in
             self.center = finishPoint
             self.transform = CGAffineTransform(rotationAngle: 1)
             self.imageViewStatus.alpha = 1.0
@@ -166,15 +184,17 @@ class TinderCard: UIView {
         }, completion: {(_ complete: Bool) -> Void in
             self.removeFromSuperview()
         })
+        isLiked = true
         delegate?.cardSwipedRight(self)
     }
     // left click action
     func leftClickAction() {
+        
         imageViewStatus.image = UIImage(named: "btn_skip_pressed")
         let finishPoint = CGPoint(x: center.x - frame.size.width * 2, y: center.y)
         imageViewStatus.alpha = 0.5
         overLayImage.alpha = 0.5
-        UIView.animate(withDuration: 2, animations: {() -> Void in
+        UIView.animate(withDuration: 1.0, animations: {() -> Void in
             self.center = finishPoint
             self.transform = CGAffineTransform(rotationAngle: -1)
             self.imageViewStatus.alpha = 1.0
@@ -182,39 +202,57 @@ class TinderCard: UIView {
         }, completion: {(_ complete: Bool) -> Void in
             self.removeFromSuperview()
         })
+        isLiked = false
         delegate?.cardSwipedLeft(self)
     }
     
-    func shakeCard()
-    {
-        let originalP: CGPoint = center
+    func makeUndoAction() {
+        
+        imageViewStatus.image = UIImage(named: isLiked ? "btn_like_pressed" : "btn_skip_pressed")
+        overLayImage.image = UIImage(named: isLiked ? "overlay_like" : "overlay_skip")
+        imageViewStatus.alpha = 1.0
+        overLayImage.alpha = 1.0
+        UIView.animate(withDuration: 0.5, animations: {() -> Void in
+            self.center = self.originalPoint
+            self.transform = CGAffineTransform(rotationAngle: 0)
+            self.imageViewStatus.alpha = 0
+            self.overLayImage.alpha = 0
+        }, completion: nil)
+    }
+    
+    func shakeCard(){
+        
         imageViewStatus.image = UIImage(named: "btn_skip_pressed")
-        UIView.animate(withDuration: 0.6, animations: {() -> Void in
+        overLayImage.image = UIImage(named: "overlay_like")
+        UIView.animate(withDuration: 0.5, animations: {() -> Void in
             self.center = CGPoint(x: self.center.x - (self.frame.size.width / 2), y: self.center.y)
             self.transform = CGAffineTransform(rotationAngle: -0.2)
             self.imageViewStatus.alpha = 1.0
+            self.overLayImage.alpha = 1.0
         }, completion: {(_ complete: Bool) -> Void in
-            UIView.animate(withDuration: 0.6, animations: {() -> Void in
+            UIView.animate(withDuration: 0.5, animations: {() -> Void in
                 self.imageViewStatus.alpha = 0
-                self.center = originalP
+                self.overLayImage.alpha = 0
+                self.center = self.originalPoint
                 self.transform = CGAffineTransform(rotationAngle: 0)
             }, completion: {(_ complete: Bool) -> Void in
                 self.imageViewStatus.image = UIImage(named: "btn_like_pressed")
-                UIView.animate(withDuration: 0.6, animations: {() -> Void in
+                self.overLayImage.image =  UIImage(named: "overlay_skip")
+                UIView.animate(withDuration: 0.5, animations: {() -> Void in
                     self.imageViewStatus.alpha = 1
+                    self.overLayImage.alpha = 1
                     self.center = CGPoint(x: self.center.x + (self.frame.size.width / 2), y: self.center.y)
                     self.transform = CGAffineTransform(rotationAngle: 0.2)
                 }, completion: {(_ complete: Bool) -> Void in
-                    UIView.animate(withDuration: 0.6, animations: {() -> Void in
+                    UIView.animate(withDuration: 0.5, animations: {() -> Void in
                         self.imageViewStatus.alpha = 0
-                        self.center = originalP
+                        self.overLayImage.alpha = 0
+                        self.center = self.originalPoint
                         self.transform = CGAffineTransform(rotationAngle: 0)
                     }) { _ in }
                 })
             })
-            
         })
-        
     }
 }
 
