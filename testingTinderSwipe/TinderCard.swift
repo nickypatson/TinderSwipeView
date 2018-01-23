@@ -29,6 +29,7 @@ class TinderCard: UIView {
     var imageViewStatus = UIImageView()
     var overLayImage = UIImageView()
     var isLiked = false
+    var intex = 0
     
     weak var delegate: TinderCardDelegate?
     
@@ -50,6 +51,7 @@ class TinderCard: UIView {
         layer.shadowColor = UIColor.darkGray.cgColor
         clipsToBounds = true
         originalPoint = center
+        isUserInteractionEnabled = false
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
         addGestureRecognizer(panGestureRecognizer)
@@ -173,6 +175,7 @@ class TinderCard: UIView {
     func rightClickAction() {
         
         imageViewStatus.image = UIImage(named: "btn_like_pressed")
+        overLayImage.image = UIImage(named: "overlay_like" )
         let finishPoint = CGPoint(x: center.x + frame.size.width * 2, y: center.y)
         imageViewStatus.alpha = 0.5
         overLayImage.alpha = 0.5
@@ -191,6 +194,7 @@ class TinderCard: UIView {
     func leftClickAction() {
         
         imageViewStatus.image = UIImage(named: "btn_skip_pressed")
+        overLayImage.image = UIImage(named:"overlay_skip")
         let finishPoint = CGPoint(x: center.x - frame.size.width * 2, y: center.y)
         imageViewStatus.alpha = 0.5
         overLayImage.alpha = 0.5
@@ -212,7 +216,7 @@ class TinderCard: UIView {
         overLayImage.image = UIImage(named: isLiked ? "overlay_like" : "overlay_skip")
         imageViewStatus.alpha = 1.0
         overLayImage.alpha = 1.0
-        UIView.animate(withDuration: 0.5, animations: {() -> Void in
+        UIView.animate(withDuration: 0.75, animations: {() -> Void in
             self.center = self.originalPoint
             self.transform = CGAffineTransform(rotationAngle: 0)
             self.imageViewStatus.alpha = 0

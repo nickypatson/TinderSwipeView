@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     
     var currentIndex = 0
     var isMakeUndo = false
+    var currentLostCard = TinderCard(frame: CGRect.zero ,value : "")
     var currentLoadedCardsArray = [TinderCard]()
     var allCardsArray = [TinderCard]()
     var valueArray = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36"]
@@ -72,12 +73,15 @@ class ViewController: UIViewController {
         
         let card = TinderCard(frame: CGRect(x: 10, y: 0, width: viewTinderBackGround.frame.size.width - 20 , height: viewTinderBackGround.frame.size.height - 40) ,value : value)
         card.delegate = self
+        card.intex = index
         return card
     }
     
     func removeObjectAndAddNewValues() {
         
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(enableUndoButton), userInfo: nil, repeats: false)
+        currentLostCard = currentLoadedCardsArray.first!
+        buttonUndo.isHidden = true
+        Timer.scheduledTimer(timeInterval: 1.01, target: self, selector: #selector(enableUndoButton), userInfo: currentLoadedCardsArray.first, repeats: false)
         currentLoadedCardsArray.remove(at: 0)
         if currentIndex < allCardsArray.count {
             let card = allCardsArray[currentIndex]
@@ -96,6 +100,9 @@ class ViewController: UIViewController {
         
         for (i,card) in currentLoadedCardsArray.enumerated() {
             UIView.animate(withDuration: 0.5, animations: {
+                if i == 0 {
+                    card.isUserInteractionEnabled = true
+                }
                 var frame = card.frame
                 frame.origin.y = CGFloat(i * SEPERATOR_DISTANCE)
                 card.frame = frame
@@ -108,18 +115,12 @@ class ViewController: UIViewController {
         
         let card = currentLoadedCardsArray.first
         card?.leftClickAction()
-        DispatchQueue.main.async {
-           self.buttonUndo.isHidden = true
-        }
     }
     
     @IBAction func LikeButtonAction(_ sender: Any) {
         
         let card = currentLoadedCardsArray.first
         card?.rightClickAction()
-        DispatchQueue.main.async {
-            self.buttonUndo.isHidden = true
-        }
     }
     
     @IBAction func undoButtonAction(_ sender: Any) {
@@ -144,10 +145,13 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func enableUndoButton(){
+    @objc func enableUndoButton(timer: Timer){
         
-        buttonUndo.isHidden = false
-        isMakeUndo = false
+        let  lostCard = timer.userInfo as! TinderCard
+        if currentLostCard.intex == lostCard.intex{
+            self.buttonUndo.isHidden = false
+            self.isMakeUndo = false
+        }
     }
 }
 
