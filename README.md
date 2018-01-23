@@ -3,6 +3,8 @@
 
 Swipe view inspired by Tinder
 
+Run in phyical device for better clarity
+
 ## Screenshot
 
 ![Alt text](/playback.gif?raw=true "Optional Title")
