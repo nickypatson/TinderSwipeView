@@ -189,6 +189,7 @@ class TinderCard: UIView {
         })
         isLiked = true
         delegate?.cardSwipedRight(self)
+        print("WATCHOUT RIGHT ACTION")
     }
     // left click action
     func leftClickAction() {
@@ -208,8 +209,10 @@ class TinderCard: UIView {
         })
         isLiked = false
         delegate?.cardSwipedLeft(self)
+        print("WATCHOUT LEFT ACTION")
     }
     
+    // undoing  action
     func makeUndoAction() {
         
         imageViewStatus.image = UIImage(named: isLiked ? "btn_like_pressed" : "btn_skip_pressed")
@@ -221,13 +224,15 @@ class TinderCard: UIView {
             self.transform = CGAffineTransform(rotationAngle: 0)
             self.imageViewStatus.alpha = 0
             self.overLayImage.alpha = 0
-        }, completion: nil)
+        })
+        
+        print("WATCHOUT UNDO ACTION")
     }
     
     func shakeCard(){
         
         imageViewStatus.image = UIImage(named: "btn_skip_pressed")
-        overLayImage.image = UIImage(named: "overlay_like")
+        overLayImage.image = UIImage(named: "overlay_skip")
         UIView.animate(withDuration: 0.5, animations: {() -> Void in
             self.center = CGPoint(x: self.center.x - (self.frame.size.width / 2), y: self.center.y)
             self.transform = CGAffineTransform(rotationAngle: -0.2)
@@ -241,7 +246,7 @@ class TinderCard: UIView {
                 self.transform = CGAffineTransform(rotationAngle: 0)
             }, completion: {(_ complete: Bool) -> Void in
                 self.imageViewStatus.image = UIImage(named: "btn_like_pressed")
-                self.overLayImage.image =  UIImage(named: "overlay_skip")
+                self.overLayImage.image =  UIImage(named: "overlay_like")
                 UIView.animate(withDuration: 0.5, animations: {() -> Void in
                     self.imageViewStatus.alpha = 1
                     self.overLayImage.alpha = 1
@@ -253,10 +258,12 @@ class TinderCard: UIView {
                         self.overLayImage.alpha = 0
                         self.center = self.originalPoint
                         self.transform = CGAffineTransform(rotationAngle: 0)
-                    }) { _ in }
+                    })
                 })
             })
         })
+        
+        print("WATCHOUT SHAKE ACTION")
     }
 }
 
