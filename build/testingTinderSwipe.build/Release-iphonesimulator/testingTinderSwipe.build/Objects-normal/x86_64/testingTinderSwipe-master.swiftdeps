@@ -1,7 +1,0 @@
-version: "Apple Swift version 4.0.3 (swiftlang-900.0.74.1 clang-900.0.39.2)"
-options: "82710f7c0904f98d4bff0428fb756a73"
-build_time: [1516712745, 722542000]
-inputs:
-  "/Users/nickypatson/Documents/Projects Now/Github/TinderSwipeView/testingTinderSwipe/ViewController.swift": [9223372036, 854775807]
-  "/Users/nickypatson/Documents/Projects Now/Github/TinderSwipeView/testingTinderSwipe/AppDelegate.swift": [9223372036, 854775807]
-  "/Users/nickypatson/Documents/Projects Now/Github/TinderSwipeView/testingTinderSwipe/TinderCard.swift": [9223372036, 854775807]
