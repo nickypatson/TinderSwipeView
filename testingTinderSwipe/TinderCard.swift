@@ -7,11 +7,10 @@
 //
 
 let NAMES = ["Adam Gontier","Matt Walst","Brad Walst","Neil Sanderson","Barry Stock","Nicky Patson"]
-let ACTION_MARGIN : CGFloat = 120
+let ACTION_MARGIN = (UIScreen.main.bounds.size.width/2) * 0.75
 let SCALE_STRENGTH : CGFloat = 4
 let SCALE_MAX : CGFloat = 0.93
-let ROTATION_MAX : CGFloat = 1
-let ROTATION_STRENGTH : CGFloat = 320
+let ROTATION_STRENGTH = UIScreen.main.bounds.size.width
 
 import UIKit
 
@@ -97,7 +96,7 @@ class TinderCard: UIView {
             
         //in the middle of a swipe
         case .changed:
-            let rotationStrength = min(xFromCenter / ROTATION_STRENGTH, ROTATION_MAX)
+            let rotationStrength = min(xFromCenter / ROTATION_STRENGTH, 1)
             let rotationAngel = .pi/8 * rotationStrength
             let scale = max(1 - fabs(rotationStrength) / SCALE_STRENGTH, SCALE_MAX)
             center = CGPoint(x: originalPoint.x + xFromCenter, y: originalPoint.y + yFromCenter)
@@ -128,15 +127,15 @@ class TinderCard: UIView {
     
     func afterSwipeAction() {
         
-        if xFromCenter > CGFloat(ACTION_MARGIN) {
+        if xFromCenter > ACTION_MARGIN {
             rightAction()
         }
-        else if xFromCenter < CGFloat(-ACTION_MARGIN) {
+        else if xFromCenter < -ACTION_MARGIN {
             leftAction()
         }
         else {
             //reseting image
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.0, options: [], animations: {
                 self.center = self.originalPoint
                 self.transform = CGAffineTransform(rotationAngle: 0)
                 self.imageViewStatus.alpha = 0
@@ -148,7 +147,7 @@ class TinderCard: UIView {
     func rightAction() {
         
         let finishPoint = CGPoint(x: frame.size.width*2, y: 2 * yFromCenter + originalPoint.y)
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.center = finishPoint
         }, completion: {(_) in
             self.removeFromSuperview()
@@ -161,7 +160,7 @@ class TinderCard: UIView {
     func leftAction() {
         
         let finishPoint = CGPoint(x: -frame.size.width*2, y: 2 * yFromCenter + originalPoint.y)
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.center = finishPoint
         }, completion: {(_) in
             self.removeFromSuperview()
