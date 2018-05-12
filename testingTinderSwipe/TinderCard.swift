@@ -229,6 +229,13 @@ class TinderCard: UIView {
         print("WATCHOUT UNDO ACTION")
     }
     
+    func discardCard(){
+        
+        UIView.animate(withDuration: 0.5) {
+            self.removeFromSuperview()
+        }
+    }
+    
     func shakeCard(){
         
         imageViewStatus.image = UIImage(named: "btn_skip_pressed")

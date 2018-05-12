@@ -38,7 +38,7 @@ class ViewController: UIViewController {
             let capCount = (valueArray.count > MAX_BUFFER_SIZE) ? MAX_BUFFER_SIZE : valueArray.count
             
             for (i,value) in valueArray.enumerated() {
-                let newCard = createDraggableViewWithData(at: i,value: value)
+                let newCard = createTinderCard(at: i,value: value)
                 allCardsArray.append(newCard)
                 if i < capCount {
                     currentLoadedCardsArray.append(newCard)
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
         }, completion: nil)
     }
     
-    func createDraggableViewWithData(at index: Int , value :String) -> TinderCard {
+    func createTinderCard(at index: Int , value :String) -> TinderCard {
         
         let card = TinderCard(frame: CGRect(x: 10, y: 0, width: viewTinderBackGround.frame.size.width - 20 , height: viewTinderBackGround.frame.size.height - 40) ,value : value)
         card.delegate = self
@@ -74,7 +74,6 @@ class ViewController: UIViewController {
     }
     
     func removeObjectAndAddNewValues() {
-        
         
         buttonUndo.isHidden = true
         currentLoadedCardsArray.remove(at: 0)
@@ -124,9 +123,9 @@ class ViewController: UIViewController {
         
         currentIndex =  currentIndex - 1
         if currentLoadedCardsArray.count == MAX_BUFFER_SIZE {
-            
+
             let lastCard = currentLoadedCardsArray.last
-            lastCard?.removeFromSuperview()
+            lastCard?.discardCard()
             currentLoadedCardsArray.removeLast()
         }
         let undoCard = allCardsArray[currentIndex]
