@@ -81,5 +81,5 @@ Nicky Patson
 
 ## License
 
-GradientSlider is available under the MIT license. See the LICENSE file for more info.
+Tinder Swipe View is available under the MIT license. See the LICENSE file for more info.
 
