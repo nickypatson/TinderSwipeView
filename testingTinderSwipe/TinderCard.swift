@@ -28,7 +28,6 @@ class TinderCard: UIView {
     var imageViewStatus = UIImageView()
     var overLayImage = UIImageView()
     var isLiked = false
-    var intex = 0
     
     weak var delegate: TinderCardDelegate?
     
@@ -41,6 +40,7 @@ class TinderCard: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     func setupView(at value:String) {
         
         layer.cornerRadius = 10
@@ -49,8 +49,9 @@ class TinderCard: UIView {
         layer.shadowOffset = CGSize(width: 0.5, height: 3)
         layer.shadowColor = UIColor.darkGray.cgColor
         clipsToBounds = true
-        originalPoint = center
         isUserInteractionEnabled = false
+        
+        originalPoint = center
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
         addGestureRecognizer(panGestureRecognizer)
@@ -218,7 +219,7 @@ class TinderCard: UIView {
         overLayImage.image = UIImage(named: isLiked ? "overlay_like" : "overlay_skip")
         imageViewStatus.alpha = 1.0
         overLayImage.alpha = 1.0
-        UIView.animate(withDuration: 0.75, animations: {() -> Void in
+        UIView.animate(withDuration: 0.4, animations: {() -> Void in
             self.center = self.originalPoint
             self.transform = CGAffineTransform(rotationAngle: 0)
             self.imageViewStatus.alpha = 0
