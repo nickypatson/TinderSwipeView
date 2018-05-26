@@ -14,7 +14,7 @@ Inspired animation from Tinder and Potluck with undo feature
 
 <p align="center">
     <img src="./testingTinderSwipe/Screen%20Shot%20.png" alt="Size Limit example"
-       width="476" height="827">
+       width="381" height="662">
 </p>
 
 <p align="center">
