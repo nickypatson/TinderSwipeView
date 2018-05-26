@@ -43,7 +43,7 @@ class TinderCard: UIView {
     
     func setupView(at value:String) {
         
-        layer.cornerRadius = 10
+        layer.cornerRadius = 20
         layer.shadowRadius = 3
         layer.shadowOpacity = 0.4
         layer.shadowOffset = CGSize(width: 0.5, height: 3)

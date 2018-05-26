@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var viewTinderBackGround: UIView!
     @IBOutlet weak var buttonUndo: UIButton!
     @IBOutlet weak var viewActions: UIView!
-    @IBOutlet weak var viewActionHeightConstrain: NSLayoutConstraint!
     
     var currentIndex = 0
     var currentLoadedCardsArray = [TinderCard]()
@@ -26,12 +25,22 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewActions.alpha = 0
+        buttonUndo.alpha = 0
+       
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         view.layoutIfNeeded()
-        loadCardValues()
+         loadCardValues()
     }
     
     
     func loadCardValues() {
+        
+        
+        //view.layoutIfNeeded()
         
         if valueArray.count > 0 {
             
@@ -68,14 +77,16 @@ class ViewController: UIViewController {
     
     func createTinderCard(at index: Int , value :String) -> TinderCard {
         
-        let card = TinderCard(frame: CGRect(x: 10, y: 0, width: viewTinderBackGround.frame.size.width - 20 , height: viewTinderBackGround.frame.size.height - 40) ,value : value)
+        let card = TinderCard(frame: CGRect(x: 0, y: 0, width: viewTinderBackGround.frame.size.width , height: viewTinderBackGround.frame.size.height - 50) ,value : value)
         card.delegate = self
         return card
     }
     
     func removeObjectAndAddNewValues() {
         
-        buttonUndo.isHidden = true
+        UIView.animate(withDuration: 0.5) {
+            self.buttonUndo.alpha = 1
+        }
         currentLoadedCardsArray.remove(at: 0)
         currentIndex = currentIndex + 1
         Timer.scheduledTimer(timeInterval: 1.01, target: self, selector: #selector(enableUndoButton), userInfo: currentIndex, repeats: false)
@@ -135,7 +146,9 @@ class ViewController: UIViewController {
         currentLoadedCardsArray.insert(undoCard, at: 0)
         animateCardAfterSwiping()
         if currentIndex == 0 {
-            buttonUndo.isHidden = true
+            UIView.animate(withDuration: 0.5) {
+                self.buttonUndo.alpha = 0
+            }
         }
     }
     
@@ -143,7 +156,10 @@ class ViewController: UIViewController {
         
         let cardIntex = timer.userInfo as! Int
         if (currentIndex == cardIntex) {
-            buttonUndo.isHidden = false
+            
+            UIView.animate(withDuration: 0.5) {
+                self.buttonUndo.alpha = 1.0
+            }
         }
     }
 }
