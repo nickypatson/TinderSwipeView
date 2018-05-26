@@ -179,7 +179,7 @@ class TinderCard: UIView {
         let finishPoint = CGPoint(x: center.x + frame.size.width * 2, y: center.y)
         imageViewStatus.alpha = 0.5
         overLayImage.alpha = 0.5
-        UIView.animate(withDuration: 5.0, animations: {() -> Void in
+        UIView.animate(withDuration: 1.0, animations: {() -> Void in
             self.center = finishPoint
             self.transform = CGAffineTransform(rotationAngle: 1)
             self.imageViewStatus.alpha = 1.0
@@ -199,7 +199,7 @@ class TinderCard: UIView {
         let finishPoint = CGPoint(x: center.x - frame.size.width * 2, y: center.y)
         imageViewStatus.alpha = 0.5
         overLayImage.alpha = 0.5
-        UIView.animate(withDuration: 5.0, animations: {() -> Void in
+        UIView.animate(withDuration: 1.0, animations: {() -> Void in
             self.center = finishPoint
             self.transform = CGAffineTransform(rotationAngle: -1)
             self.imageViewStatus.alpha = 1.0
