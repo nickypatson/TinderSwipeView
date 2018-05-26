@@ -6,7 +6,7 @@ Inspired animation from Tinder and Potluck with undo feature
 
 <p align="center">
   <img src="./promo.gif" alt="Size Limit example"
-       width="320" height="691">
+       width="320" height="568">
 </p>
 
 
