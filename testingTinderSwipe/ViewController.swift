@@ -28,14 +28,21 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         viewActions.alpha = 0
         buttonUndo.alpha = 0
-        emojiView.alpha = 0
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         view.layoutIfNeeded()
         loadCardValues()
+    }
+    
+    @objc func animateEmojiView(timer : Timer){
+        let sender = timer.userInfo as! EmojiRateView
+        emojiView.rateValue =  emojiView.rateValue + 0.2
+        if sender.rateValue >= 5 {
+            timer.invalidate()
+            emojiView.rateValue = 2.5
+        }
     }
     
     
@@ -71,8 +78,8 @@ class ViewController: UIViewController {
         dummyCard?.shakeAnimationCard()
         UIView.animate(withDuration: 1.0, delay: 2.0, options: .curveLinear, animations: {
             self.viewActions.alpha = 1.0
-            self.emojiView.alpha = 1.0
         }, completion: nil)
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.animateEmojiView), userInfo: emojiView, repeats: true)
     }
     
     func createTinderCard(at index: Int , value :String) -> TinderCard {
