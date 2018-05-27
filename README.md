@@ -7,7 +7,7 @@ Run in physical device for better animaton!!!!
 ## Preview
 
 <p align="center">
-  <img src="./promo.gif" alt="Size Limit example"
+  <img src="./playback.gif" alt="Size Limit example"
        width="320" height="568">
 </p>
 
