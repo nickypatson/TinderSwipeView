@@ -7,23 +7,22 @@
 //
 
 let NAMES = ["Adam Gontier","Matt Walst","Brad Walst","Neil Sanderson","Barry Stock","Nicky Patson"]
-let ACTION_MARGIN = (UIScreen.main.bounds.size.width/2) * 0.75
+let THERESOLD_MARGIN = (UIScreen.main.bounds.size.width/2) * 0.75
 let SCALE_STRENGTH : CGFloat = 4
-let SCALE_MAX : CGFloat = 0.93
-let ROTATION_STRENGTH = UIScreen.main.bounds.size.width
+let SCALE_RANGE : CGFloat = 0.90
 
 import UIKit
 
 protocol TinderCardDelegate: NSObjectProtocol {
-    func cardSwipedLeft(_ card: TinderCard)
-    func cardSwipedRight(_ card: TinderCard)
-    func updateCardView(_ card: TinderCard, withDistance distance: CGFloat)
+    func cardGoesLeft(card: TinderCard)
+    func cardGoesRight(card: TinderCard)
+    func currentCardStatus(card: TinderCard, distance: CGFloat)
 }
 
 class TinderCard: UIView {
     
-    var xFromCenter: CGFloat = 0.0
-    var yFromCenter: CGFloat = 0.0
+    var xCenter: CGFloat = 0.0
+    var yCenter: CGFloat = 0.0
     var originalPoint = CGPoint.zero
     var imageViewStatus = UIImageView()
     var overLayImage = UIImageView()
@@ -87,24 +86,23 @@ class TinderCard: UIView {
     
     @objc func beingDragged(_ gestureRecognizer: UIPanGestureRecognizer) {
         
-        xFromCenter = gestureRecognizer.translation(in: self).x
-        yFromCenter = gestureRecognizer.translation(in: self).y
+        xCenter = gestureRecognizer.translation(in: self).x
+        yCenter = gestureRecognizer.translation(in: self).y
         switch gestureRecognizer.state {
         // Keep swiping
         case .began:
             originalPoint = self.center;
             break;
-            
         //in the middle of a swipe
         case .changed:
-            let rotationStrength = min(xFromCenter / ROTATION_STRENGTH, 1)
+            let rotationStrength = min(xCenter / UIScreen.main.bounds.size.width, 1)
             let rotationAngel = .pi/8 * rotationStrength
-            let scale = max(1 - fabs(rotationStrength) / SCALE_STRENGTH, SCALE_MAX)
-            center = CGPoint(x: originalPoint.x + xFromCenter, y: originalPoint.y + yFromCenter)
+            let scale = max(1 - fabs(rotationStrength) / SCALE_STRENGTH, SCALE_RANGE)
+            center = CGPoint(x: originalPoint.x + xCenter, y: originalPoint.y + yCenter)
             let transforms = CGAffineTransform(rotationAngle: rotationAngel)
             let scaleTransform: CGAffineTransform = transforms.scaledBy(x: scale, y: scale)
             self.transform = scaleTransform
-            updateOverlay(xFromCenter)
+            updateOverlay(xCenter)
             break;
             
         // swipe ended
@@ -119,19 +117,19 @@ class TinderCard: UIView {
     }
     func updateOverlay(_ distance: CGFloat) {
         
-        imageViewStatus.image = distance > 0 ? UIImage(named: "btn_like_pressed") : UIImage(named: "btn_skip_pressed")
-        overLayImage.image = distance > 0 ? UIImage(named: "overlay_like") : UIImage(named: "overlay_skip")
+        imageViewStatus.image = distance > 0 ? #imageLiteral(resourceName: "btn_like_pressed") : #imageLiteral(resourceName: "btn_skip_pressed")
+        overLayImage.image = distance > 0 ? #imageLiteral(resourceName: "overlay_like") : #imageLiteral(resourceName: "overlay_skip")
         imageViewStatus.alpha = min(fabs(distance) / 100, 0.5)
         overLayImage.alpha = min(fabs(distance) / 100, 0.5)
-        delegate?.updateCardView(self, withDistance: distance)
+        delegate?.currentCardStatus(card: self, distance: distance)
     }
     
     func afterSwipeAction() {
         
-        if xFromCenter > ACTION_MARGIN {
+        if xCenter > THERESOLD_MARGIN {
             rightAction()
         }
-        else if xFromCenter < -ACTION_MARGIN {
+        else if xCenter < -THERESOLD_MARGIN {
             leftAction()
         }
         else {
@@ -147,35 +145,35 @@ class TinderCard: UIView {
     
     func rightAction() {
         
-        let finishPoint = CGPoint(x: frame.size.width*2, y: 2 * yFromCenter + originalPoint.y)
+        let finishPoint = CGPoint(x: frame.size.width*2, y: 2 * yCenter + originalPoint.y)
         UIView.animate(withDuration: 0.5, animations: {
             self.center = finishPoint
         }, completion: {(_) in
             self.removeFromSuperview()
         })
         isLiked = true
-        delegate?.cardSwipedRight(self)
+        delegate?.cardGoesRight(card: self)
         print("WATCHOUT RIGHT")
     }
     
     func leftAction() {
         
-        let finishPoint = CGPoint(x: -frame.size.width*2, y: 2 * yFromCenter + originalPoint.y)
+        let finishPoint = CGPoint(x: -frame.size.width*2, y: 2 * yCenter + originalPoint.y)
         UIView.animate(withDuration: 0.5, animations: {
             self.center = finishPoint
         }, completion: {(_) in
             self.removeFromSuperview()
         })
         isLiked = false
-        delegate?.cardSwipedLeft(self)
+        delegate?.cardGoesLeft(card: self)
         print("WATCHOUT LEFT")
     }
     
     // right click action
     func rightClickAction() {
         
-        imageViewStatus.image = UIImage(named: "btn_like_pressed")
-        overLayImage.image = UIImage(named: "overlay_like" )
+        imageViewStatus.image = #imageLiteral(resourceName: "btn_like_pressed")
+        overLayImage.image = #imageLiteral(resourceName: "overlay_like")
         let finishPoint = CGPoint(x: center.x + frame.size.width * 2, y: center.y)
         imageViewStatus.alpha = 0.5
         overLayImage.alpha = 0.5
@@ -188,14 +186,14 @@ class TinderCard: UIView {
             self.removeFromSuperview()
         })
         isLiked = true
-        delegate?.cardSwipedRight(self)
+        delegate?.cardGoesRight(card: self)
         print("WATCHOUT RIGHT ACTION")
     }
     // left click action
     func leftClickAction() {
         
-        imageViewStatus.image = UIImage(named: "btn_skip_pressed")
-        overLayImage.image = UIImage(named:"overlay_skip")
+        imageViewStatus.image = #imageLiteral(resourceName: "btn_skip_pressed")
+        overLayImage.image = #imageLiteral(resourceName: "overlay_skip")
         let finishPoint = CGPoint(x: center.x - frame.size.width * 2, y: center.y)
         imageViewStatus.alpha = 0.5
         overLayImage.alpha = 0.5
@@ -208,15 +206,15 @@ class TinderCard: UIView {
             self.removeFromSuperview()
         })
         isLiked = false
-        delegate?.cardSwipedLeft(self)
+        delegate?.cardGoesLeft(card: self)
         print("WATCHOUT LEFT ACTION")
     }
     
     // undoing  action
     func makeUndoAction() {
         
-        imageViewStatus.image = UIImage(named: isLiked ? "btn_like_pressed" : "btn_skip_pressed")
-        overLayImage.image = UIImage(named: isLiked ? "overlay_like" : "overlay_skip")
+        imageViewStatus.image = isLiked ? #imageLiteral(resourceName: "btn_like_pressed") : #imageLiteral(resourceName: "btn_skip_pressed")
+        overLayImage.image = isLiked ? #imageLiteral(resourceName: "overlay_like") : #imageLiteral(resourceName: "overlay_skip")
         imageViewStatus.alpha = 1.0
         overLayImage.alpha = 1.0
         UIView.animate(withDuration: 0.4, animations: {() -> Void in
@@ -229,31 +227,31 @@ class TinderCard: UIView {
         print("WATCHOUT UNDO ACTION")
     }
     
-    func discardCard(){
+    func rollBackCard(){
         
         UIView.animate(withDuration: 0.5) {
             self.removeFromSuperview()
         }
     }
     
-    func shakeCard(){
+    func shakeAnimationCard(){
         
-        imageViewStatus.image = UIImage(named: "btn_skip_pressed")
-        overLayImage.image = UIImage(named: "overlay_skip")
+        imageViewStatus.image = #imageLiteral(resourceName: "btn_skip_pressed")
+        overLayImage.image = #imageLiteral(resourceName: "overlay_skip")
         UIView.animate(withDuration: 0.5, animations: {() -> Void in
             self.center = CGPoint(x: self.center.x - (self.frame.size.width / 2), y: self.center.y)
             self.transform = CGAffineTransform(rotationAngle: -0.2)
             self.imageViewStatus.alpha = 1.0
             self.overLayImage.alpha = 1.0
-        }, completion: {(_ complete: Bool) -> Void in
+        }, completion: {(_) -> Void in
             UIView.animate(withDuration: 0.5, animations: {() -> Void in
                 self.imageViewStatus.alpha = 0
                 self.overLayImage.alpha = 0
                 self.center = self.originalPoint
                 self.transform = CGAffineTransform(rotationAngle: 0)
             }, completion: {(_ complete: Bool) -> Void in
-                self.imageViewStatus.image = UIImage(named: "btn_like_pressed")
-                self.overLayImage.image =  UIImage(named: "overlay_like")
+                self.imageViewStatus.image = #imageLiteral(resourceName: "btn_like_pressed")
+                self.overLayImage.image =  #imageLiteral(resourceName: "overlay_like")
                 UIView.animate(withDuration: 0.5, animations: {() -> Void in
                     self.imageViewStatus.alpha = 1
                     self.overLayImage.alpha = 1

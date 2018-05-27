@@ -1,6 +1,8 @@
 # Tinder Swipe View ![Swift 4.0.x](https://img.shields.io/badge/Swift-4.0.x-orange.svg)
 
-Inspired animation from Tinder and Potluck with undo feature
+Inspired animation from Tinder and Potluck with random undo feature!
+
+Run in physical device for better animaton!!!!
 
 ## Preview
 
@@ -61,9 +63,9 @@ func discardCard(){
     undoCard.makeUndoAction()
     }
 
-func shakeCard(){
+func shakeAnimationCard(){
     let card = currentLoadedCardsArray.first
-    card?.shakeCard()
+    card?.shakeAnimationCard()
     }
 
 ```
@@ -74,9 +76,9 @@ Here is a list of callbacks you can listen to:
 
 ```swift
 protocol TinderCardDelegate: NSObjectProtocol {
-    func cardSwipedLeft(_ card: TinderCard)
-    func cardSwipedRight(_ card: TinderCard)
-    func updateCardView(_ card: TinderCard, withDistance distance: CGFloat)
+    func cardGoesLeft(card: TinderCard)
+    func cardGoesRight(card: TinderCard)
+    func currentCardStatus(card: TinderCard, distance: CGFloat)
 }
 ```
 

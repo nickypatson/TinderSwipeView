@@ -69,7 +69,7 @@ class ViewController: UIViewController {
     @objc func loadInitialDummyAnimation() {
         
         let dummyCard = currentLoadedCardsArray.first;
-        dummyCard?.shakeCard()
+        dummyCard?.shakeAnimationCard()
         UIView.animate(withDuration: 1.0, delay: 2.0, options: .curveLinear, animations: {
             self.viewActions.alpha = 1.0
         }, completion: nil)
@@ -136,7 +136,7 @@ class ViewController: UIViewController {
         if currentLoadedCardsArray.count == MAX_BUFFER_SIZE {
 
             let lastCard = currentLoadedCardsArray.last
-            lastCard?.discardCard()
+            lastCard?.rollBackCard()
             currentLoadedCardsArray.removeLast()
         }
         let undoCard = allCardsArray[currentIndex]
@@ -167,14 +167,14 @@ class ViewController: UIViewController {
 extension ViewController : TinderCardDelegate{
     
     // action called when the card goes to the left.
-    func cardSwipedLeft(_ card: TinderCard) {
+    func cardGoesLeft(card: TinderCard) {
         removeObjectAndAddNewValues()
     }
     // action called when the card goes to the right.
-    func cardSwipedRight(_ card: TinderCard) {
+    func cardGoesRight(card: TinderCard) {
         removeObjectAndAddNewValues()
     }
-    func updateCardView(_ card: TinderCard, withDistance distance: CGFloat) {
+    func currentCardStatus(card: TinderCard, distance: CGFloat) {
         //Log(@"%f",distance);
     }
 }
