@@ -14,6 +14,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var emojiView: EmojiRateView!
     @IBOutlet weak var viewTinderBackGround: UIView!
     @IBOutlet weak var buttonUndo: UIButton!
     @IBOutlet weak var viewActions: UIView!
@@ -27,20 +28,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         viewActions.alpha = 0
         buttonUndo.alpha = 0
-       
+        emojiView.alpha = 0
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         view.layoutIfNeeded()
-         loadCardValues()
+        loadCardValues()
     }
     
     
     func loadCardValues() {
-        
-        
-        //view.layoutIfNeeded()
         
         if valueArray.count > 0 {
             
@@ -72,6 +71,7 @@ class ViewController: UIViewController {
         dummyCard?.shakeAnimationCard()
         UIView.animate(withDuration: 1.0, delay: 2.0, options: .curveLinear, animations: {
             self.viewActions.alpha = 1.0
+            self.emojiView.alpha = 1.0
         }, completion: nil)
     }
     
@@ -84,6 +84,7 @@ class ViewController: UIViewController {
     
     func removeObjectAndAddNewValues() {
         
+        emojiView.rateValue =  2.5
         UIView.animate(withDuration: 0.5) {
             self.buttonUndo.alpha = 1
         }
@@ -134,7 +135,7 @@ class ViewController: UIViewController {
         
         currentIndex =  currentIndex - 1
         if currentLoadedCardsArray.count == MAX_BUFFER_SIZE {
-
+            
             let lastCard = currentLoadedCardsArray.last
             lastCard?.rollBackCard()
             currentLoadedCardsArray.removeLast()
@@ -175,7 +176,17 @@ extension ViewController : TinderCardDelegate{
         removeObjectAndAddNewValues()
     }
     func currentCardStatus(card: TinderCard, distance: CGFloat) {
-        //Log(@"%f",distance);
+        
+        if distance == 0 {
+            emojiView.rateValue =  2.5
+        }else{
+            let value = Float(min(fabs(distance/100), 1.0) * 5)
+            let sorted = distance > 0  ? 2.5 + (value * 5) / 10  : 2.5 - (value * 5) / 10
+            emojiView.rateValue =  sorted
+        }
+
+        
     }
 }
+
 

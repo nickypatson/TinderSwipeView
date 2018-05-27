@@ -139,6 +139,7 @@ class TinderCard: UIView {
                 self.transform = CGAffineTransform(rotationAngle: 0)
                 self.imageViewStatus.alpha = 0
                 self.overLayImage.alpha = 0
+                self.delegate?.currentCardStatus(card: self, distance:0)
             })
         }
     }
@@ -271,4 +272,5 @@ class TinderCard: UIView {
         print("WATCHOUT SHAKE ACTION")
     }
 }
+
 

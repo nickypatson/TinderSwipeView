@@ -16,6 +16,7 @@
 		E1B3FCA21FBDA0FD0038ADF9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B3FCA11FBDA0FD0038ADF9 /* ViewController.swift */; };
 		E1B3FCAA1FBDA0FD0038ADF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1B3FCA81FBDA0FD0038ADF9 /* LaunchScreen.storyboard */; };
 		E1B3FCB41FBDA13D0038ADF9 /* TinderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B3FCB31FBDA13D0038ADF9 /* TinderCard.swift */; };
+		E1D0EE4C20BA7A07008E0A09 /* EmojiRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0EE4B20BA7A07008E0A09 /* EmojiRateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		E1B3FCA91FBDA0FD0038ADF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E1B3FCAB1FBDA0FD0038ADF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1B3FCB31FBDA13D0038ADF9 /* TinderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderCard.swift; sourceTree = "<group>"; };
+		E1D0EE4B20BA7A07008E0A09 /* EmojiRateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiRateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				E1B3FC9F1FBDA0FD0038ADF9 /* AppDelegate.swift */,
 				E1B3FCA11FBDA0FD0038ADF9 /* ViewController.swift */,
 				E1B3FCB31FBDA13D0038ADF9 /* TinderCard.swift */,
+				E1D0EE4B20BA7A07008E0A09 /* EmojiRateView.swift */,
 				E1B2075A2014956400E0A3A2 /* Assets.xcassets */,
 				E19A4F5520B9915D00D2BE9E /* Tinder.storyboard */,
 				E1B3FCA81FBDA0FD0038ADF9 /* LaunchScreen.storyboard */,
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1B3FCA21FBDA0FD0038ADF9 /* ViewController.swift in Sources */,
+				E1D0EE4C20BA7A07008E0A09 /* EmojiRateView.swift in Sources */,
 				E1B3FCA01FBDA0FD0038ADF9 /* AppDelegate.swift in Sources */,
 				E1B3FCB41FBDA13D0038ADF9 /* TinderCard.swift in Sources */,
 			);
