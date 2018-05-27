@@ -7,17 +7,17 @@ Run in physical device for better animaton!!!!
 ## Preview
 
 <p align="center">
-  <img src="./playback.gif" alt="Size Limit example"
-       width="320" height="568">
-</p>
-
-
-## Screenshot
-
-<p align="center">
     <img src="./testingTinderSwipe/Screen%20Shot%20.png" alt="Size Limit example"
        width="381" height="662">
+    <img src="./playback.gif" alt="Size Limit example"
+       width="381" height="662">
 </p>
+
+<p align="center">
+  
+</p>
+
+## Screenshot
 
 <p align="center">
   <img src="./testingTinderSwipe/Screen%20Shot%20DIislike.png" alt="Size Limit example"
