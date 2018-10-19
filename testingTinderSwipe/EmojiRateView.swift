@@ -242,7 +242,7 @@ open class EmojiRateView: UIView {
     fileprivate func redraw() {
         shapeLayer.frame = self.bounds
         shapeLayer.strokeColor = rateColor.cgColor;
-        shapeLayer.lineCap = "round"
+        shapeLayer.lineCap = CAShapeLayerLineCap(rawValue: "round")
         shapeLayer.lineWidth = rateLineWidth
         
         shapePath.removeAllPoints()
@@ -264,7 +264,7 @@ open class EmojiRateView: UIView {
      */
     fileprivate func facePathWithRect(_ rect: CGRect) -> UIBezierPath {
         let margin = rateFaceMargin + 2
-        let facePath = UIBezierPath(ovalIn: UIEdgeInsetsInsetRect(rect, UIEdgeInsetsMake(margin, margin, margin, margin)))
+        let facePath = UIBezierPath(ovalIn: rect.inset(by: UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)))
         return facePath
     }
     

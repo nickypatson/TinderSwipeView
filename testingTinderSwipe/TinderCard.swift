@@ -97,7 +97,7 @@ class TinderCard: UIView {
         case .changed:
             let rotationStrength = min(xCenter / UIScreen.main.bounds.size.width, 1)
             let rotationAngel = .pi/8 * rotationStrength
-            let scale = max(1 - fabs(rotationStrength) / SCALE_STRENGTH, SCALE_RANGE)
+            let scale = max(1 - abs(rotationStrength) / SCALE_STRENGTH, SCALE_RANGE)
             center = CGPoint(x: originalPoint.x + xCenter, y: originalPoint.y + yCenter)
             let transforms = CGAffineTransform(rotationAngle: rotationAngel)
             let scaleTransform: CGAffineTransform = transforms.scaledBy(x: scale, y: scale)
@@ -119,8 +119,8 @@ class TinderCard: UIView {
         
         imageViewStatus.image = distance > 0 ? #imageLiteral(resourceName: "btn_like_pressed") : #imageLiteral(resourceName: "btn_skip_pressed")
         overLayImage.image = distance > 0 ? #imageLiteral(resourceName: "overlay_like") : #imageLiteral(resourceName: "overlay_skip")
-        imageViewStatus.alpha = min(fabs(distance) / 100, 0.5)
-        overLayImage.alpha = min(fabs(distance) / 100, 0.5)
+        imageViewStatus.alpha = min(abs(distance) / 100, 0.5)
+        overLayImage.alpha = min(abs(distance) / 100, 0.5)
         delegate?.currentCardStatus(card: self, distance: distance)
     }
     
