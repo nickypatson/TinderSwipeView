@@ -15,9 +15,9 @@
 		E1B3FCAA1FBDA0FD0038ADF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1B3FCA81FBDA0FD0038ADF9 /* LaunchScreen.storyboard */; };
 		E1B3FCB41FBDA13D0038ADF9 /* TinderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B3FCB31FBDA13D0038ADF9 /* TinderCard.swift */; };
 		E1D0EE4C20BA7A07008E0A09 /* EmojiRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0EE4B20BA7A07008E0A09 /* EmojiRateView.swift */; };
-		E1E7C59121AD6846003E0E63 /* Screen Shot Like.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E7C58E21AD6845003E0E63 /* Screen Shot Like.png */; };
 		E1E7C59221AD6846003E0E63 /* Screen Shot .png in Resources */ = {isa = PBXBuildFile; fileRef = E1E7C58F21AD6846003E0E63 /* Screen Shot .png */; };
-		E1E7C59321AD6846003E0E63 /* Screen Shot DIislike.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E7C59021AD6846003E0E63 /* Screen Shot DIislike.png */; };
+		E1E7C59821AD7484003E0E63 /* Screen Shot Like.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E7C59621AD7483003E0E63 /* Screen Shot Like.png */; };
+		E1E7C59921AD7484003E0E63 /* Screen Shot DIislike.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E7C59721AD7484003E0E63 /* Screen Shot DIislike.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,9 +31,9 @@
 		E1B3FCAB1FBDA0FD0038ADF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1B3FCB31FBDA13D0038ADF9 /* TinderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderCard.swift; sourceTree = "<group>"; };
 		E1D0EE4B20BA7A07008E0A09 /* EmojiRateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiRateView.swift; sourceTree = "<group>"; };
-		E1E7C58E21AD6845003E0E63 /* Screen Shot Like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot Like.png"; sourceTree = "<group>"; };
 		E1E7C58F21AD6846003E0E63 /* Screen Shot .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot .png"; sourceTree = "<group>"; };
-		E1E7C59021AD6846003E0E63 /* Screen Shot DIislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot DIislike.png"; sourceTree = "<group>"; };
+		E1E7C59621AD7483003E0E63 /* Screen Shot Like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot Like.png"; sourceTree = "<group>"; };
+		E1E7C59721AD7484003E0E63 /* Screen Shot DIislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot DIislike.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +67,8 @@
 			isa = PBXGroup;
 			children = (
 				E1E7C58F21AD6846003E0E63 /* Screen Shot .png */,
-				E1E7C59021AD6846003E0E63 /* Screen Shot DIislike.png */,
-				E1E7C58E21AD6845003E0E63 /* Screen Shot Like.png */,
+				E1E7C59721AD7484003E0E63 /* Screen Shot DIislike.png */,
+				E1E7C59621AD7483003E0E63 /* Screen Shot Like.png */,
 				E1B3FC9F1FBDA0FD0038ADF9 /* AppDelegate.swift */,
 				E1B3FCA11FBDA0FD0038ADF9 /* ViewController.swift */,
 				E1B3FCB31FBDA13D0038ADF9 /* TinderCard.swift */,
@@ -142,11 +142,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1E7C59221AD6846003E0E63 /* Screen Shot .png in Resources */,
-				E1E7C59321AD6846003E0E63 /* Screen Shot DIislike.png in Resources */,
+				E1E7C59921AD7484003E0E63 /* Screen Shot DIislike.png in Resources */,
 				E1B3FCAA1FBDA0FD0038ADF9 /* LaunchScreen.storyboard in Resources */,
 				E19A4F5720B9915D00D2BE9E /* Tinder.storyboard in Resources */,
-				E1E7C59121AD6846003E0E63 /* Screen Shot Like.png in Resources */,
 				E1B2075B2014956500E0A3A2 /* Assets.xcassets in Resources */,
+				E1E7C59821AD7484003E0E63 /* Screen Shot Like.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
