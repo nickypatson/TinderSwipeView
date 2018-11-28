@@ -66,10 +66,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qa3-PX-6kd" userLabel="SwipeView">
-                                <rect key="frame" x="15" y="190" width="345" height="357"/>
+                                <rect key="frame" x="15" y="190" width="345" height="377"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Its Hammer Time!!!!!!!   🏎 😎" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqX-ci-xEP">
-                                        <rect key="frame" x="58.5" y="168" width="228.5" height="21"/>
+                                        <rect key="frame" x="58.5" y="178" width="228.5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -145,7 +145,7 @@
                             <constraint firstItem="Dc2-OV-lNp" firstAttribute="bottom" secondItem="wBt-rA-k6D" secondAttribute="bottom" id="oVC-gX-OuJ"/>
                             <constraint firstItem="Qa3-PX-6kd" firstAttribute="leading" secondItem="Dc2-OV-lNp" secondAttribute="leading" constant="15" id="rnx-Lb-3Uc"/>
                             <constraint firstItem="wBt-rA-k6D" firstAttribute="trailing" secondItem="Dc2-OV-lNp" secondAttribute="trailing" id="sJN-yQ-rod"/>
-                            <constraint firstItem="wBt-rA-k6D" firstAttribute="top" secondItem="Qa3-PX-6kd" secondAttribute="bottom" constant="20" id="vgw-iW-MwE"/>
+                            <constraint firstItem="wBt-rA-k6D" firstAttribute="top" secondItem="Qa3-PX-6kd" secondAttribute="bottom" id="vgw-iW-MwE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Dc2-OV-lNp"/>
                         <userDefinedRuntimeAttributes>
