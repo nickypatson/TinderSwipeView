@@ -8,9 +8,9 @@ Run in physical device for better animaton!!!!
 
 <p align="center">
     <img src="./testingTinderSwipe/Screen%20Shot%20.png" alt="Size Limit example"
-       width="381" height="662">
+       width="316" height="550">
     <img src="./playback.gif" alt="Size Limit example"
-       width="381" height="662">
+       width="316" height="550">
 </p>
 
 <p align="center">
