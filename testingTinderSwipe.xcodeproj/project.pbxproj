@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0151286F224852BF00D9F953 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151286E224852BE00D9F953 /* GradientView.swift */; };
 		E14B16A420B99ABF004053D0 /* Screen Shot .png in Resources */ = {isa = PBXBuildFile; fileRef = E14B16A320B99ABE004053D0 /* Screen Shot .png */; };
 		E14B16A720B99D41004053D0 /* Screen Shot Like.png in Resources */ = {isa = PBXBuildFile; fileRef = E14B16A520B99D41004053D0 /* Screen Shot Like.png */; };
 		E14B16A820B99D41004053D0 /* Screen Shot DIislike.png in Resources */ = {isa = PBXBuildFile; fileRef = E14B16A620B99D41004053D0 /* Screen Shot DIislike.png */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0151286E224852BE00D9F953 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		E14B16A320B99ABE004053D0 /* Screen Shot .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot .png"; sourceTree = "<group>"; };
 		E14B16A520B99D41004053D0 /* Screen Shot Like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot Like.png"; sourceTree = "<group>"; };
 		E14B16A620B99D41004053D0 /* Screen Shot DIislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot DIislike.png"; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				E1B3FC9F1FBDA0FD0038ADF9 /* AppDelegate.swift */,
 				E1B3FCA11FBDA0FD0038ADF9 /* ViewController.swift */,
 				E1B3FCB31FBDA13D0038ADF9 /* TinderCard.swift */,
+				0151286E224852BE00D9F953 /* GradientView.swift */,
 				E1D0EE4B20BA7A07008E0A09 /* EmojiRateView.swift */,
 				E1B2075A2014956400E0A3A2 /* Assets.xcassets */,
 				E19A4F5520B9915D00D2BE9E /* Tinder.storyboard */,
@@ -156,6 +159,7 @@
 			files = (
 				E1B3FCA21FBDA0FD0038ADF9 /* ViewController.swift in Sources */,
 				E1D0EE4C20BA7A07008E0A09 /* EmojiRateView.swift in Sources */,
+				0151286F224852BF00D9F953 /* GradientView.swift in Sources */,
 				E1B3FCA01FBDA0FD0038ADF9 /* AppDelegate.swift in Sources */,
 				E1B3FCB41FBDA13D0038ADF9 /* TinderCard.swift in Sources */,
 			);

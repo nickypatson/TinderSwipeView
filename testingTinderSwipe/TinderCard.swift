@@ -7,15 +7,15 @@
 //
 
 let NAMES = ["Adam Gontier","Matt Walst","Brad Walst","Neil Sanderson","Barry Stock","Nicky Patson"]
-let THERESOLD_MARGIN = (UIScreen.main.bounds.size.width/2) * 0.75
+let THERESOLD_MARGIN = (UIScreen.main.bounds.size.height/2) * 0.75
 let SCALE_STRENGTH : CGFloat = 4
 let SCALE_RANGE : CGFloat = 0.90
 
 import UIKit
 
 protocol TinderCardDelegate: NSObjectProtocol {
-    func cardGoesLeft(card: TinderCard)
-    func cardGoesRight(card: TinderCard)
+    func cardGoesUp(card: TinderCard)
+    func cardGoesDown(card: TinderCard)
     func currentCardStatus(card: TinderCard, distance: CGFloat)
 }
 
@@ -126,11 +126,11 @@ class TinderCard: UIView {
     
     func afterSwipeAction() {
         
-        if xCenter > THERESOLD_MARGIN {
-            rightAction()
+        if yCenter > THERESOLD_MARGIN {
+            cardGoesDown()
         }
-        else if xCenter < -THERESOLD_MARGIN {
-            leftAction()
+        else if yCenter < -THERESOLD_MARGIN {
+            cardGoesUp()
         }
         else {
             //reseting image
@@ -144,29 +144,29 @@ class TinderCard: UIView {
         }
     }
     
-    func rightAction() {
+    func cardGoesDown() {
         
-        let finishPoint = CGPoint(x: frame.size.width*2, y: 2 * yCenter + originalPoint.y)
+        let finishPoint = CGPoint(x: 2 * xCenter + originalPoint.x, y: frame.size.height*2)
         UIView.animate(withDuration: 0.5, animations: {
             self.center = finishPoint
         }, completion: {(_) in
             self.removeFromSuperview()
         })
         isLiked = true
-        delegate?.cardGoesRight(card: self)
+        delegate?.cardGoesDown(card: self)
         print("WATCHOUT RIGHT")
     }
     
-    func leftAction() {
+    func cardGoesUp() {
         
-        let finishPoint = CGPoint(x: -frame.size.width*2, y: 2 * yCenter + originalPoint.y)
+        let finishPoint = CGPoint(x: 2 * xCenter + originalPoint.x, y: -frame.size.height*2)
         UIView.animate(withDuration: 0.5, animations: {
             self.center = finishPoint
         }, completion: {(_) in
             self.removeFromSuperview()
         })
         isLiked = false
-        delegate?.cardGoesLeft(card: self)
+        delegate?.cardGoesUp(card: self)
         print("WATCHOUT LEFT")
     }
     
@@ -187,7 +187,7 @@ class TinderCard: UIView {
             self.removeFromSuperview()
         })
         isLiked = true
-        delegate?.cardGoesRight(card: self)
+        delegate?.cardGoesDown(card: self)
         print("WATCHOUT RIGHT ACTION")
     }
     // left click action
@@ -207,7 +207,7 @@ class TinderCard: UIView {
             self.removeFromSuperview()
         })
         isLiked = false
-        delegate?.cardGoesLeft(card: self)
+        delegate?.cardGoesUp(card: self)
         print("WATCHOUT LEFT ACTION")
     }
     
