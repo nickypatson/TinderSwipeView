@@ -175,13 +175,15 @@ class ViewController: UIViewController {
 extension ViewController : TinderCardDelegate{
     
     // action called when the card goes to the left.
-    func cardGoesUp(card: TinderCard) {
+    func cardGoesLeft(card: TinderCard) {
         removeObjectAndAddNewValues()
     }
+    
     // action called when the card goes to the right.
-    func cardGoesDown(card: TinderCard) {
+    func cardGoesRight(card: TinderCard) {
         removeObjectAndAddNewValues()
     }
+    
     func currentCardStatus(card: TinderCard, distance: CGFloat) {
         
         if distance == 0 {
