@@ -1,30 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="TinderSwipeView_Example" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TinderSwipeView_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="GradientView" customModule="TinderSwipeView_Example" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.10000000149011612" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="myi-qN-G97">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fpu-Iy-osB" userLabel="SwipeView" customClass="I">
+                                <rect key="frame" x="0.0" y="144" width="414" height="618"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Its Hammer Time!!!!!!!   🏎 😎" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sg8-Ru-cEd">
+                                        <rect key="frame" x="93" y="298.5" width="228.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Sg8-Ru-cEd" firstAttribute="centerX" secondItem="Fpu-Iy-osB" secondAttribute="centerX" id="YQH-xY-bJS"/>
+                                    <constraint firstItem="Sg8-Ru-cEd" firstAttribute="centerY" secondItem="Fpu-Iy-osB" secondAttribute="centerY" id="ehE-zF-JLV"/>
+                                </constraints>
+                            </view>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QRT-9P-Qth" userLabel="BottomNav">
+                                <rect key="frame" x="0.0" y="762" width="414" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vnI-oE-NnI">
+                                        <rect key="frame" x="20" y="12.5" width="75" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="75" id="N3a-kh-DqJ"/>
+                                            <constraint firstAttribute="height" constant="75" id="gUJ-Xf-s9I"/>
+                                        </constraints>
+                                        <state key="normal" image="noButton"/>
+                                        <state key="selected" image="noButton_Selected"/>
+                                        <state key="highlighted" image="noButton_Selected"/>
+                                        <connections>
+                                            <action selector="leftSwipeAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nmf-ll-hoV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arf-QQ-90l">
+                                        <rect key="frame" x="169.5" y="12.5" width="75" height="75"/>
+                                        <state key="normal" image="undoButton"/>
+                                        <state key="highlighted" image="undoSelected"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neP-jI-gPz">
+                                        <rect key="frame" x="319" y="12.5" width="75" height="75"/>
+                                        <state key="normal" image="yesButton"/>
+                                        <state key="highlighted" image="yesButtonSelected"/>
+                                        <connections>
+                                            <action selector="rightSwipeAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nZ5-rB-JT2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="arf-QQ-90l" firstAttribute="top" secondItem="vnI-oE-NnI" secondAttribute="top" id="1TI-2b-4jl"/>
+                                    <constraint firstItem="arf-QQ-90l" firstAttribute="centerX" secondItem="QRT-9P-Qth" secondAttribute="centerX" id="340-Pd-CpD"/>
+                                    <constraint firstItem="neP-jI-gPz" firstAttribute="width" secondItem="arf-QQ-90l" secondAttribute="width" id="GJj-d5-67L"/>
+                                    <constraint firstItem="arf-QQ-90l" firstAttribute="width" secondItem="vnI-oE-NnI" secondAttribute="width" id="HgB-6e-5TN"/>
+                                    <constraint firstAttribute="trailing" secondItem="neP-jI-gPz" secondAttribute="trailing" constant="20" id="KFt-CP-6w1"/>
+                                    <constraint firstItem="vnI-oE-NnI" firstAttribute="leading" secondItem="QRT-9P-Qth" secondAttribute="leading" constant="20" id="LDo-cx-iNP"/>
+                                    <constraint firstItem="vnI-oE-NnI" firstAttribute="centerY" secondItem="QRT-9P-Qth" secondAttribute="centerY" id="MeM-9K-D2R"/>
+                                    <constraint firstItem="neP-jI-gPz" firstAttribute="top" secondItem="arf-QQ-90l" secondAttribute="top" id="Tp7-v5-mdY"/>
+                                    <constraint firstItem="neP-jI-gPz" firstAttribute="height" secondItem="arf-QQ-90l" secondAttribute="height" id="cPS-Rn-Uyo"/>
+                                    <constraint firstAttribute="height" constant="100" id="oRl-j8-jIT"/>
+                                    <constraint firstItem="arf-QQ-90l" firstAttribute="height" secondItem="vnI-oE-NnI" secondAttribute="height" id="xIm-OR-cwW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Fpu-Iy-osB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="2LY-Pg-Zo7"/>
+                            <constraint firstItem="Fpu-Iy-osB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="3es-tY-dOf"/>
+                            <constraint firstItem="myi-qN-G97" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Bm3-UT-wY1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="QRT-9P-Qth" secondAttribute="bottom" id="Sa4-NM-nrk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Fpu-Iy-osB" secondAttribute="trailing" id="abO-nU-Tta"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="myi-qN-G97" secondAttribute="trailing" id="dnK-cX-Bqz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QRT-9P-Qth" secondAttribute="trailing" id="eQ4-iM-uOR"/>
+                            <constraint firstItem="QRT-9P-Qth" firstAttribute="top" secondItem="Fpu-Iy-osB" secondAttribute="bottom" id="kBK-PN-HBh"/>
+                            <constraint firstItem="QRT-9P-Qth" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mID-fU-eEL"/>
+                            <constraint firstAttribute="bottom" secondItem="myi-qN-G97" secondAttribute="bottom" id="ojS-I6-ExT"/>
+                            <constraint firstItem="myi-qN-G97" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vnA-CE-9T5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="topColor">
+                                <color key="value" red="0.79607843140000001" green="0.20784313730000001" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
+                                <color key="value" red="0.74117647060000003" green="0.2470588235" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="endPointX">
+                                <real key="value" value="0.5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="endPointY">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="startPointX">
+                                <real key="value" value="0.5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="startPointY">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
+                    <connections>
+                        <outlet property="viewContainer" destination="Fpu-Iy-osB" id="p5S-49-NqL"/>
+                        <outlet property="viewNavigation" destination="QRT-9P-Qth" id="tOZ-pX-Aup"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="1" width="1409" height="1762"/>
+        <image name="noButton" width="100" height="100"/>
+        <image name="noButton_Selected" width="100" height="100"/>
+        <image name="undoButton" width="50" height="50"/>
+        <image name="undoSelected" width="50" height="50"/>
+        <image name="yesButton" width="100" height="100"/>
+        <image name="yesButtonSelected" width="100" height="100"/>
+    </resources>
 </document>

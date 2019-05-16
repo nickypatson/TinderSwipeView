@@ -32,41 +32,27 @@ Run in physical device for better animaton!!!!
 Tinder Swipe  can be added to storyboard or instantiated programmatically:
 
 ```swift
-func createTinderCard(at index: Int , value :String) -> TinderCard {
-
-        let card = TinderCard(frame: CGRect(x: 0, y: 0, width: viewTinderBackGround.frame.size.width , height:   viewTinderBackGround.frame.size.height - 50) ,value : value)
-        card.delegate = self
-        return card
-}
+    let swipeView = TinderSwipeView<UserModel>(frame: viewContainer.bounds, overlayGenerator: overlayGenerator)
+    viewContainer.addSubview(swipeView)
+    swipeView.showTinderCards(with: userModels)
 ```
 ## Animation
 
 ```swift
 
-func rightClickAction(){
-    let card = currentLoadedCardsArray.first
-    card?.rightClickAction()
-    }
+    internal func cardGoesRight()
 
-func leftClickAction(){
-    let card = currentLoadedCardsArray.first
-    card?.leftClickAction()
-    }
+    internal func cardGoesLeft()
 
-func makeUndoAction(){
-    let card = currentLoadedCardsArray.first
-    undoCard.makeUndoAction()
-    }
+    internal func rightClickAction()
 
-func discardCard(){
-    let card = currentLoadedCardsArray.first
-    undoCard.makeUndoAction()
-    }
+    internal func leftClickAction()
 
-func shakeAnimationCard(){
-    let card = currentLoadedCardsArray.first
-    card?.shakeAnimationCard()
-    }
+    internal func makeUndoAction()
+
+    internal func rollBackCard()
+
+    internal func shakeAnimationCard(completion: @escaping (Bool) -> ())
 
 ```
 
@@ -76,17 +62,20 @@ Here is a list of callbacks you can listen to:
 
 ```swift
 protocol TinderCardDelegate: NSObjectProtocol {
-    func cardGoesLeft(card: TinderCard)
-    func cardGoesRight(card: TinderCard)
-    func currentCardStatus(card: TinderCard, distance: CGFloat)
+
+    func dummyAnimationDone()
+    func currentCardStatus(card: Any, distance: CGFloat)
+    func cardGoesLeft(_ object: Any)
+    func cardGoesRight(_ object: Any)
+    func endOfCardsReached()
 }
 ```
 
 ## Requirements
 
 ```
-* Swift 4.1
-* XCode 9
+* Swift 5
+* XCode 10
 * iOS 8.0 (Min SDK)
 ```
 
