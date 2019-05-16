@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'TinderSwipeView'
-  s.version          = '0.2.0'
+  s.version          = '1.0.2'
   s.summary          = 'Swipe view inspired by tinder'
 
   s.description      = <<-DESC

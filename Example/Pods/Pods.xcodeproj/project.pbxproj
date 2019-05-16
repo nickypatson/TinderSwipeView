@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		014209B8228CF7D4002F9575 /* TinderSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014209B6228CF7D4002F9575 /* TinderSwipeView.swift */; };
-		014209B9228CF7D5002F9575 /* TinderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014209B7228CF7D4002F9575 /* TinderCard.swift */; };
+		014209C7228D04FD002F9575 /* TinderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014209C5228D04FC002F9575 /* TinderCard.swift */; };
+		014209C8228D04FD002F9575 /* TinderSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014209C6228D04FD002F9575 /* TinderSwipeView.swift */; };
 		15A3C787CB4A911973440030D6F856CA /* Pods-TinderSwipeView_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D99D3DB109158AA675CA1928B950AF /* Pods-TinderSwipeView_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		707D5E7BA30B954F44E89786CB194A14 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		716B8CC510455673FBD0FA5343F973E4 /* Pods-TinderSwipeView_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 15556E2ABB3AB761411D3553873248AA /* Pods-TinderSwipeView_Tests-dummy.m */; };
@@ -38,8 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		014209B6228CF7D4002F9575 /* TinderSwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TinderSwipeView.swift; sourceTree = "<group>"; };
-		014209B7228CF7D4002F9575 /* TinderCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TinderCard.swift; sourceTree = "<group>"; };
+		014209C5228D04FC002F9575 /* TinderCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TinderCard.swift; path = TinderSwipeView/Classes/TinderCard.swift; sourceTree = "<group>"; };
+		014209C6228D04FD002F9575 /* TinderSwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TinderSwipeView.swift; path = TinderSwipeView/Classes/TinderSwipeView.swift; sourceTree = "<group>"; };
 		11E9C1EAE10F2242522EBCF09DA3E9F7 /* TinderSwipeView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TinderSwipeView.modulemap; sourceTree = "<group>"; };
 		15556E2ABB3AB761411D3553873248AA /* Pods-TinderSwipeView_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TinderSwipeView_Tests-dummy.m"; sourceTree = "<group>"; };
 		29712BC5718A964E7CAAA9BB45D7C935 /* Pods-TinderSwipeView_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TinderSwipeView_Example-Info.plist"; sourceTree = "<group>"; };
@@ -199,8 +199,8 @@
 		EEA32DE013EC8D122CA30D960FAC9CE6 /* TinderSwipeView */ = {
 			isa = PBXGroup;
 			children = (
-				014209B7228CF7D4002F9575 /* TinderCard.swift */,
-				014209B6228CF7D4002F9575 /* TinderSwipeView.swift */,
+				014209C5228D04FC002F9575 /* TinderCard.swift */,
+				014209C6228D04FD002F9575 /* TinderSwipeView.swift */,
 				49EC4054A1D88A9A390DE61687C26ED0 /* Pod */,
 				ACCB7389A4E5F44D598F7E0972A75E87 /* Support Files */,
 			);
@@ -390,8 +390,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0A0DC22AE689F2109FD33A4ABAFD974 /* TinderSwipeView-dummy.m in Sources */,
-				014209B8228CF7D4002F9575 /* TinderSwipeView.swift in Sources */,
-				014209B9228CF7D5002F9575 /* TinderCard.swift in Sources */,
+				014209C8228D04FD002F9575 /* TinderSwipeView.swift in Sources */,
+				014209C7228D04FD002F9575 /* TinderCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +450,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 41A17B49AF8A55A1E62E15380E3C74CB /* TinderSwipeView.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -673,6 +674,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 41A17B49AF8A55A1E62E15380E3C74CB /* TinderSwipeView.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -693,6 +695,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
