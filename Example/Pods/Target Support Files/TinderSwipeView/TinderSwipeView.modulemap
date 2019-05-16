@@ -1,0 +1,6 @@
+framework module TinderSwipeView {
+  umbrella header "TinderSwipeView-umbrella.h"
+
+  export *
+  module * { export * }
+}

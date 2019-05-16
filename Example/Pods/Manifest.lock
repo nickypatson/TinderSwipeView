@@ -1,0 +1,16 @@
+PODS:
+  - TinderSwipeView (0.1.0)
+
+DEPENDENCIES:
+  - TinderSwipeView (from `../`)
+
+EXTERNAL SOURCES:
+  TinderSwipeView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  TinderSwipeView: db450ac099baa80943c544bd66a956139c7c41c0
+
+PODFILE CHECKSUM: ec867e6b3d8b98328eed62084cdcf15b0c33b3bd
+
+COCOAPODS: 1.6.2
