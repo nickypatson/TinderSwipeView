@@ -7,7 +7,7 @@ Run in physical device for better animaton!!!!
 ## Preview
 
 <p align="center">
-    <img src="./testingTinderSwipe/Screen%20Shot%20.png" alt="Size Limit example"
+    <img src="./TinderSwipeView/Screen%20Shot%20.png" alt="Size Limit example"
        width="316" height="550">
     <img src="./playback.gif" alt="Size Limit example"
        width="316" height="550">
@@ -20,9 +20,9 @@ Run in physical device for better animaton!!!!
 ## Screenshot
 
 <p align="center">
-  <img src="./testingTinderSwipe/Screen%20Shot%20DIislike.png" alt="Size Limit example"
+  <img src="./TinderSwipeView/Screen%20Shot%20DIislike.png" alt="Size Limit example"
        width="381" height="662">
-  <img src="./testingTinderSwipe/Screen%20Shot%20Like.png" alt="Size Limit example"
+  <img src="./TinderSwipeView/Screen%20Shot%20Like.png" alt="Size Limit example"
        width="381" height="662">
 </p>
 
@@ -44,7 +44,7 @@ platform :ios, '8.0'
 
 target 'TargetName' do
 use_frameworks!
-pod 'GradientSlider’, :git=> ‘https://github.com/nickypatson/GradientSlider’
+pod 'TinderSwipeView’
 end
 ```
 
