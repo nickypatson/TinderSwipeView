@@ -99,7 +99,7 @@ platform :ios, '8.0'
 target 'TargetName' do
 use_frameworks!
 
-pod 'TinderSwipeView’
+pod 'TinderSwipeView’ , '~> 1.1.1'
 end
 ```
 

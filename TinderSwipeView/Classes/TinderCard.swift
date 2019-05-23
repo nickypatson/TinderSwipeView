@@ -128,8 +128,8 @@ class TinderCard: UIView {
     
     fileprivate func updateOverlay(_ distance: CGFloat) {
         
-        statusImageView.image = makeImage(name:  distance > 0 ? "ic_like" : "ic_skip" , className: TinderCard.self)
-        overlayImageView.image = makeImage(name:  distance > 0 ? "overlay_like" : "overlay_skip" , className: TinderCard.self)
+        statusImageView.image = makeImage(name:  distance > 0 ? "ic_like" : "ic_skip")
+        overlayImageView.image = makeImage(name:  distance > 0 ? "overlay_like" : "overlay_skip")
         statusImageView.alpha = min(abs(distance) / 100, 0.8)
         overlayImageView.alpha = min(abs(distance) / 100, 0.8)
         delegate?.currentCardStatus(card: self, distance: distance)
@@ -213,8 +213,8 @@ class TinderCard: UIView {
     // undoing  action
     func makeUndoAction() {
         
-        statusImageView.image = makeImage(name: isLiked ? "ic_like" : "overlay_skip", className: TinderCard.self)
-        overlayImageView.image = makeImage(name: isLiked ? "overlay_like" : "overlay_skip", className: TinderCard.self)
+        statusImageView.image = makeImage(name: isLiked ? "ic_like" : "overlay_skip")
+        overlayImageView.image = makeImage(name: isLiked ? "overlay_like" : "overlay_skip")
         statusImageView.alpha = 1.0
         overlayImageView.alpha = 1.0
         UIView.animate(withDuration: 0.4, animations: {() -> Void in
@@ -236,8 +236,8 @@ class TinderCard: UIView {
     
     func shakeAnimationCard(completion: @escaping (Bool) -> ()){
         
-        statusImageView.image = makeImage(name: "ic_skip", className: TinderCard.self)
-        overlayImageView.image = makeImage(name: "overlay_skip", className: TinderCard.self)
+        statusImageView.image = makeImage(name: "ic_skip")
+        overlayImageView.image = makeImage(name: "overlay_skip")
         UIView.animate(withDuration: 0.5, animations: {() -> Void in
             let finishPoint = CGPoint(x: self.center.x - (self.frame.size.width / 2), y: self.center.y)
             self.animateCard(to: finishPoint, angle: -0.2, alpha: 1.0)
@@ -245,8 +245,8 @@ class TinderCard: UIView {
             UIView.animate(withDuration: 0.5, animations: {() -> Void in
                 self.animateCard(to: self.originalPoint)
             }, completion: {(_ complete: Bool) -> Void in
-                self.statusImageView.image = self.makeImage(name: "ic_like", className: TinderCard.self)
-                self.overlayImageView.image =  self.makeImage(name: "overlay_like", className: TinderCard.self)
+                self.statusImageView.image = self.makeImage(name: "ic_like")
+                self.overlayImageView.image =  self.makeImage(name: "overlay_like")
                 UIView.animate(withDuration: 0.5, animations: {() -> Void in
                     let finishPoint = CGPoint(x: self.center.x + (self.frame.size.width / 2) ,y: self.center.y)
                     self.animateCard(to: finishPoint , angle: 0.2, alpha: 1)
@@ -268,13 +268,15 @@ class TinderCard: UIView {
         statusImageView.alpha = 0.5
         overlayImageView.alpha = 0.5
         
-        statusImageView.image = makeImage(name: isleft ?  "ic_skip" : "ic_like", className: TinderCard.self)
-        overlayImageView.image = makeImage(name: isleft ?  "overlay_skip" : "overlay_like", className: TinderCard.self)
+        statusImageView.image = makeImage(name: isleft ?  "ic_skip" : "ic_like")
+        overlayImageView.image = makeImage(name: isleft ?  "overlay_skip" : "overlay_like")
         
     }
     
-    fileprivate func makeImage(name: String,className:AnyClass) -> UIImage? {
-        return UIImage(named: name, in: Bundle(for: className.self), compatibleWith: nil)
+    fileprivate func makeImage(name: String) -> UIImage? {
+        
+        let image = UIImage(named: name, in: Bundle(for: type(of: self)), compatibleWith: nil)
+        return image
     }
     
     fileprivate func animateCard(to center:CGPoint,angle:CGFloat = 0,alpha:CGFloat = 0){

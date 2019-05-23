@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'TinderSwipeView'
-  s.version          = '1.1.0'
+  s.version          = '1.1.1'
   s.summary          = 'Swipe view inspired from tinder'
 
   s.description      = <<-DESC
@@ -33,6 +33,8 @@ LICENSE
   s.resource_bundles = {
     'TinderSwipeView' => ['TinderSwipeView/Resources/*']
     }
+
+  s.resources = 'TinderSwipeView/Resources/**/*.{png,storyboard}'
 
 
 end
