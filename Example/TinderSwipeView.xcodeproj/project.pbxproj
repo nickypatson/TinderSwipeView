@@ -157,6 +157,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = R6Y9R88CTU;
 						LastSwiftMigration = 1020;
 					};
 				};
@@ -383,6 +384,7 @@
 			baseConfigurationReference = F634AEBABBCB9867F28A14C0 /* Pods-TinderSwipeView_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = R6Y9R88CTU;
 				INFOPLIST_FILE = TinderSwipeView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -397,6 +399,7 @@
 			baseConfigurationReference = 9D0565F914BEFCAF01EB0C9D /* Pods-TinderSwipeView_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = R6Y9R88CTU;
 				INFOPLIST_FILE = TinderSwipeView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;

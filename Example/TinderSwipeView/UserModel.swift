@@ -11,6 +11,5 @@ import UIKit
 struct UserModel {
 
     let name : String!
-    let age : String!
-    
+    let num : String!
 }

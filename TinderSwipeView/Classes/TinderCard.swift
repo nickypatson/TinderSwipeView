@@ -20,17 +20,19 @@ protocol TinderCardDelegate: NSObjectProtocol {
 
 class TinderCard: UIView {
     
-    var imageViewStatus : UIImageView = {
+    var statusImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.alpha = 0
         return imageView
     }()
     
-    var backGroundImage : UIImageView = {
+    var overlayImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.alpha = 0
         return imageView
     }()
+    
+    var index: Int!
     
     var overlay: UIView?
     var containerView : UIView!
@@ -41,7 +43,9 @@ class TinderCard: UIView {
     var originalPoint = CGPoint.zero
     
     var isLiked = false
-
+    
+    var model : Any?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -71,11 +75,11 @@ class TinderCard: UIView {
         containerView.backgroundColor = .clear
         addSubview(containerView)
         
-        imageViewStatus = UIImageView(frame: CGRect(x: (frame.size.width / 2) - 37.5, y: 25, width: 75, height: 75))
-        containerView.addSubview(imageViewStatus)
+        statusImageView = UIImageView(frame: CGRect(x: (frame.size.width / 2) - 37.5, y: 25, width: 75, height: 75))
+        containerView.addSubview(statusImageView)
         
-        backGroundImage = UIImageView(frame:bounds)
-        containerView.addSubview(backGroundImage)
+        overlayImageView = UIImageView(frame:bounds)
+        containerView.addSubview(overlayImageView)
     }
     
     func addOverlay( view: UIView?){
@@ -122,18 +126,17 @@ class TinderCard: UIView {
     }
     
     
-    func updateOverlay(_ distance: CGFloat) {
+    fileprivate func updateOverlay(_ distance: CGFloat) {
         
-        imageViewStatus.image = distance > 0 ? #imageLiteral(resourceName: "btn_like_pressed") : #imageLiteral(resourceName: "btn_skip_pressed")
-        backGroundImage.image = distance > 0 ? #imageLiteral(resourceName: "overlay_like") : #imageLiteral(resourceName: "overlay_skip")
-        imageViewStatus.alpha = min(abs(distance) / 100, 0.5)
-        backGroundImage.alpha = min(abs(distance) / 100, 0.5)
+        statusImageView.image = makeImage(name:  distance > 0 ? "ic_like" : "ic_skip" , className: TinderCard.self)
+        overlayImageView.image = makeImage(name:  distance > 0 ? "overlay_like" : "overlay_skip" , className: TinderCard.self)
+        statusImageView.alpha = min(abs(distance) / 100, 0.8)
+        overlayImageView.alpha = min(abs(distance) / 100, 0.8)
         delegate?.currentCardStatus(card: self, distance: distance)
     }
     
     
-    func afterSwipeAction() {
-        
+    fileprivate func afterSwipeAction() {
         
         if xCenter > theresoldMargin {
             cardGoesRight()
@@ -146,12 +149,13 @@ class TinderCard: UIView {
             UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.0, options: [], animations: {
                 self.center = self.originalPoint
                 self.transform = CGAffineTransform(rotationAngle: 0)
-                self.imageViewStatus.alpha = 0
-                self.backGroundImage.alpha = 0
+                self.statusImageView.alpha = 0
+                self.overlayImageView.alpha = 0
             })
         }
     }
     
+    // right swipe action
     func cardGoesRight() {
         
         let finishPoint = CGPoint(x: frame.size.width*2, y: 2 * yCenter + originalPoint.y)
@@ -162,9 +166,9 @@ class TinderCard: UIView {
         })
         isLiked = true
         delegate?.cardGoesRight(card: self)
-        print("WATCHOUT RIGHT")
     }
     
+    // left swipe action
     func cardGoesLeft() {
         
         let finishPoint = CGPoint(x: -frame.size.width*2, y: 2 * yCenter + originalPoint.y)
@@ -175,7 +179,6 @@ class TinderCard: UIView {
         })
         isLiked = false
         delegate?.cardGoesLeft(card: self)
-        print("WATCHOUT LEFT")
     }
     
     // right click action
@@ -190,9 +193,8 @@ class TinderCard: UIView {
         })
         isLiked = true
         delegate?.cardGoesRight(card: self)
-        print("WATCHOUT RIGHT ACTION")
     }
-
+    
     
     // left click action
     func leftClickAction() {
@@ -206,60 +208,36 @@ class TinderCard: UIView {
         })
         isLiked = false
         delegate?.cardGoesLeft(card: self)
-        print("WATCHOUT LEFT ACTION")
     }
-    
-    fileprivate func setInitialLayoutStatus(isleft:Bool){
-        
-        imageViewStatus.alpha = 0.5
-        backGroundImage.alpha = 0.5
-        
-        if isleft{
-            imageViewStatus.image = #imageLiteral(resourceName: "btn_skip_pressed")
-            backGroundImage.image = #imageLiteral(resourceName: "overlay_skip")
-        }else{
-            imageViewStatus.image = #imageLiteral(resourceName: "btn_like_pressed")
-            backGroundImage.image = #imageLiteral(resourceName: "overlay_like")
-        }
-    }
-    
     
     // undoing  action
     func makeUndoAction() {
         
-        imageViewStatus.image = isLiked ? #imageLiteral(resourceName: "btn_like_pressed") : #imageLiteral(resourceName: "btn_skip_pressed")
-        backGroundImage.image = isLiked ? #imageLiteral(resourceName: "overlay_like") : #imageLiteral(resourceName: "overlay_skip")
-        imageViewStatus.alpha = 1.0
-        backGroundImage.alpha = 1.0
+        statusImageView.image = makeImage(name: isLiked ? "ic_like" : "overlay_skip", className: TinderCard.self)
+        overlayImageView.image = makeImage(name: isLiked ? "overlay_like" : "overlay_skip", className: TinderCard.self)
+        statusImageView.alpha = 1.0
+        overlayImageView.alpha = 1.0
         UIView.animate(withDuration: 0.4, animations: {() -> Void in
             self.center = self.originalPoint
             self.transform = CGAffineTransform(rotationAngle: 0)
-            self.imageViewStatus.alpha = 0
-            self.backGroundImage.alpha = 0
+            self.statusImageView.alpha = 0
+            self.overlayImageView.alpha = 0
         })
-        
-        print("WATCHOUT UNDO ACTION")
     }
     
     func rollBackCard(){
         
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.alpha = 0
+        }) { (_) in
             self.removeFromSuperview()
         }
     }
     
-    fileprivate func animateCard(to center:CGPoint,angle:CGFloat = 0,alpha:CGFloat = 0){
-        
-        self.center = center
-        self.transform = CGAffineTransform(rotationAngle: angle)
-        imageViewStatus.alpha = alpha
-        backGroundImage.alpha = alpha
-    }
-    
     func shakeAnimationCard(completion: @escaping (Bool) -> ()){
-
-        imageViewStatus.image = #imageLiteral(resourceName: "btn_skip_pressed")
-        backGroundImage.image = #imageLiteral(resourceName: "overlay_skip")
+        
+        statusImageView.image = makeImage(name: "ic_skip", className: TinderCard.self)
+        overlayImageView.image = makeImage(name: "overlay_skip", className: TinderCard.self)
         UIView.animate(withDuration: 0.5, animations: {() -> Void in
             let finishPoint = CGPoint(x: self.center.x - (self.frame.size.width / 2), y: self.center.y)
             self.animateCard(to: finishPoint, angle: -0.2, alpha: 1.0)
@@ -267,14 +245,14 @@ class TinderCard: UIView {
             UIView.animate(withDuration: 0.5, animations: {() -> Void in
                 self.animateCard(to: self.originalPoint)
             }, completion: {(_ complete: Bool) -> Void in
-                self.imageViewStatus.image = #imageLiteral(resourceName: "btn_like_pressed")
-                self.backGroundImage.image =  #imageLiteral(resourceName: "overlay_like")
+                self.statusImageView.image = self.makeImage(name: "ic_like", className: TinderCard.self)
+                self.overlayImageView.image =  self.makeImage(name: "overlay_like", className: TinderCard.self)
                 UIView.animate(withDuration: 0.5, animations: {() -> Void in
                     let finishPoint = CGPoint(x: self.center.x + (self.frame.size.width / 2) ,y: self.center.y)
                     self.animateCard(to: finishPoint , angle: 0.2, alpha: 1)
                 }, completion: {(_ complete: Bool) -> Void in
                     UIView.animate(withDuration: 0.5, animations: {() -> Void in
-                         self.animateCard(to: self.originalPoint)
+                        self.animateCard(to: self.originalPoint)
                     }, completion: {(_ complete: Bool) -> Void in
                         completion(true)
                     })
@@ -285,9 +263,29 @@ class TinderCard: UIView {
         print("WATCHOUT SHAKE ACTION")
     }
     
+    fileprivate func setInitialLayoutStatus(isleft:Bool){
+        
+        statusImageView.alpha = 0.5
+        overlayImageView.alpha = 0.5
+        
+        statusImageView.image = makeImage(name: isleft ?  "ic_skip" : "ic_like", className: TinderCard.self)
+        overlayImageView.image = makeImage(name: isleft ?  "overlay_skip" : "overlay_like", className: TinderCard.self)
+        
+    }
+    
+    fileprivate func makeImage(name: String,className:AnyClass) -> UIImage? {
+        return UIImage(named: name, in: Bundle(for: className.self), compatibleWith: nil)
+    }
+    
+    fileprivate func animateCard(to center:CGPoint,angle:CGFloat = 0,alpha:CGFloat = 0){
+        
+        self.center = center
+        self.transform = CGAffineTransform(rotationAngle: angle)
+        statusImageView.alpha = alpha
+        overlayImageView.alpha = alpha
+    }
     
 }
-
 
 extension TinderCard: UIGestureRecognizerDelegate {
     
@@ -295,5 +293,3 @@ extension TinderCard: UIGestureRecognizerDelegate {
         return true
     }
 }
-
-

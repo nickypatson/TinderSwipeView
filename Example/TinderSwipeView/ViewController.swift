@@ -28,8 +28,8 @@ class ViewController: UIViewController {
     
     let userModels : [UserModel] =  {
         var model : [UserModel] = []
-        for n in 1...10 {
-            model.append(UserModel(name: names[Int(arc4random_uniform(UInt32(names.count)))], age: "\(n)"))
+        for n in 1...30 {
+            model.append(UserModel(name: names[Int(arc4random_uniform(UInt32(names.count)))], num: "\(n)"))
         }
         return model
     }()
@@ -37,6 +37,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // Dynamically create view for each tinder card
         
         let overlayGenerator: ( CGRect,UserModel) -> (UIView) = { (frame: CGRect , userModel:UserModel) -> (UIView) in
             
@@ -57,7 +60,7 @@ class ViewController: UIViewController {
             
             let labelText = UILabel(frame:CGRect(x: 90, y: frame.size.height - 80, width: frame.size.width - 100, height: 60))
             let attributedText = NSMutableAttributedString(string: userModel.name, attributes: [.foregroundColor: UIColor.white,.font:UIFont.boldSystemFont(ofSize: 25)])
-            attributedText.append(NSAttributedString(string: "\n\( userModel.age!) mins", attributes: [.foregroundColor: UIColor.white,.font:UIFont.systemFont(ofSize: 18)]))
+            attributedText.append(NSAttributedString(string: "\nnums :\( userModel.num!)", attributes: [.foregroundColor: UIColor.white,.font:UIFont.systemFont(ofSize: 18)]))
             labelText.attributedText = attributedText
             labelText.numberOfLines = 2
             containerView.addSubview(labelText)
@@ -65,14 +68,14 @@ class ViewController: UIViewController {
             return containerView
             
         }
-        
+                
         swipeView = TinderSwipeView<UserModel>(frame: viewContainer.bounds, overlayGenerator: overlayGenerator)
         viewContainer.addSubview(swipeView)
-        swipeView.showTinderCards(with: userModels)
+        swipeView.showTinderCards(with: userModels ,isDummyShow: true)
         
     }
     
-    
+
     @IBAction func leftSwipeAction(_ sender: Any) {
         if let swipeView = swipeView{
             swipeView.makeLeftSwipeAction()
@@ -84,14 +87,16 @@ class ViewController: UIViewController {
             swipeView.makeRightSwipeAction()
         }
     }
+    
+    @IBAction func undoButtonPressed(_ sender: Any) {
+        if let swipeView = swipeView{
+            swipeView.undoCurrentTinderCard()
+        }
+    }
 
 }
 
 extension ViewController : TinderSwipeViewDelegate{
-    
-    func currentCardStatus(card object: Any, distance: CGFloat) {
-        print(distance)
-    }
     
     func dummyAnimationDone() {
         UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveLinear, animations: {
@@ -99,18 +104,29 @@ extension ViewController : TinderSwipeViewDelegate{
         }, completion: nil)
     }
     
-    func cardGoesLeft(_ object: Any) {
-        
+    func cardGoesLeft(model: Any) {
+        let userModel = model as! UserModel
+        print("Watchout Left \(userModel.name!)")
     }
     
-    func cardGoesRight(_ object: Any) {
-        
+    func cardGoesRight(model : Any) {
+        let userModel = model as! UserModel
+        print("Watchout Right \(userModel.name!)")
+    }
+    
+    func undoCardsDone(model: Any) {
+        let userModel = model as! UserModel
+        print("Reverting done \(userModel.name!)")
     }
     
     func endOfCardsReached() {
         UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveLinear, animations: {
             self.viewNavigation.alpha = 0.0
         }, completion: nil)
+    }
+    
+    func currentCardStatus(card object: Any, distance: CGFloat) {
+        print(distance)
     }
 }
 

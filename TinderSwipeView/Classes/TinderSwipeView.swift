@@ -8,14 +8,15 @@
 
 import UIKit
 
-let distance : CGFloat = 10
+let inset : CGFloat = 10
 
 public protocol TinderSwipeViewDelegate: class {
     
     func dummyAnimationDone()
     func currentCardStatus(card: Any, distance: CGFloat)
-    func cardGoesLeft(_ object: Any)
-    func cardGoesRight(_ object: Any)
+    func cardGoesLeft(model: Any)
+    func cardGoesRight(model: Any)
+    func undoCardsDone(model: Any)
     func endOfCardsReached()
 }
 
@@ -28,9 +29,10 @@ public class TinderSwipeView <Element>: UIView {
     }
     public var sepeatorDistance : CGFloat = 8
     var index = 0
-
+    
     fileprivate var allCards = [Element]()
-    fileprivate var currentLoadedCards = [TinderCard]()
+    fileprivate var loadedCards = [TinderCard]()
+    fileprivate var currentCard : TinderCard!
     
     public weak var delegate: TinderSwipeViewDelegate?
     
@@ -63,14 +65,14 @@ public class TinderSwipeView <Element>: UIView {
         
         for element in elements {
             
-            if currentLoadedCards.count < bufferSize {
+            if loadedCards.count < bufferSize {
                 let cardView = self.createTinderCard(element: element)
-                if currentLoadedCards.isEmpty {
+                if loadedCards.isEmpty {
                     self.addSubview(cardView)
                 } else {
-                    self.insertSubview(cardView, belowSubview: currentLoadedCards.last!)
+                    self.insertSubview(cardView, belowSubview: loadedCards.last!)
                 }
-                currentLoadedCards.append(cardView)
+                loadedCards.append(cardView)
             }
         }
         
@@ -81,28 +83,29 @@ public class TinderSwipeView <Element>: UIView {
         }
         
     }
-
+    
     fileprivate func createTinderCard(element: Element) -> TinderCard {
         
-        let cardView = TinderCard(frame: CGRect(x: distance, y: distance, width: bounds.width - (distance * 2), height: bounds.height - (CGFloat(bufferSize) * sepeatorDistance) - (distance * 2) ))
-        cardView.delegate = self
-        cardView.addOverlay(view: (self.overlayGenerator?(cardView.bounds, element)))
-        return cardView
+        let card = TinderCard(frame: CGRect(x: inset, y: inset + (CGFloat(loadedCards.count) * self.sepeatorDistance), width: bounds.width - (inset * 2), height: bounds.height - (CGFloat(bufferSize) * sepeatorDistance) - (inset * 2) ))
+        card.delegate = self
+        card.model = element
+        card.addOverlay(view: (self.overlayGenerator?(card.bounds, element)))
+        return card
     }
     
     fileprivate func animateCardAfterSwiping() {
         
-        if currentLoadedCards.isEmpty{
+        if loadedCards.isEmpty{
             self.delegate?.endOfCardsReached()
             return
         }
         
-        for (i,card) in currentLoadedCards.enumerated() {
+        for (i,card) in loadedCards.enumerated() {
             
             UIView.animate(withDuration: 0.5, animations: {
-                 card.isUserInteractionEnabled = i == 0 ? true : false
+                card.isUserInteractionEnabled = i == 0 ? true : false
                 var frame = card.frame
-                frame.origin.y = distance + (CGFloat(i) * self.sepeatorDistance)
+                frame.origin.y = inset + (CGFloat(i) * self.sepeatorDistance)
                 card.frame = frame
             })
         }
@@ -110,45 +113,75 @@ public class TinderSwipeView <Element>: UIView {
     
     @objc func loadAnimation() {
         
-        guard let dummyCard = currentLoadedCards.first else {
+        guard let dummyCard = loadedCards.first else {
             return
         }
         dummyCard.shakeAnimationCard(completion: { (_) in
             self.delegate?.dummyAnimationDone()
         })
     }
-
+    
+    fileprivate func removeCardAndAddNewCard(){
+        
+        index += 1
+        let card = loadedCards.first!
+        card.index = index
+        Timer.scheduledTimer(timeInterval: 1.01, target: self, selector: #selector(enableUndoButton), userInfo: card, repeats: false)
+        loadedCards.remove(at: 0)
+        
+        if (index + loadedCards.count) < allCards.count {
+            let tinderCard = createTinderCard(element: allCards[index + loadedCards.count])
+            self.insertSubview(tinderCard, belowSubview: loadedCards.last!)
+            loadedCards.append(tinderCard)
+        }
+        
+        animateCardAfterSwiping()
+    }
     
     public func makeLeftSwipeAction() {
-        if let card = currentLoadedCards.first {
+        if let card = loadedCards.first {
             card.leftClickAction()
         }
         
     }
     
     public func makeRightSwipeAction() {
-        if let card = currentLoadedCards.first {
+        if let card = loadedCards.first {
             card.rightClickAction()
         }
     }
     
-    public func undoTinderCard() {
+    public func undoCurrentTinderCard() {
+        
+        guard let undoCard = currentCard else{
+            return
+        }
+        
+        index -= 1
+        if loadedCards.count == bufferSize {
+            let lastCard = loadedCards.last
+            lastCard?.rollBackCard()
+            loadedCards.removeLast()
+        }
+        
+        undoCard.layer.removeAllAnimations()
+        self.insertSubview(undoCard, aboveSubview: loadedCards.first!)
+        loadedCards.insert(undoCard, at: 0)
+        undoCard.makeUndoAction()
+        animateCardAfterSwiping()
+        delegate?.undoCardsDone(model: undoCard.model!)
+        currentCard = nil
         
     }
     
-    fileprivate func removeCardAndAddNewCard(){
+    @objc func enableUndoButton(timer: Timer){
         
-        currentLoadedCards.remove(at: 0)
-        index += 1
-        if (index + currentLoadedCards.count) < allCards.count {
-            let tinderCard = createTinderCard(element: allCards[index + currentLoadedCards.count])
-            self.insertSubview(tinderCard, belowSubview: currentLoadedCards.last!)
-            currentLoadedCards.append(tinderCard)
+        let card = timer.userInfo as! TinderCard
+        if card.index == index{
+            currentCard = card
         }
-
-        animateCardAfterSwiping()
     }
-
+    
 }
 
 
@@ -156,15 +189,15 @@ extension TinderSwipeView : TinderCardDelegate {
     
     func cardGoesRight(card: TinderCard) {
         removeCardAndAddNewCard()
+        self.delegate?.cardGoesRight(model: card.model! )
     }
     
     func cardGoesLeft(card: TinderCard) {
         removeCardAndAddNewCard()
+        self.delegate?.cardGoesLeft(model: card.model!)
     }
     
     func currentCardStatus(card: TinderCard, distance: CGFloat) {
         self.delegate?.currentCardStatus(card: card, distance: distance)
     }
-    
-    
 }

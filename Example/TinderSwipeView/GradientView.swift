@@ -3,7 +3,7 @@
 //  testingTinderSwipe
 //
 //  Created by Nick on 19/10/18.
-//  Copyright © 2018 Nicky. All rights reserved.
+//  Copyright © 2018 Nick. All rights reserved.
 //
 
 import UIKit
