@@ -55,7 +55,9 @@ class TinderCard: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    /*
+     * Initializing View
+     */
     func setupView() {
         
         layer.cornerRadius = 20
@@ -64,7 +66,6 @@ class TinderCard: UIView {
         layer.shadowOffset = CGSize(width: 0.5, height: 3)
         layer.shadowColor = UIColor.darkGray.cgColor
         clipsToBounds = true
-        backgroundColor = .blue
         originalPoint = center
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
@@ -82,6 +83,9 @@ class TinderCard: UIView {
         containerView.addSubview(overlayImageView)
     }
     
+    /*
+     * Adding Overlay to TinderCard
+     */
     func addOverlay( view: UIView?){
         
         if let overlay = view{
@@ -90,8 +94,179 @@ class TinderCard: UIView {
         }
     }
     
+    /*
+     * Card goes right method
+     */
+    func cardGoesRight() {
+        
+        delegate?.cardGoesRight(card: self)
+        let finishPoint = CGPoint(x: frame.size.width*2, y: 2 * yCenter + originalPoint.y)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.center = finishPoint
+        }, completion: {(_) in
+            self.removeFromSuperview()
+        })
+        isLiked = true
+        
+    }
     
-    @objc func beingDragged(_ gestureRecognizer: UIPanGestureRecognizer) {
+    /*
+     * Card goes left method
+     */
+    func cardGoesLeft() {
+        
+        delegate?.cardGoesLeft(card: self)
+        let finishPoint = CGPoint(x: -frame.size.width*2, y: 2 * yCenter + originalPoint.y)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.center = finishPoint
+        }, completion: {(_) in
+            self.removeFromSuperview()
+        })
+        isLiked = false
+    }
+    
+    /*
+     * Card goes right action method
+     */
+    func rightClickAction() {
+        
+        setInitialLayoutStatus(isleft: false)
+        let finishPoint = CGPoint(x: center.x + frame.size.width * 2, y: center.y)
+        UIView.animate(withDuration: 1.0, animations: {() -> Void in
+            self.animateCard(to: finishPoint, angle: 1, alpha: 1.0)
+        }, completion: {(_ complete: Bool) -> Void in
+            self.removeFromSuperview()
+        })
+        isLiked = true
+        delegate?.cardGoesRight(card: self)
+    }
+    
+    
+    /*
+     * Card goes left action method
+     */
+    func leftClickAction() {
+        
+        setInitialLayoutStatus(isleft: true)
+        let finishPoint = CGPoint(x: center.x - frame.size.width * 2, y: center.y)
+        UIView.animate(withDuration: 1.0, animations: {() -> Void in
+            self.animateCard(to: finishPoint, angle: -1, alpha: 1.0)
+        }, completion: {(_ complete: Bool) -> Void in
+            self.removeFromSuperview()
+        })
+        isLiked = false
+        delegate?.cardGoesLeft(card: self)
+    }
+    
+    /*
+     * Reverting current card method
+     */
+    func makeUndoAction() {
+        
+        statusImageView.image = makeImage(name: isLiked ? "ic_like" : "overlay_skip")
+        overlayImageView.image = makeImage(name: isLiked ? "overlay_like" : "overlay_skip")
+        statusImageView.alpha = 1.0
+        overlayImageView.alpha = 1.0
+        UIView.animate(withDuration: 0.4, animations: {() -> Void in
+            self.center = self.originalPoint
+            self.transform = CGAffineTransform(rotationAngle: 0)
+            self.statusImageView.alpha = 0
+            self.overlayImageView.alpha = 0
+        })
+    }
+    
+    /*
+     * Removing last card from view
+     */
+    func rollBackCard(){
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.alpha = 0
+        }) { (_) in
+            self.removeFromSuperview()
+        }
+    }
+    
+    /*
+     * Shake animation method
+     */
+    func shakeAnimationCard(completion: @escaping (Bool) -> ()){
+        
+        statusImageView.image = makeImage(name: "ic_skip")
+        overlayImageView.image = makeImage(name: "overlay_skip")
+        UIView.animate(withDuration: 0.5, animations: {() -> Void in
+            let finishPoint = CGPoint(x: self.center.x - (self.frame.size.width / 2), y: self.center.y)
+            self.animateCard(to: finishPoint, angle: -0.2, alpha: 1.0)
+        }, completion: {(_) -> Void in
+            UIView.animate(withDuration: 0.5, animations: {() -> Void in
+                self.animateCard(to: self.originalPoint)
+            }, completion: {(_ complete: Bool) -> Void in
+                self.statusImageView.image = self.makeImage(name: "ic_like")
+                self.overlayImageView.image =  self.makeImage(name: "overlay_like")
+                UIView.animate(withDuration: 0.5, animations: {() -> Void in
+                    let finishPoint = CGPoint(x: self.center.x + (self.frame.size.width / 2) ,y: self.center.y)
+                    self.animateCard(to: finishPoint , angle: 0.2, alpha: 1)
+                }, completion: {(_ complete: Bool) -> Void in
+                    UIView.animate(withDuration: 0.5, animations: {() -> Void in
+                        self.animateCard(to: self.originalPoint)
+                    }, completion: {(_ complete: Bool) -> Void in
+                        completion(true)
+                    })
+                })
+            })
+        })
+        
+        print("WATCHOUT SHAKE ACTION")
+    }
+    
+    /*
+     * Setting up initial status for imageviews
+     */
+    fileprivate func setInitialLayoutStatus(isleft:Bool){
+        
+        statusImageView.alpha = 0.5
+        overlayImageView.alpha = 0.5
+        
+        statusImageView.image = makeImage(name: isleft ?  "ic_skip" : "ic_like")
+        overlayImageView.image = makeImage(name: isleft ?  "overlay_skip" : "overlay_like")
+        
+    }
+    
+    /*
+     * Acessing image from bundle
+     */
+    fileprivate func makeImage(name: String) -> UIImage? {
+        
+        let image = UIImage(named: name, in: Bundle(for: type(of: self)), compatibleWith: nil)
+        return image
+    }
+    
+    /*
+     * Animation with center point
+     */
+    fileprivate func animateCard(to center:CGPoint,angle:CGFloat = 0,alpha:CGFloat = 0){
+        
+        self.center = center
+        self.transform = CGAffineTransform(rotationAngle: angle)
+        statusImageView.alpha = alpha
+        overlayImageView.alpha = alpha
+    }
+}
+
+// MARK: UIGestureRecognizerDelegate Methods
+extension TinderCard: UIGestureRecognizerDelegate {
+    
+    /*
+     * Gesture methods
+     */
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    /*
+     * Gesture methods
+     */
+    @objc fileprivate func beingDragged(_ gestureRecognizer: UIPanGestureRecognizer) {
         
         xCenter = gestureRecognizer.translation(in: self).x
         yCenter = gestureRecognizer.translation(in: self).y
@@ -125,17 +300,9 @@ class TinderCard: UIView {
         }
     }
     
-    
-    fileprivate func updateOverlay(_ distance: CGFloat) {
-        
-        statusImageView.image = makeImage(name:  distance > 0 ? "ic_like" : "ic_skip")
-        overlayImageView.image = makeImage(name:  distance > 0 ? "overlay_like" : "overlay_skip")
-        statusImageView.alpha = min(abs(distance) / 100, 0.8)
-        overlayImageView.alpha = min(abs(distance) / 100, 0.8)
-        delegate?.currentCardStatus(card: self, distance: distance)
-    }
-    
-    
+    /*
+     * Tinder Card swipe action
+     */
     fileprivate func afterSwipeAction() {
         
         if xCenter > theresoldMargin {
@@ -145,7 +312,6 @@ class TinderCard: UIView {
             cardGoesLeft()
         }
         else {
-            //reseting image
             UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.0, options: [], animations: {
                 self.center = self.originalPoint
                 self.transform = CGAffineTransform(rotationAngle: 0)
@@ -155,143 +321,15 @@ class TinderCard: UIView {
         }
     }
     
-    // right swipe action
-    func cardGoesRight() {
+    /*
+     * Updating overlay methods
+     */
+    fileprivate func updateOverlay(_ distance: CGFloat) {
         
-        let finishPoint = CGPoint(x: frame.size.width*2, y: 2 * yCenter + originalPoint.y)
-        UIView.animate(withDuration: 0.5, animations: {
-            self.center = finishPoint
-        }, completion: {(_) in
-            self.removeFromSuperview()
-        })
-        isLiked = true
-        delegate?.cardGoesRight(card: self)
-    }
-    
-    // left swipe action
-    func cardGoesLeft() {
-        
-        let finishPoint = CGPoint(x: -frame.size.width*2, y: 2 * yCenter + originalPoint.y)
-        UIView.animate(withDuration: 0.5, animations: {
-            self.center = finishPoint
-        }, completion: {(_) in
-            self.removeFromSuperview()
-        })
-        isLiked = false
-        delegate?.cardGoesLeft(card: self)
-    }
-    
-    // right click action
-    func rightClickAction() {
-        
-        setInitialLayoutStatus(isleft: false)
-        let finishPoint = CGPoint(x: center.x + frame.size.width * 2, y: center.y)
-        UIView.animate(withDuration: 1.0, animations: {() -> Void in
-            self.animateCard(to: finishPoint, angle: 1, alpha: 1.0)
-        }, completion: {(_ complete: Bool) -> Void in
-            self.removeFromSuperview()
-        })
-        isLiked = true
-        delegate?.cardGoesRight(card: self)
-    }
-    
-    
-    // left click action
-    func leftClickAction() {
-        
-        setInitialLayoutStatus(isleft: true)
-        let finishPoint = CGPoint(x: center.x - frame.size.width * 2, y: center.y)
-        UIView.animate(withDuration: 1.0, animations: {() -> Void in
-            self.animateCard(to: finishPoint, angle: -1, alpha: 1.0)
-        }, completion: {(_ complete: Bool) -> Void in
-            self.removeFromSuperview()
-        })
-        isLiked = false
-        delegate?.cardGoesLeft(card: self)
-    }
-    
-    // undoing  action
-    func makeUndoAction() {
-        
-        statusImageView.image = makeImage(name: isLiked ? "ic_like" : "overlay_skip")
-        overlayImageView.image = makeImage(name: isLiked ? "overlay_like" : "overlay_skip")
-        statusImageView.alpha = 1.0
-        overlayImageView.alpha = 1.0
-        UIView.animate(withDuration: 0.4, animations: {() -> Void in
-            self.center = self.originalPoint
-            self.transform = CGAffineTransform(rotationAngle: 0)
-            self.statusImageView.alpha = 0
-            self.overlayImageView.alpha = 0
-        })
-    }
-    
-    func rollBackCard(){
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            self.alpha = 0
-        }) { (_) in
-            self.removeFromSuperview()
-        }
-    }
-    
-    func shakeAnimationCard(completion: @escaping (Bool) -> ()){
-        
-        statusImageView.image = makeImage(name: "ic_skip")
-        overlayImageView.image = makeImage(name: "overlay_skip")
-        UIView.animate(withDuration: 0.5, animations: {() -> Void in
-            let finishPoint = CGPoint(x: self.center.x - (self.frame.size.width / 2), y: self.center.y)
-            self.animateCard(to: finishPoint, angle: -0.2, alpha: 1.0)
-        }, completion: {(_) -> Void in
-            UIView.animate(withDuration: 0.5, animations: {() -> Void in
-                self.animateCard(to: self.originalPoint)
-            }, completion: {(_ complete: Bool) -> Void in
-                self.statusImageView.image = self.makeImage(name: "ic_like")
-                self.overlayImageView.image =  self.makeImage(name: "overlay_like")
-                UIView.animate(withDuration: 0.5, animations: {() -> Void in
-                    let finishPoint = CGPoint(x: self.center.x + (self.frame.size.width / 2) ,y: self.center.y)
-                    self.animateCard(to: finishPoint , angle: 0.2, alpha: 1)
-                }, completion: {(_ complete: Bool) -> Void in
-                    UIView.animate(withDuration: 0.5, animations: {() -> Void in
-                        self.animateCard(to: self.originalPoint)
-                    }, completion: {(_ complete: Bool) -> Void in
-                        completion(true)
-                    })
-                })
-            })
-        })
-        
-        print("WATCHOUT SHAKE ACTION")
-    }
-    
-    fileprivate func setInitialLayoutStatus(isleft:Bool){
-        
-        statusImageView.alpha = 0.5
-        overlayImageView.alpha = 0.5
-        
-        statusImageView.image = makeImage(name: isleft ?  "ic_skip" : "ic_like")
-        overlayImageView.image = makeImage(name: isleft ?  "overlay_skip" : "overlay_like")
-        
-    }
-    
-    fileprivate func makeImage(name: String) -> UIImage? {
-        
-        let image = UIImage(named: name, in: Bundle(for: type(of: self)), compatibleWith: nil)
-        return image
-    }
-    
-    fileprivate func animateCard(to center:CGPoint,angle:CGFloat = 0,alpha:CGFloat = 0){
-        
-        self.center = center
-        self.transform = CGAffineTransform(rotationAngle: angle)
-        statusImageView.alpha = alpha
-        overlayImageView.alpha = alpha
-    }
-    
-}
-
-extension TinderCard: UIGestureRecognizerDelegate {
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+        statusImageView.image = makeImage(name:  distance > 0 ? "ic_like" : "ic_skip")
+        overlayImageView.image = makeImage(name:  distance > 0 ? "overlay_like" : "overlay_skip")
+        statusImageView.alpha = min(abs(distance) / 100, 0.8)
+        overlayImageView.alpha = min(abs(distance) / 100, 0.8)
+        delegate?.currentCardStatus(card: self, distance: distance)
     }
 }

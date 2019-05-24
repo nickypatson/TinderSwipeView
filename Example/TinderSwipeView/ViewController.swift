@@ -6,7 +6,6 @@
 //  Copyright © 2019 Nick. All rights reserved.
 //
 
-
 let names = ["Adam Gontier","Matt Walst","Brad Walst","Neil Sanderson","Barry Stock","Nicky Patson"]
 
 import UIKit
@@ -72,7 +71,6 @@ class ViewController: UIViewController {
         swipeView = TinderSwipeView<UserModel>(frame: viewContainer.bounds, overlayGenerator: overlayGenerator)
         viewContainer.addSubview(swipeView)
         swipeView.showTinderCards(with: userModels ,isDummyShow: true)
-        
     }
     
 
@@ -93,7 +91,6 @@ class ViewController: UIViewController {
             swipeView.undoCurrentTinderCard()
         }
     }
-
 }
 
 extension ViewController : TinderSwipeViewDelegate{
@@ -129,4 +126,3 @@ extension ViewController : TinderSwipeViewDelegate{
         print(distance)
     }
 }
-

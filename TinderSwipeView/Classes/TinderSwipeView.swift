@@ -54,7 +54,9 @@ public class TinderSwipeView <Element>: UIView {
         fatalError("Please use init(frame:,overlayGenerator)")
     }
     
-    
+    /*
+     * Showing Tinder cards to view
+     */
     public func showTinderCards(with elements: [Element] ,isDummyShow: Bool = true) {
         
         if elements.isEmpty {
@@ -84,6 +86,9 @@ public class TinderSwipeView <Element>: UIView {
         
     }
     
+    /*
+     * Creating invidual cards
+     */
     fileprivate func createTinderCard(element: Element) -> TinderCard {
         
         let card = TinderCard(frame: CGRect(x: inset, y: inset + (CGFloat(loadedCards.count) * self.sepeatorDistance), width: bounds.width - (inset * 2), height: bounds.height - (CGFloat(bufferSize) * sepeatorDistance) - (inset * 2) ))
@@ -93,6 +98,9 @@ public class TinderSwipeView <Element>: UIView {
         return card
     }
     
+    /*
+     * Animating cards
+     */
     fileprivate func animateCardAfterSwiping() {
         
         if loadedCards.isEmpty{
@@ -111,7 +119,10 @@ public class TinderSwipeView <Element>: UIView {
         }
     }
     
-    @objc func loadAnimation() {
+    /*
+     * Loading animation
+     */
+    @objc private func loadAnimation() {
         
         guard let dummyCard = loadedCards.first else {
             return
@@ -121,6 +132,9 @@ public class TinderSwipeView <Element>: UIView {
         })
     }
     
+    /*
+     * Removing currrent card and add new cards to view
+     */
     fileprivate func removeCardAndAddNewCard(){
         
         index += 1
@@ -138,19 +152,27 @@ public class TinderSwipeView <Element>: UIView {
         animateCardAfterSwiping()
     }
     
+    /*
+     * Left swipe action
+     */
     public func makeLeftSwipeAction() {
         if let card = loadedCards.first {
             card.leftClickAction()
         }
-        
     }
     
+    /*
+     * Right swipe action
+     */
     public func makeRightSwipeAction() {
         if let card = loadedCards.first {
             card.rightClickAction()
         }
     }
     
+    /*
+     * Undo button pressed
+     */
     public func undoCurrentTinderCard() {
         
         guard let undoCard = currentCard else{
@@ -171,19 +193,19 @@ public class TinderSwipeView <Element>: UIView {
         animateCardAfterSwiping()
         delegate?.undoCardsDone(model: undoCard.model!)
         currentCard = nil
-        
     }
     
-    @objc func enableUndoButton(timer: Timer){
+    /*
+     * Enabling undo button
+     */
+    @objc private func enableUndoButton(timer: Timer){
         
         let card = timer.userInfo as! TinderCard
         if card.index == index{
             currentCard = card
         }
     }
-    
 }
-
 
 extension TinderSwipeView : TinderCardDelegate {
     
