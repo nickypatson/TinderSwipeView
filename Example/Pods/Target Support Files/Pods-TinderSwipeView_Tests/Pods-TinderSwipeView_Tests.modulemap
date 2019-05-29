@@ -1,6 +1,0 @@
-framework module Pods_TinderSwipeView_Tests {
-  umbrella header "Pods-TinderSwipeView_Tests-umbrella.h"
-
-  export *
-  module * { export * }
-}

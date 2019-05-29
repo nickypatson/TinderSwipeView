@@ -26,36 +26,7 @@ Run in physical device for better animaton!!!!
        width="381" height="662">
 </p>
 
-## Installation with CocoaPods
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Swift, which automates and simplifies the process of using 3rd-party libraries in your projects. You can install it with the following command:
-
-```bash
-$ gem install cocoapods
-```
-
-## Podfile
-
-To integrate GradientSlider into your Xcode project using CocoaPods, specify it in your `Podfile`:
-
-```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
-
-target 'TargetName' do
-use_frameworks!
-
-pod 'TinderSwipeView’ , '~> 1.1.3'
-end
-```
-
-Then, run the following command:
-
-```bash
-$ pod repo update
-
-$ pod install
-```
 
 ## Instantiation
 
@@ -63,15 +34,16 @@ Tinder Swipe been instantiated programmatically using :
 
 ```swift
 
-    let swipeView = TinderSwipeView<UserModel>(frame: viewContainer.bounds, contentView: contentView)
+    let swipeView = TinderSwipeView<UserModel>(frame: viewContainer.bounds, overlayGenerator: overlayGenerator)
+    viewContainer.addSubview(swipeView)
     swipeView.showTinderCards(with: userModels)
     
 ```
-Dynamically create tinder card either by programmatically or from nib  for each index 
+Dynamically create tinder card for each index
 
 ```swift
 
-public typealias ContentView = (_ index: Int, _ frame: CGRect, _ element:Element) -> (UIView)
+public typealias OverlayGenerator = (_ frame: CGRect, _ element:Element) -> (UIView)
 
 ```
 ## Animation
@@ -101,12 +73,42 @@ Here is a list of callbacks you can listen to:
 protocol TinderCardDelegate: NSObjectProtocol {
 
     func dummyAnimationDone()
-    func fallbackCard(model:Any)
     func currentCardStatus(card: Any, distance: CGFloat)
     func cardGoesLeft(_ object: Any)
     func cardGoesRight(_ object: Any)
     func endOfCardsReached()
 }
+```
+
+## Installation with CocoaPods
+
+[CocoaPods](http://cocoapods.org) is a dependency manager for Swift, which automates and simplifies the process of using 3rd-party libraries in your projects. You can install it with the following command:
+
+```bash
+$ gem install cocoapods
+```
+
+## Podfile
+
+To integrate GradientSlider into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+
+target 'TargetName' do
+use_frameworks!
+
+pod 'TinderSwipeView’ , '~> 1.1.2'
+end
+```
+
+Then, run the following command:
+
+```bash
+$ pod repo update
+
+$ pod install
 ```
 
 ## Requirements
@@ -129,6 +131,3 @@ Nicky Patson
 ## License
 
 Tinder Swipe View is available under the MIT license. See the LICENSE file for more info.
-
-## Credits
-Emoji based on [TTGEmojiRate](https://github.com/zekunyan/TTGEmojiRate)

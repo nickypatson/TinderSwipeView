@@ -12,6 +12,9 @@
 		014209B5228CF75B002F9575 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014209B4228CF75A002F9575 /* GradientView.swift */; };
 		014209BE228CF8D5002F9575 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 014209BA228CF8D4002F9575 /* LaunchScreen.storyboard */; };
 		014209BF228CF8D5002F9575 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 014209BC228CF8D5002F9575 /* Main.storyboard */; };
+		01B4899D229F412B007BB074 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B4899C229F412B007BB074 /* CustomView.swift */; };
+		01B4899F229F4134007BB074 /* CustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01B4899E229F4134007BB074 /* CustomView.xib */; };
+		01BCB3A92298C2BA00D8BB40 /* EmojiRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BCB3A82298C2B900D8BB40 /* EmojiRateView.swift */; };
 		142CE57C5FC7C3921148183D /* Pods_TinderSwipeView_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3061FA4C874E89ABC51291 /* Pods_TinderSwipeView_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -23,6 +26,9 @@
 		014209B4228CF75A002F9575 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		014209BB228CF8D4002F9575 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		014209BD228CF8D5002F9575 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		01B4899C229F412B007BB074 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		01B4899E229F4134007BB074 /* CustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomView.xib; sourceTree = "<group>"; };
+		01BCB3A82298C2B900D8BB40 /* EmojiRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiRateView.swift; sourceTree = "<group>"; };
 		03E829DBF3E466737D4E77C4 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		3BD87AF848B5740554F6B287 /* Pods_TinderSwipeView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinderSwipeView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* TinderSwipeView_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderSwipeView_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,8 +89,11 @@
 		607FACD21AFB9204008FA782 /* Example for TinderSwipeView */ = {
 			isa = PBXGroup;
 			children = (
+				01BCB3A82298C2B900D8BB40 /* EmojiRateView.swift */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				014209AE228CF728002F9575 /* ViewController.swift */,
+				01B4899C229F412B007BB074 /* CustomView.swift */,
+				01B4899E229F4134007BB074 /* CustomView.xib */,
 				014209B4228CF75A002F9575 /* GradientView.swift */,
 				014209A9228CF703002F9575 /* UserModel.swift */,
 				014209BC228CF8D5002F9575 /* Main.storyboard */,
@@ -186,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				014209BF228CF8D5002F9575 /* Main.storyboard in Resources */,
+				01B4899F229F4134007BB074 /* CustomView.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				014209BE228CF8D5002F9575 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -199,15 +209,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TinderSwipeView_Example/Pods-TinderSwipeView_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/TinderSwipeView/TinderSwipeView.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TinderSwipeView.framework",
 			);
@@ -246,7 +252,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				014209AF228CF728002F9575 /* ViewController.swift in Sources */,
+				01BCB3A92298C2BA00D8BB40 /* EmojiRateView.swift in Sources */,
 				014209B5228CF75B002F9575 /* GradientView.swift in Sources */,
+				01B4899D229F412B007BB074 /* CustomView.swift in Sources */,
 				014209AC228CF703002F9575 /* UserModel.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "390C51844F41500859B4FEBD56FED3DC"
-               BuildableName = "Pods_TinderSwipeView_Tests.framework"
-               BlueprintName = "Pods-TinderSwipeView_Tests"
+               BlueprintIdentifier = "48CF6737F3CCFB614C0F0807088B2AF8"
+               BuildableName = "TinderSwipeView.bundle"
+               BlueprintName = "TinderSwipeView-TinderSwipeView"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "390C51844F41500859B4FEBD56FED3DC"
-            BuildableName = "Pods_TinderSwipeView_Tests.framework"
-            BlueprintName = "Pods-TinderSwipeView_Tests"
+            BlueprintIdentifier = "48CF6737F3CCFB614C0F0807088B2AF8"
+            BuildableName = "TinderSwipeView.bundle"
+            BlueprintName = "TinderSwipeView-TinderSwipeView"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

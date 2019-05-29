@@ -21,11 +21,28 @@
                             <imageView userInteractionEnabled="NO" alpha="0.10000000149011612" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="myi-qN-G97">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x8Z-fJ-3IK" customClass="EmojiRateView" customModule="TinderSwipeView_Example" customModuleProvider="target">
+                                <rect key="frame" x="143" y="54" width="128" height="128"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="RFH-H9-Xgt"/>
+                                    <constraint firstAttribute="height" constant="128" id="w7S-bO-KQR"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rateLineWidth">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="rateColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="rateShowEyes" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fpu-Iy-osB" userLabel="SwipeView">
-                                <rect key="frame" x="0.0" y="144" width="414" height="618"/>
+                                <rect key="frame" x="0.0" y="202" width="414" height="560"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sg8-Ru-cEd">
-                                        <rect key="frame" x="65.5" y="277" width="283.5" height="64.5"/>
+                                        <rect key="frame" x="65.5" y="248" width="283.5" height="64.5"/>
                                         <string key="text">Its Hammer Time!!!!!!!   
 🏎 😎</string>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="27"/>
@@ -90,10 +107,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Fpu-Iy-osB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="2LY-Pg-Zo7"/>
                             <constraint firstItem="Fpu-Iy-osB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="3es-tY-dOf"/>
                             <constraint firstItem="myi-qN-G97" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Bm3-UT-wY1"/>
+                            <constraint firstItem="x8Z-fJ-3IK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EPz-tq-5ez"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="QRT-9P-Qth" secondAttribute="bottom" id="Sa4-NM-nrk"/>
+                            <constraint firstItem="Fpu-Iy-osB" firstAttribute="top" secondItem="x8Z-fJ-3IK" secondAttribute="bottom" constant="20" id="TCY-6M-y5E"/>
+                            <constraint firstItem="x8Z-fJ-3IK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="ZEx-Cf-R66"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Fpu-Iy-osB" secondAttribute="trailing" id="abO-nU-Tta"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="myi-qN-G97" secondAttribute="trailing" id="dnK-cX-Bqz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QRT-9P-Qth" secondAttribute="trailing" id="eQ4-iM-uOR"/>
@@ -125,16 +144,18 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
+                        <outlet property="emojiView" destination="x8Z-fJ-3IK" id="Jyz-T9-Jia"/>
                         <outlet property="viewContainer" destination="Fpu-Iy-osB" id="p5S-49-NqL"/>
                         <outlet property="viewNavigation" destination="QRT-9P-Qth" id="tOZ-pX-Aup"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="71.651785714285708"/>
         </scene>
     </scenes>
     <resources>
-        <image name="1" width="1409" height="1762"/>
+        <image name="1" width="614" height="1093"/>
         <image name="noButton" width="100" height="100"/>
         <image name="noButton_Selected" width="100" height="100"/>
         <image name="undoButton" width="50" height="50"/>

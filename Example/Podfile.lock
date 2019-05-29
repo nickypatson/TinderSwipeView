@@ -1,16 +1,16 @@
 PODS:
-  - TinderSwipeView (0.1.0)
+  - TinderSwipeView (1.1.2)
 
 DEPENDENCIES:
-  - TinderSwipeView (from `../`)
+  - TinderSwipeView
 
-EXTERNAL SOURCES:
-  TinderSwipeView:
-    :path: "../"
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - TinderSwipeView
 
 SPEC CHECKSUMS:
-  TinderSwipeView: db450ac099baa80943c544bd66a956139c7c41c0
+  TinderSwipeView: 4fa91b414127abab5d82daa884542b52c3b76a05
 
-PODFILE CHECKSUM: ec867e6b3d8b98328eed62084cdcf15b0c33b3bd
+PODFILE CHECKSUM: f8ba4fe83920b9e3f0f8183af10e6b4e21a1199a
 
-COCOAPODS: 1.6.2
+COCOAPODS: 1.7.0

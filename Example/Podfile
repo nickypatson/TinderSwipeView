@@ -1,5 +1,5 @@
 use_frameworks!
 
 target 'TinderSwipeView_Example' do
-  pod 'TinderSwipeView' 
+  pod 'TinderSwipeView'
 end
