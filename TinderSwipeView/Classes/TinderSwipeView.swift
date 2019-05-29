@@ -14,6 +14,7 @@ public protocol TinderSwipeViewDelegate: class {
     
     func dummyAnimationDone()
     func currentCardStatus(card: Any, distance: CGFloat)
+    func fallbackCard(model:Any)
     func cardGoesLeft(model: Any)
     func cardGoesRight(model: Any)
     func undoCardsDone(model: Any)
@@ -36,12 +37,12 @@ public class TinderSwipeView <Element>: UIView {
     
     public weak var delegate: TinderSwipeViewDelegate?
     
-    fileprivate let overlayGenerator: OverlayGenerator?
-    public typealias OverlayGenerator = (_ frame: CGRect, _ element:Element) -> (UIView)
+    fileprivate let contentView: ContentView?
+    public typealias ContentView = (_ index: Int, _ frame: CGRect, _ element:Element) -> (UIView)
     
     public init(frame: CGRect,
-                overlayGenerator: @escaping OverlayGenerator, bufferSize : Int = 3) {
-        self.overlayGenerator = overlayGenerator
+                contentView: @escaping ContentView, bufferSize : Int = 3) {
+        self.contentView = contentView
         self.bufferSize = bufferSize
         super.init(frame: frame)
     }
@@ -65,10 +66,10 @@ public class TinderSwipeView <Element>: UIView {
         
         allCards.append(contentsOf: elements)
         
-        for element in elements {
+        for (i,element) in elements.enumerated() {
             
             if loadedCards.count < bufferSize {
-                let cardView = self.createTinderCard(element: element)
+                let cardView = self.createTinderCard(index: i, element: element)
                 if loadedCards.isEmpty {
                     self.addSubview(cardView)
                 } else {
@@ -89,12 +90,12 @@ public class TinderSwipeView <Element>: UIView {
     /*
      * Creating invidual cards
      */
-    fileprivate func createTinderCard(element: Element) -> TinderCard {
+    fileprivate func createTinderCard(index:Int,element: Element) -> TinderCard {
         
         let card = TinderCard(frame: CGRect(x: inset, y: inset + (CGFloat(loadedCards.count) * self.sepeatorDistance), width: bounds.width - (inset * 2), height: bounds.height - (CGFloat(bufferSize) * sepeatorDistance) - (inset * 2) ))
         card.delegate = self
         card.model = element
-        card.addOverlay(view: (self.overlayGenerator?(card.bounds, element)))
+        card.addContentView(view: (self.contentView?(index, card.bounds, element)))
         return card
     }
     
@@ -144,7 +145,7 @@ public class TinderSwipeView <Element>: UIView {
         loadedCards.remove(at: 0)
         
         if (index + loadedCards.count) < allCards.count {
-            let tinderCard = createTinderCard(element: allCards[index + loadedCards.count])
+            let tinderCard = createTinderCard(index: index + loadedCards.count, element: allCards[index + loadedCards.count])
             self.insertSubview(tinderCard, belowSubview: loadedCards.last!)
             loadedCards.append(tinderCard)
         }
@@ -206,12 +207,16 @@ public class TinderSwipeView <Element>: UIView {
         }
     }
 }
-
+// MARK: TinderCardDelegate Methods
 extension TinderSwipeView : TinderCardDelegate {
+
+    func fallbackCard(card: TinderCard) {
+       self.delegate?.fallbackCard(model: card.model!)
+    }
     
     func cardGoesRight(card: TinderCard) {
         removeCardAndAddNewCard()
-        self.delegate?.cardGoesRight(model: card.model! )
+        self.delegate?.cardGoesRight(model: card.model!)
     }
     
     func cardGoesLeft(card: TinderCard) {

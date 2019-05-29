@@ -16,6 +16,7 @@ protocol TinderCardDelegate: NSObjectProtocol {
     func cardGoesRight(card: TinderCard)
     func cardGoesLeft(card: TinderCard)
     func currentCardStatus(card: TinderCard, distance: CGFloat)
+    func fallbackCard(card: TinderCard)
 }
 
 class TinderCard: UIView {
@@ -60,13 +61,15 @@ class TinderCard: UIView {
      */
     func setupView() {
         
-        layer.cornerRadius = 20
+        layer.cornerRadius = 25
         layer.shadowRadius = 3
         layer.shadowOpacity = 0.4
         layer.shadowOffset = CGSize(width: 0.5, height: 3)
         layer.shadowColor = UIColor.darkGray.cgColor
         clipsToBounds = true
+        backgroundColor = .white
         originalPoint = center
+        
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
         panGestureRecognizer.delegate = self
@@ -86,10 +89,10 @@ class TinderCard: UIView {
     /*
      * Adding Overlay to TinderCard
      */
-    func addOverlay( view: UIView?){
+    func addContentView( view: UIView?){
         
         if let overlay = view{
-            self.overlay = view
+            self.overlay = overlay
             self.insertSubview(overlay, belowSubview: containerView)
         }
     }
@@ -216,7 +219,6 @@ class TinderCard: UIView {
             })
         })
         
-        print("WATCHOUT SHAKE ACTION")
     }
     
     /*
@@ -312,6 +314,7 @@ extension TinderCard: UIGestureRecognizerDelegate {
             cardGoesLeft()
         }
         else {
+            self.delegate?.fallbackCard(card: self)
             UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.0, options: [], animations: {
                 self.center = self.originalPoint
                 self.transform = CGAffineTransform(rotationAngle: 0)
