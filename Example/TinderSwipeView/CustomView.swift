@@ -14,7 +14,14 @@ class CustomView: UIView {
     @IBOutlet weak var labelText: UILabel!
     @IBOutlet weak var imageViewProfile: UIImageView!
     @IBOutlet weak var imageViewBackground: UIImageView!
+    @IBOutlet weak var buttonAction: UIButton!
     
+    var userModel : UserModel! {
+        didSet{
+            self.labelText.attributedText = self.attributeStringForModel(userModel: userModel)
+            self.imageViewBackground.image = UIImage(named:String(Int(1 + arc4random() % (8 - 1))))
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,6 +41,14 @@ class CustomView: UIView {
         imageViewProfile.layer.cornerRadius = 30
         imageViewProfile.clipsToBounds = true
     }
+    
+    private func attributeStringForModel(userModel:UserModel) -> NSAttributedString{
+        
+        let attributedText = NSMutableAttributedString(string: userModel.name, attributes: [.foregroundColor: UIColor.white,.font:UIFont.boldSystemFont(ofSize: 25)])
+        attributedText.append(NSAttributedString(string: "\nnums :\(userModel.num!) - (nib view)" , attributes: [.foregroundColor: UIColor.white,.font:UIFont.systemFont(ofSize: 18)]))
+        return attributedText
+    }
+
 }
 
 extension UIView{

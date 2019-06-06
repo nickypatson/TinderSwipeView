@@ -13,6 +13,7 @@ let stength : CGFloat = 4
 let range : CGFloat = 0.90
 
 protocol TinderCardDelegate: NSObjectProtocol {
+    func didSelectCard(card: TinderCard)
     func cardGoesRight(card: TinderCard)
     func cardGoesLeft(card: TinderCard)
     func currentCardStatus(card: TinderCard, distance: CGFloat)
@@ -44,7 +45,6 @@ class TinderCard: UIView {
     var originalPoint = CGPoint.zero
     
     var isLiked = false
-    
     var model : Any?
     
     override init(frame: CGRect) {
@@ -61,7 +61,7 @@ class TinderCard: UIView {
      */
     func setupView() {
         
-        layer.cornerRadius = 25
+        layer.cornerRadius = bounds.width/20
         layer.shadowRadius = 3
         layer.shadowOpacity = 0.4
         layer.shadowOffset = CGSize(width: 0.5, height: 3)
@@ -70,14 +70,12 @@ class TinderCard: UIView {
         backgroundColor = .white
         originalPoint = center
         
-        
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
         panGestureRecognizer.delegate = self
         addGestureRecognizer(panGestureRecognizer)
         
         containerView = UIView(frame: bounds)
         containerView.backgroundColor = .clear
-        addSubview(containerView)
         
         statusImageView = UIImageView(frame: CGRect(x: (frame.size.width / 2) - 37.5, y: 25, width: 75, height: 75))
         containerView.addSubview(statusImageView)
@@ -110,7 +108,6 @@ class TinderCard: UIView {
             self.removeFromSuperview()
         })
         isLiked = true
-        
     }
     
     /*
@@ -218,7 +215,6 @@ class TinderCard: UIView {
                 })
             })
         })
-        
     }
     
     /*
@@ -231,7 +227,6 @@ class TinderCard: UIView {
         
         statusImageView.image = makeImage(name: isleft ?  "ic_skip" : "ic_like")
         overlayImageView.image = makeImage(name: isleft ?  "overlay_skip" : "overlay_like")
-        
     }
     
     /*
@@ -276,6 +271,8 @@ extension TinderCard: UIGestureRecognizerDelegate {
         // Keep swiping
         case .began:
             originalPoint = self.center;
+            addSubview(containerView)
+            self.delegate?.didSelectCard(card: self)
             break;
         //in the middle of a swipe
         case .changed:
@@ -291,6 +288,7 @@ extension TinderCard: UIGestureRecognizerDelegate {
             
         // swipe ended
         case .ended:
+            containerView.removeFromSuperview()
             afterSwipeAction()
             break;
             

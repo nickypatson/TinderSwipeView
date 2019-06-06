@@ -15,6 +15,7 @@ public protocol TinderSwipeViewDelegate: class {
     func dummyAnimationDone()
     func currentCardStatus(card: Any, distance: CGFloat)
     func fallbackCard(model:Any)
+    func didSelectCard(model:Any)
     func cardGoesLeft(model: Any)
     func cardGoesRight(model: Any)
     func undoCardsDone(model: Any)
@@ -69,6 +70,7 @@ public class TinderSwipeView <Element>: UIView {
         for (i,element) in elements.enumerated() {
             
             if loadedCards.count < bufferSize {
+                
                 let cardView = self.createTinderCard(index: i, element: element)
                 if loadedCards.isEmpty {
                     self.addSubview(cardView)
@@ -84,7 +86,16 @@ public class TinderSwipeView <Element>: UIView {
         if isDummyShow{
             perform(#selector(loadAnimation), with: nil, afterDelay: 1.0)
         }
+    }
+    
+    /*
+     * Adding additional cards
+     */
+    public func appendTinderCards(with elements: [Element]) {
         
+        if elements.isEmpty {
+            return
+        }
     }
     
     /*
@@ -209,9 +220,13 @@ public class TinderSwipeView <Element>: UIView {
 }
 // MARK: TinderCardDelegate Methods
 extension TinderSwipeView : TinderCardDelegate {
-
+    
+    func didSelectCard(card: TinderCard) {
+        self.delegate?.didSelectCard(model: card.model!)
+    }
+    
     func fallbackCard(card: TinderCard) {
-       self.delegate?.fallbackCard(model: card.model!)
+        self.delegate?.fallbackCard(model: card.model!)
     }
     
     func cardGoesRight(card: TinderCard) {

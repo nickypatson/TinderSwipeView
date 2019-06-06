@@ -45,7 +45,7 @@ platform :ios, '8.0'
 target 'TargetName' do
 use_frameworks!
 
-pod 'TinderSwipeView’ , '~> 1.1.6'
+pod 'TinderSwipeView’ , '~> 1.1.7'
 end
 ```
 
@@ -78,16 +78,12 @@ public typealias ContentView = (_ index: Int, _ frame: CGRect, _ element:Element
 
 ```swift
 
+    internal func didSelectCard()
     internal func cardGoesRight()
-
     internal func cardGoesLeft()
-
     internal func rightClickAction()
-
     internal func leftClickAction()
-
     internal func makeUndoAction()
-
     internal func shakeAnimationCard(completion: @escaping (Bool) -> ())
 
 ```
@@ -101,6 +97,7 @@ Here is a list of callbacks you can listen to:
 protocol TinderCardDelegate: NSObjectProtocol {
 
     func dummyAnimationDone()
+    func didSelectCard(card: TinderCard)
     func fallbackCard(model:Any)
     func currentCardStatus(card: Any, distance: CGFloat)
     func cardGoesLeft(_ object: Any)

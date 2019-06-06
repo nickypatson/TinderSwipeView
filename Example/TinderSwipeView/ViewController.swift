@@ -38,22 +38,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // Dynamically create view for each tinder card
-        
-        let contentView: ( Int, CGRect,UserModel) -> (UIView) = { (index : Int ,frame: CGRect , userModel:UserModel) -> (UIView) in
-            
+        let contentView: (Int, CGRect, UserModel) -> (UIView) = { (index: Int ,frame: CGRect , userModel: UserModel) -> (UIView) in
             
             // Programitcally creating content view
-            if index % 2 == 0 {
+            if index % 2 != 0 {
                 return self.programticViewForOverlay(frame: frame, userModel: userModel)
             }
             // loading contentview from nib 
             else{
-                let nibView = CustomView(frame: frame)
-                nibView.labelText.attributedText = self.attributeStringForModel(userModel: userModel, isNib: true)
-                nibView.imageViewBackground.image = UIImage(named:String(Int(1 + arc4random() % (8 - 1))))
-                return nibView
+                let customView = CustomView(frame: frame)
+                customView.userModel = userModel
+                customView.buttonAction.addTarget(self, action: #selector(self.customViewButtonSelected), for: UIControl.Event.touchUpInside)
+                return customView
             }
         }
                 
@@ -61,7 +58,6 @@ class ViewController: UIViewController {
         viewContainer.addSubview(swipeView)
         swipeView.showTinderCards(with: userModels ,isDummyShow: true)
     }
-    
     
     private func programticViewForOverlay(frame:CGRect, userModel:UserModel) -> UIView{
     
@@ -81,18 +77,25 @@ class ViewController: UIViewController {
         containerView.addSubview(profileImageView)
         
         let labelText = UILabel(frame:CGRect(x: 90, y: frame.size.height - 80, width: frame.size.width - 100, height: 60))
-        labelText.attributedText = self.attributeStringForModel(userModel: userModel, isNib: false)
+        labelText.attributedText = self.attributeStringForModel(userModel: userModel)
         labelText.numberOfLines = 2
         containerView.addSubview(labelText)
         
         return containerView
     }
     
+    @objc func customViewButtonSelected(button:UIButton){
+        
+        if let customView = button.superview(of: CustomView.self) , let userModel = customView.userModel{
+            print("button selected for \(userModel.name!)")
+        }
+        
+    }
     
-    private func attributeStringForModel(userModel:UserModel,isNib:Bool) -> NSAttributedString{
+    private func attributeStringForModel(userModel:UserModel) -> NSAttributedString{
         
         let attributedText = NSMutableAttributedString(string: userModel.name, attributes: [.foregroundColor: UIColor.white,.font:UIFont.boldSystemFont(ofSize: 25)])
-        attributedText.append(NSAttributedString(string: "\nnums :\( userModel.num!) \(isNib ? " (nib view)" : "  (programitically)")", attributes: [.foregroundColor: UIColor.white,.font:UIFont.systemFont(ofSize: 18)]))
+        attributedText.append(NSAttributedString(string: "\nnums :\( userModel.num!) (programitically)", attributes: [.foregroundColor: UIColor.white,.font:UIFont.systemFont(ofSize: 18)]))
         return attributedText
     }
     
@@ -117,12 +120,16 @@ class ViewController: UIViewController {
 }
 
 extension ViewController : TinderSwipeViewDelegate{
-
+    
     func dummyAnimationDone() {
         UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveLinear, animations: {
             self.viewNavigation.alpha = 1.0
         }, completion: nil)
         print("Watch out shake action")
+    }
+    
+    func didSelectCard(model: Any) {
+        print("Selected card")
     }
     
     func fallbackCard(model: Any) {
@@ -165,5 +172,16 @@ extension ViewController : TinderSwipeViewDelegate{
             emojiView.rateValue =  sorted
         }
         print(distance)
+    }
+}
+
+extension UIView {
+    
+    func superview<T>(of type: T.Type) -> T? {
+        return superview as? T ?? superview.map { $0.superview(of: type)! }
+    }
+    
+    func subview<T>(of type: T.Type) -> T? {
+        return subviews.compactMap { $0 as? T ?? $0.subview(of: type) }.first
     }
 }
